@@ -1,0 +1,454 @@
+// Alert Modal Styles
+.alert-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 11000;
+    animation: fadeIn 0.2s ease;
+    
+    &[style*="display: flex"] {
+        display: flex !important;
+    }
+}
+
+.alert-modal-container {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+.alert-modal-content {
+    padding: 40px;
+    text-align: center;
+}
+
+.alert-icon {
+    margin: 0 auto 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    position: relative;
+    
+    // Background circle dengan gradient
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0.15;
+        z-index: 0;
+    }
+    
+    // Icon SVG positioning
+    svg {
+        position: relative;
+        z-index: 1;
+        width: 52px;
+        height: 52px;
+    }
+    
+    // Success variant - Hijau
+    &.alert-icon--success {
+        &::before {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        svg {
+            stroke: #10b981;
+        }
+    }
+    
+    // Error variant - Merah
+    &.alert-icon--error {
+        &::before {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        svg {
+            stroke: #ef4444;
+        }
+    }
+    
+    // Confirm/Warning variant - Oranye
+    &.alert-icon--confirm {
+        &::before {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        svg {
+            stroke: #f59e0b;
+        }
+    }
+}
+
+.alert-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 12px 0;
+}
+
+.alert-message {
+    font-size: 15px;
+    color: #4a5568;
+    margin: 0 0 28px 0;
+    line-height: 1.6;
+}
+
+.alert-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.alert-btn {
+    padding: 13px 28px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    
+    &:active {
+        transform: translateY(0) !important;
+    }
+}
+
+// Button Success/Close - Hijau (hanya untuk alert success)
+.alert-btn-close {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+    
+    // Variant untuk alert error - Warna netral abu-abu
+    .alert-modal-container[data-alert-type="error"] & {
+        background: #64748b;
+        color: white;
+        
+        &:hover {
+            background: #475569;
+            box-shadow: 0 4px 14px rgba(71, 85, 105, 0.3);
+        }
+    }
+}
+
+// Button Confirm Delete - Merah (untuk confirm delete)
+.alert-btn-confirm {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    }
+}
+
+// Button Cancel - Abu-abu
+.alert-btn-cancel {
+    background: #f1f5f9;
+    color: #475569;
+    
+    &:hover {
+        background: #e2e8f0;
+        color: #334155;
+    }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============= RESPONSIVE DESIGN ============= */
+
+// Desktop Large (1440px)
+@media (max-width: 1440px) {
+    .alert-modal-container {
+        max-width: 460px;
+    }
+    
+    .alert-modal-content {
+        padding: 38px;
+    }
+    
+    .alert-icon {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 22px;
+        
+        svg {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 21px;
+    }
+    
+    .alert-message {
+        font-size: 14px;
+        margin-bottom: 26px;
+    }
+    
+    .alert-btn {
+        padding: 12px 26px;
+        font-size: 14px;
+        min-width: 115px;
+    }
+}
+
+// Desktop Medium (1280px)
+@media (max-width: 1280px) {
+    .alert-modal-container {
+        max-width: 440px;
+    }
+    
+    .alert-modal-content {
+        padding: 36px;
+    }
+    
+    .alert-icon {
+        width: 88px;
+        height: 88px;
+        margin-bottom: 20px;
+        
+        svg {
+            width: 48px;
+            height: 48px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 20px;
+    }
+    
+    .alert-message {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+    
+    .alert-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+        min-width: 110px;
+    }
+}
+
+// Tablet Landscape (1024px)
+@media (max-width: 1024px) {
+    .alert-modal-container {
+        max-width: 420px;
+    }
+    
+    .alert-modal-content {
+        padding: 32px;
+    }
+    
+    .alert-icon {
+        width: 84px;
+        height: 84px;
+        margin-bottom: 20px;
+        
+        svg {
+            width: 46px;
+            height: 46px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 20px;
+    }
+    
+    .alert-message {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+    
+    .alert-btn {
+        padding: 11px 22px;
+        font-size: 14px;
+        min-width: 105px;
+    }
+}
+
+// Tablet Portrait (850px)
+@media (max-width: 850px) {
+    .alert-modal-container {
+        max-width: 400px;
+    }
+    
+    .alert-modal-content {
+        padding: 30px;
+    }
+    
+    .alert-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 18px;
+        
+        svg {
+            width: 44px;
+            height: 44px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 19px;
+    }
+    
+    .alert-message {
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+    
+    .alert-btn {
+        padding: 11px 20px;
+        font-size: 13px;
+        min-width: 100px;
+    }
+}
+
+// Mobile Large (480px)
+@media (max-width: 480px) {
+    .alert-modal-container {
+        max-width: 90%;
+        border-radius: 14px;
+    }
+    
+    .alert-modal-content {
+        padding: 28px 24px;
+    }
+    
+    .alert-icon {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 16px;
+        
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 18px;
+    }
+    
+    .alert-message {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    
+    .alert-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .alert-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        min-width: unset;
+    }
+}
+
+// Mobile Small (360px)
+@media (max-width: 360px) {
+    .alert-modal-content {
+        padding: 24px 20px;
+    }
+    
+    .alert-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 14px;
+        
+        svg {
+            width: 36px;
+            height: 36px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 17px;
+    }
+    
+    .alert-message {
+        font-size: 12px;
+        margin-bottom: 18px;
+    }
+    
+    .alert-btn {
+        padding: 11px;
+        font-size: 13px;
+    }
+}
+
+// Mobile Extra Small (320px)
+@media (max-width: 320px) {
+    .alert-modal-content {
+        padding: 20px 16px;
+    }
+    
+    .alert-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 12px;
+        
+        svg {
+            width: 32px;
+            height: 32px;
+        }
+    }
+    
+    .alert-title {
+        font-size: 16px;
+    }
+    
+    .alert-message {
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .alert-btn {
+        padding: 10px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,486 @@
+// Topbar
+.topbar {
+    background: #ffffff;
+    padding: 0 24px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    border-bottom: 1px solid #e2e8f0;
+
+    // Hamburger menu - hanya untuk mobile
+    .hamburger-menu {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #8da434;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(141, 164, 52, 0.2);
+
+        &:hover {
+            background: #7a912f;
+            box-shadow: 0 4px 10px rgba(141, 164, 52, 0.3);
+            transform: translateY(-1px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        .hamburger-icon {
+            width: 25px;
+            height: 25px;
+            fill: #ffffff;
+            stroke: #ffffff;
+            stroke-width: 2;
+        }
+    }
+
+    // Profile dropdown - selalu di kanan
+    .profile-dropdown {
+        margin-left: auto;
+    }
+}
+
+// Profile Dropdown
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+// Profile Trigger (avatar di luar dropdown)
+.profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: #f7fcfa;
+    }
+
+    // Avatar icon di luar dropdown
+    .profile-avatar-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .user-icon {
+            max-width: 35px;
+            max-height: 35px;
+            fill: #8da434;
+            stroke: #8da434;
+        }
+    }
+
+    // Chevron icon
+    .profile-chevron {
+        width: 16px;
+        height: 16px;
+        fill: #718096;
+        stroke: #718096;
+        transition: all 0.2s ease;
+    }
+}
+
+// Profile Menu (dropdown)
+.profile-menu {
+    position: absolute;
+    top: 70%;
+    right: 5px;
+    margin-top: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border-bottom: 1px solid #f1f5f9;
+
+        // Avatar icon di dalam dropdown
+        .profile-avatar-icon-large {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .user-icon {
+                max-width: 40px;
+                max-height: 40px;
+                width: 100%;
+                height: 100%;
+                fill: #8da434;
+                stroke: #8da434;
+            }
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+        }
+
+        // Role Badge Styles
+        .role-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            max-width: 60px;
+        }
+
+        .role-badge--admin {
+            background-color: #dcfce7; // Light green
+            color: #16a34a; // Green 600
+        }
+
+        .role-badge--petugas {
+            background-color: #dbeafe; // Light blue
+            color: #1d4ed8; // Blue 700
+        }
+
+        .role-badge--default {
+            background-color: #f3f4f6; // Light gray
+            color: #6b7280; // Gray 500
+        }
+
+        .role-badge--guest {
+            background-color: #fef3c7; // Light yellow
+            color: #d97706; // Amber 600
+        }
+
+        .profile-email {
+            font-size: 12px;
+            color: #718096;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+        }
+    }
+
+    .profile-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        color: #4a5568;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        margin: 4px 8px;
+        font-size: 14px;
+        font-weight: 500;
+
+        &:hover {
+            background-color: #f7fafc;
+            color: #2d3748;
+            transform: translateX(2px);
+        }
+
+        &:active {
+            transform: translateX(0);
+        }
+
+        .profile-menu-icon {
+            width: 18px;
+            height: 18px;
+            fill: #718096;
+            stroke: #718096;
+            stroke-width: 2;
+        }
+    }
+
+    .profile-logout-form {
+        .profile-logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            width: 94%;
+            margin: 4px 8px;
+            background: none;
+            border: none;
+            color: #e53e3e;
+            cursor: pointer;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: #fef2f2;
+                color: #c53030;
+                transform: translateX(2px);
+            }
+
+            &:active {
+                transform: translateX(0);
+            }
+
+            .logout-icon {
+                width: 18px;
+                height: 18px;
+                fill: #e53e3e;
+                stroke: #e53e3e;
+                stroke-width: 2;
+            }
+        }
+    }
+}
+
+/* ============= RESPONSIVE DESIGN ============= */
+
+// Tablet Landscape (1024px) - MOBILE BREAKPOINT
+@media (max-width: 1024px) {
+    .topbar {
+        height: 65px;
+
+        .hamburger-menu {
+            display: flex;
+        }
+    }
+
+    .profile-trigger {
+        padding: 5px;
+        gap: 5px;
+
+        .profile-avatar-icon {
+            width: 40px;
+            height: 40px;
+
+            .user-icon {
+                max-width: 40px;
+                max-height: 40px;
+            }
+        }
+
+        .profile-chevron {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .profile-menu {
+        min-width: 180px;
+
+        .profile-header {
+            gap: 10px;
+
+            .profile-info {
+                min-width: 0;
+            }
+
+            .profile-name {
+                font-size: 14px;
+            }
+
+            .role-badge {
+                font-size: 11px;
+            }
+
+            .profile-email {
+                font-size: 12px;
+                max-width: 150px;
+            }
+        }
+    }
+}
+
+// Tablet Portrait (850px)
+@media (max-width: 850px) {
+    .topbar {
+        .hamburger-menu {
+            width: 40px;
+            height: 40px;
+
+            .hamburger-icon {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+
+    .profile-trigger {
+        padding: 4px;
+        gap: 4px;
+
+        .profile-avatar-icon {
+            width: 40px;
+            height: 40px;
+
+            .user-icon {
+                max-width: 40px;
+                max-height: 40px;
+            }
+        }
+
+        .profile-chevron {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}
+
+// Mobile Large (480px)
+@media (max-width: 480px) {
+    .topbar {
+        padding: 0 20px;
+
+        .hamburger-menu {
+            width: 38px;
+            height: 38px;
+
+            .hamburger-icon {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+
+    .profile-trigger {
+        padding: 3px;
+        gap: 3px;
+
+        .profile-avatar-icon {
+            width: 35px;
+            height: 35px;
+
+            .user-icon {
+                max-width: 35px;
+                max-height: 35px;
+            }
+        }
+
+        .profile-chevron {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .profile-menu {
+        min-width: 170px;
+
+        .profile-header {
+            padding: 10px;
+            gap: 10px;
+
+            .profile-info {
+                min-width: 0;
+            }
+
+            .profile-name {
+                font-size: 12px;
+                max-width: 160px;
+            }
+
+            .role-badge {
+                font-size: 10px;
+                padding: 4px 8px;
+                max-width: 55px;
+            }
+
+            .profile-email {
+                font-size: 11px;
+                max-width: 130px;
+            }
+        }
+
+        .profile-menu-item {
+            font-size: 12px;
+        }
+
+        .profile-logout-form {
+            .profile-logout-btn {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+// Mobile Small (360px)
+@media (max-width: 360px) {
+    .topbar {
+        padding: 0 18px;
+
+        .hamburger-menu {
+            width: 36px;
+            height: 36px;
+
+            .hamburger-icon {
+                width: 23px;
+                height: 23px;
+            }
+        }
+    }
+
+    .profile-trigger {
+        padding: 2px;
+        gap: 2px;
+
+        .profile-avatar-icon {
+            width: 33px;
+            height: 33px;
+
+            .user-icon {
+                max-width: 33px;
+                max-height: 33px;
+            }
+        }
+
+        .profile-chevron {
+            width: 13px;
+            height: 13px;
+        }
+    }
+}

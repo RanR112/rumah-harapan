@@ -1,0 +1,866 @@
+.anak-asuh-page {
+    overflow-y: auto;
+    max-height: 84vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    // Page Header
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .page-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0 0 12px 0;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: #4a5568;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+
+            .btn-primary {
+                display: flex;
+                align-items: center;
+                padding: 12px 24px;
+                background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                gap: 8px;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: white;
+                    stroke-width: 2;
+                }
+            }
+        }
+    }
+
+    // Search Section
+    .search-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .search-container {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+            min-width: 300px;
+
+            .search-input-wrapper {
+                position: relative;
+                flex: 1;
+                max-width: 300px;
+
+                input {
+                    width: 100%;
+                    padding: 12px 48px 12px 16px;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    transition: all 0.2s ease;
+
+                    &:focus {
+                        outline: none;
+                        border-color: rgba(141, 164, 52, 0.4);
+                        box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                    }
+                }
+            }
+
+            .search-icon {
+                position: absolute;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 18px;
+                height: 18px;
+                stroke: #718096;
+                stroke-width: 2;
+            }
+
+            .search-loader {
+                position: absolute;
+                right: 48px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                border: 2px solid #e2e8f0;
+                border-top-color: #8da434;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                display: none;
+            }
+
+            .search-loader.active {
+                display: block;
+            }
+
+            .filter-buttons {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+
+                // Custom Dropdown Styling
+                .custom-dropdown {
+                    position: relative;
+                    min-width: 140px;
+
+                    .custom-dropdown-trigger {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 10px 16px;
+                        border: 2px solid #e2e8f0;
+                        border-radius: 8px;
+                        background: #ffffff;
+                        font-size: 14px;
+                        color: #2d3748;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        width: 100%;
+
+                        &:hover,
+                        &.active {
+                            border-color: rgba(141, 164, 52, 0.4);
+                            box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                        }
+
+                        .dropdown-text {
+                            flex: 1;
+                            text-align: left;
+                        }
+
+                        .dropdown-icon {
+                            width: 18px;
+                            height: 18px;
+                            margin-left: 35px;
+                            stroke: #718096;
+                            stroke-width: 2;
+                            transition: transform 0.2s ease;
+                        }
+
+                        &.active {
+                            .dropdown-icon {
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+
+                    .custom-dropdown-menu {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background: #ffffff;
+                        border: 2px solid #e2e8f0;
+                        border-radius: 8px;
+                        margin-top: 4px;
+                        z-index: 1000;
+                        display: none;
+                        max-height: 200px;
+                        overflow-y: auto;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+                        &.show {
+                            display: block;
+                        }
+
+                        .dropdown-item {
+                            padding: 10px 16px;
+                            cursor: pointer;
+                            transition: background-color 0.2s ease;
+
+                            &:hover {
+                                background-color: #f7fafc;
+                                color: #2d3748;
+                            }
+
+                            &:first-child {
+                                font-weight: 600;
+                                color: #4a5568;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Export & Import Buttons
+        .import-export-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+
+            .inline-form {
+                display: inline-block;
+            }
+
+            // Export Button - Warna Biru Tua (konsisten dengan ikon download)
+            .btn-export {
+                display: flex;
+                align-items: center;
+                padding: 10px 16px;
+                background: #1e40af; // Biru tua
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                gap: 8px;
+
+                &:hover {
+                    background: #1d4ed8;
+                    transform: translateY(-1px);
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: white;
+                    stroke-width: 2;
+                }
+            }
+
+            // Import Button - Warna Hijau (konsisten dengan ikon upload)
+            .btn-import {
+                display: flex;
+                align-items: center;
+                padding: 10px 16px;
+                background: #16a34a; // Hijau
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                gap: 8px;
+
+                &:hover {
+                    background: #15803d;
+                    transform: translateY(-1px);
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: white;
+                    stroke-width: 2;
+                }
+            }
+        }
+    }
+
+    // Card Container
+    .anak-asuh-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+    }
+
+    // Loading Spinner
+    .loading-spinner {
+        text-align: center;
+        padding: 40px;
+        grid-column: 1 / -1;
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #8da434;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    // Empty State
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        grid-column: 1 / -1;
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            color: #a0aec0;
+        }
+
+        .empty-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0 0 8px 0;
+        }
+
+        .empty-text {
+            color: #718096;
+            margin: 0 0 20px 0;
+        }
+
+        // Empty Link Styling - Green link like the Import button
+        .empty-link {
+            display: inline-flex;
+            align-items: center;
+            color: #8da434;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            gap: 8px;
+
+            &:hover {
+                color: #5f740b;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Error Message
+    .error-message {
+        text-align: center;
+        padding: 60px 20px;
+        grid-column: 1 / -1;
+
+        svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            color: #e53e3e;
+        }
+
+        .btn-reload {
+            margin-top: 16px;
+            padding: 8px 20px;
+            background: #8da434;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s ease;
+
+            &:hover {
+                background: #7a912d;
+            }
+        }
+    }
+
+    // Status Badge Styling - Konsisten dengan Users
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.status-aktif {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        &.status-nonaktif {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+    }
+
+    // Grade Badge Styling - Konsisten dengan Role Badge di Users
+    .grade-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.grade-a {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        &.grade-b {
+            background-color: #bfdbfe;
+            color: #1e40af;
+        }
+
+        &.grade-c {
+            background-color: #93c5fd;
+            color: #1e40af;
+        }
+
+        &.grade-d {
+            background-color: #60a5fa;
+            color: #1e40af;
+        }
+
+        &.grade-e {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+    }
+}
+
+// Responsive Design
+// ========================================================================
+
+// Desktop Large (1440px and below)
+@media (max-width: 1440px) {
+    .anak-asuh-page {
+        .page-header {
+            margin-bottom: 20px;
+
+            .page-title {
+                font-size: 23px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+
+            .page-actions {
+                .btn-primary {
+                    padding: 11px 22px;
+                    font-size: 13px;
+
+                    .btn-icon {
+                        width: 17px;
+                        height: 17px;
+                    }
+                }
+            }
+        }
+
+        .search-section {
+            .search-container {
+                .search-input-wrapper {
+                    max-width: 350px;
+                }
+
+                .filter-buttons {
+                    .custom-dropdown {
+                        min-width: 130px;
+                    }
+                }
+            }
+
+            .import-export-buttons {
+                .btn-export,
+                .btn-import {
+                    padding: 8px 14px;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .anak-asuh-container {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .empty-state {
+            padding: 55px 18px;
+
+            .empty-title {
+                font-size: 19px;
+            }
+
+            .empty-link {
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+// Desktop Medium (1280px and below)
+@media (max-width: 1280px) {
+    .anak-asuh-page {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+        }
+
+        .search-section {
+            .search-container {
+                .search-input-wrapper {
+                    max-width: 320px;
+                }
+
+                .filter-buttons {
+                    .custom-dropdown {
+                        min-width: 120px;
+
+                        .custom-dropdown-trigger {
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+
+            .import-export-buttons {
+                .btn-export,
+                .btn-import {
+                    padding: 8px 12px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .anak-asuh-container {
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .empty-state {
+            padding: 50px 16px;
+
+            .empty-title {
+                font-size: 18px;
+            }
+
+            .empty-link {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+// Tablet Large (1024px and below)
+@media (max-width: 1024px) {
+    .anak-asuh-page {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+
+            .page-actions {
+                gap: 10px;
+            }
+        }
+
+        .search-section {
+            .search-container {
+                .search-input-wrapper {
+                    max-width: 300px;
+                }
+
+                .filter-buttons {
+                    .custom-dropdown {
+                        min-width: 110px;
+
+                        .custom-dropdown-trigger {
+                            padding: 8px 14px;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+
+            .import-export-buttons {
+                .btn-export,
+                .btn-import {
+                    padding: 8px 12px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .anak-asuh-container {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .empty-state,
+        .error-message {
+            padding: 50px 15px;
+
+            .empty-icon,
+            svg {
+                width: 56px;
+                height: 56px;
+            }
+
+            .empty-title {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+// Tablet Small (850px and below)
+@media (max-width: 850px) {
+    .anak-asuh-page {
+        .page-header {
+            .page-actions {
+                .btn-primary {
+                    padding: 10px 20px;
+                    font-size: 12px;
+
+                    .btn-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .search-section {
+            flex-direction: column;
+            align-items: stretch;
+
+            .search-container {
+                flex-direction: column;
+                gap: 16px;
+
+                .search-input-wrapper {
+                    max-width: 100%;
+                }
+
+                .filter-buttons {
+                    justify-content: center;
+                    flex-wrap: wrap;
+
+                    .custom-dropdown {
+                        min-width: 100px;
+                    }
+                }
+            }
+
+            .import-export-buttons {
+                justify-content: center;
+                width: 100%;
+
+                .btn-export,
+                .btn-import {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+
+        .anak-asuh-container {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+        }
+    }
+}
+
+// Mobile Large (480px and below)
+@media (max-width: 480px) {
+    .anak-asuh-page {
+        .page-header {
+            margin-bottom: 20px;
+            flex-direction: column;
+            align-items: stretch;
+
+            .page-title {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 8px;
+                line-height: 1.5;
+            }
+
+            .page-actions {
+                width: 100%;
+                justify-content: flex-start;
+
+                .btn-primary {
+                    padding: 10px 16px;
+                    font-size: 13px;
+
+                    .btn-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .search-section {
+            margin-bottom: 20px;
+
+            .search-container {
+                gap: 12px;
+
+                .search-input-wrapper {
+                    input {
+                        padding: 10px 44px 10px 14px;
+                        font-size: 13px;
+                    }
+                }
+
+                .filter-buttons {
+                    .custom-dropdown {
+                        min-width: 90px;
+
+                        .custom-dropdown-trigger {
+                            padding: 8px 12px;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+
+            .import-export-buttons {
+                .btn-export,
+                .btn-import {
+                    width: 100%;
+                    padding: 10px;
+                    font-size: 14px;
+                    justify-content: center;
+                }
+            }
+        }
+
+        .anak-asuh-container {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .empty-state,
+        .error-message {
+            padding: 40px 10px;
+
+            .empty-icon,
+            svg {
+                width: 48px;
+                height: 48px;
+            }
+
+            .empty-title {
+                font-size: 16px;
+            }
+
+            .btn-reload {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+// Mobile Small (360px and below)
+@media (max-width: 360px) {
+    .anak-asuh-page {
+        .page-header {
+            margin-bottom: 18px;
+
+            .page-title {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .page-description {
+                font-size: 13px;
+            }
+        }
+
+        .search-section {
+            margin-bottom: 18px;
+
+            .search-container {
+                .search-input-wrapper {
+                    input {
+                        padding: 8px 40px 8px 12px;
+                        font-size: 12px;
+                    }
+                }
+
+                .filter-buttons {
+                    .custom-dropdown {
+                        min-width: 80px;
+
+                        .custom-dropdown-trigger {
+                            padding: 6px 10px;
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
+
+            .import-export-buttons {
+                .btn-export,
+                .btn-import {
+                    padding: 5px 10px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .anak-asuh-container {
+            gap: 10px;
+        }
+
+        .empty-state,
+        .error-message {
+            padding: 35px 8px;
+
+            .empty-icon,
+            svg {
+                width: 44px;
+                height: 44px;
+            }
+
+            .empty-title {
+                font-size: 15px;
+            }
+
+            .btn-reload {
+                padding: 5px 14px;
+                font-size: 12px;
+            }
+        }
+    }
+}

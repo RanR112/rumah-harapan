@@ -1,0 +1,594 @@
+.profile-form-page {
+    overflow-y: auto;
+    max-height: 84vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .page-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: #4a5568;
+            margin: 0;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        // Header Back Button (Only visible on mobile ≤480px)
+        .btn-header-back {
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+
+            &:hover {
+                border-color: #a0aec0;
+                background: #f7fafc;
+                color: #2d3748;
+                text-decoration: none;
+            }
+
+            &:active {
+                transform: translateY(1px);
+            }
+
+            .btn-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    // Form Card Container (NO max-width in base styles)
+    .card {
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        width: 100%; // Full width container
+        margin: 0 auto;
+        overflow: hidden;
+
+        .card-body {
+            padding: 40px;
+        }
+    }
+
+    // Form Container dengan Layout 2 Kolom
+    .profile-form {
+        .form-container {
+            width: 100%;
+            max-width: 1000px;
+
+            // Two-column layout untuk desktop
+            .form-columns {
+                display: flex;
+                flex-direction: column;
+                gap: 35px;
+
+                // Switch to horizontal on desktop (min-width approach)
+                @media (min-width: 481px) {
+                    flex-direction: row;
+                    gap: 32px;
+                }
+            }
+
+            // Kolom Kiri (Nama, Email, Telepon)
+            .form-left,
+            // Kolom Kanan (Role, Password, Konfirmasi)
+            .form-right {
+                flex: 1;
+                min-width: 0;
+
+                // Force full width on mobile
+                @media (max-width: 480px) {
+                    width: 100%;
+                }
+            }
+
+            .form-group {
+                margin-bottom: 24px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .form-label {
+                    display: block;
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #374151;
+                    margin-bottom: 10px;
+                }
+
+                .form-input,
+                .form-select {
+                    width: 100%;
+                    padding: 14px 18px;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 8px;
+                    font-weight: 500;
+                    color: #2d3748;
+                    font-size: 15px;
+                    transition: all 0.2s ease;
+                    background-color: #ffffff;
+
+                    &::placeholder {
+                        color: #a0aec0;
+                        font-weight: 400;
+                    }
+
+                    &:focus {
+                        outline: none;
+                        background-color: #ffffff;
+                        border-color: rgba(141, 164, 52, 0.4);
+                        box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                    }
+
+                    &.is-invalid {
+                        border-color: #e53e3e;
+                    }
+
+                    // Autofill styling
+                    &:-webkit-autofill {
+                        -webkit-box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+                        box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+                        -webkit-text-fill-color: #2d3748 !important;
+                    }
+                }
+
+
+                // Password Toggle
+                .password-input-wrapper {
+                    position: relative;
+
+                    .password-input {
+                        padding-right: 52px;
+                    }
+
+                    .toggle-password {
+                        position: absolute;
+                        right: 12px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        padding: 4px;
+                        border-radius: 6px;
+                        transition: background-color 0.2s ease;
+
+                        &:hover {
+                            background-color: #f1f5f9;
+                        }
+
+                        .eye-icon {
+                            width: 18px;
+                            height: 18px;
+                            stroke: #718096;
+                            stroke-width: 2;
+                        }
+                    }
+                }
+
+                .form-error {
+                    display: block;
+                    color: #e53e3e;
+                    font-size: 13px;
+                    font-weight: 500;
+                    margin-top: 6px;
+                    padding-left: 4px;
+                    min-height: 18px;
+                }
+            }
+
+            // Form Actions (Kembali di kiri, Submit di kanan)
+            .form-actions {
+                margin-top: 40px;
+                padding-top: 32px;
+                border-top: 1px solid #e2e8f0;
+                display: flex;
+                gap: 16px;
+                justify-content: flex-end;
+
+                // Button Submit (Primary) di kanan - TANPA ICON
+                .btn-primary {
+                    padding: 12px 28px;
+                    font-size: 15px;
+                    font-weight: 600;
+                    border: none;
+                    border-radius: 8px;
+                    background: linear-gradient(135deg, #8da434 0%, #a8c550 100%);
+                    color: white;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+
+                    &:hover:not(:disabled) {
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+                    }
+
+                    &:disabled {
+                        opacity: 0.7;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Animations
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dropdownSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Desktop Large (1440px)
+@media (max-width: 1440px) {
+    .profile-form-page {
+        .page-header {
+            margin-bottom: 20px;
+
+            .page-title {
+                font-size: 23px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+        }
+
+        .card {
+            .card-body {
+                padding: 36px;
+            }
+        }
+
+        .profile-form {
+            .form-container {
+                .form-columns {
+                    gap: 28px;
+                }
+
+                .form-group {
+                    .form-label {
+                        font-size: 14px;
+                    }
+
+                    .form-input,
+                    .form-select {
+                        padding: 13px 17px;
+                        font-size: 14px;
+                    }
+
+                    .password-input-wrapper {
+                        .toggle-password {
+                            .eye-icon {
+                                width: 17px;
+                                height: 17px;
+                            }
+                        }
+                    }
+                }
+
+                .form-actions {
+                    .btn-primary {
+                        padding: 11px 26px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Desktop Medium (1280px)
+@media (max-width: 1280px) {
+    .profile-form-page {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+        }
+
+        .card {
+            .card-body {
+                padding: 32px;
+            }
+        }
+
+        .profile-form {
+            .form-container {
+                .form-columns {
+                    gap: 26px;
+                }
+
+                .form-group {
+                    margin-bottom: 22px;
+                }
+            }
+        }
+    }
+}
+
+// Tablet Landscape (1024px)
+@media (max-width: 1024px) {
+    .profile-form-page {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+        }
+
+        .card {
+            .card-body {
+                padding: 30px;
+            }
+        }
+
+        .profile-form {
+            .form-container {
+                .form-columns {
+                    gap: 24px;
+                }
+
+                .form-group {
+                    margin-bottom: 20px;
+
+                    .form-label {
+                        font-size: 14px;
+                    }
+
+                    .form-input,
+                    .form-select {
+                        padding: 12px 16px;
+                        font-size: 14px;
+                    }
+
+                    .password-input-wrapper {
+                        .toggle-password {
+                            .eye-icon {
+                                width: 16px;
+                                height: 16px;
+                            }
+                        }
+                    }
+                }
+
+                .form-actions {
+                    padding-top: 28px;
+
+                    .btn-primary {
+                        padding: 11px 24px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Tablet Portrait (850px)
+@media (max-width: 850px) {
+    .profile-form-page {
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            .card-body {
+                padding: 28px;
+            }
+        }
+
+        .profile-form {
+            .form-container {
+                .form-columns {
+                    gap: 22px;
+                }
+
+                .form-group {
+                    margin-bottom: 18px;
+                }
+            }
+        }
+    }
+}
+
+// Mobile Medium (480px) - Layout becomes vertical
+@media (max-width: 480px) {
+    .profile-form-page {
+        overflow-y: auto;
+        max-height: 85vh;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        .page-header {
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            // Header Back Button (Only visible on mobile ≤480px)
+            .btn-header-back {
+                padding: 10px 18px;
+                font-size: 14px;
+                font-weight: 600;
+                border: 2px solid #cbd5e0;
+                border-radius: 8px;
+                background: #ffffff;
+                color: #4a5568;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                transition: all 0.2s ease;
+                width: 40%;
+                justify-content: center;
+
+                &:hover {
+                    border-color: #a0aec0;
+                    background: #f7fafc;
+                    color: #2d3748;
+                    text-decoration: none;
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke-width: 2;
+                }
+            }
+        }
+
+        .card {
+            border-radius: 14px;
+
+            .card-body {
+                padding: 24px;
+            }
+        }
+
+        .profile-form {
+            .form-container {
+                .form-columns {
+                    flex-direction: column;
+                    gap: 18px;
+                }
+
+                .form-group {
+                    margin-bottom: 14px;
+
+                    .form-label {
+                        font-size: 14px;
+                        margin-bottom: 7px;
+                    }
+
+                    .form-input,
+                    .form-select {
+                        padding: 12px 14px;
+                        font-size: 14px;
+                    }
+
+                    .password-input-wrapper {
+                        .toggle-password {
+                            .eye-icon {
+                                width: 17px;
+                                height: 17px;
+                            }
+                        }
+                    }
+
+                    .form-error {
+                        font-size: 12px;
+                    }
+                }
+
+                .form-actions {
+                    margin-top: 24px;
+                    padding-top: 25px;
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 12px;
+
+                    .btn-primary {
+                        width: 100%;
+                        padding: 12px 15px;
+                        font-size: 15px;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Mobile Small (360px)
+@media (max-width: 360px) {
+    .profile-form-page {
+        .page-header {
+            margin-bottom: 15px;
+
+            .page-title {
+                font-size: 20px;
+            }
+
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 3px;
+            }
+        }
+
+        .card {
+            .card-body {
+                padding: 20px;
+            }
+        }
+
+        .profile-form {
+            .form-container {
+                .form-group {
+                    .form-input,
+                    .form-select {
+                        padding: 12px 13px;
+                        font-size: 14px;
+                    }
+                }
+
+                .form-actions {
+                    .btn-primary {
+                        padding: 12px 15px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

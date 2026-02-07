@@ -1,0 +1,1009 @@
+.users-index {
+    overflow-y: auto;
+    min-height: 84vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .page-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: #4b5563;
+            margin: 0;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+    }
+
+    // Search Container (Tanpa Button Submit)
+    .search-container {
+        margin-bottom: 15px;
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            color: #9ca3af;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 48px 12px 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: #8da434;
+                box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+            }
+
+            &::placeholder {
+                color: #9ca3af;
+            }
+        }
+
+        // Search Loader (Spinner di dalam input)
+        .search-loader {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            width: 20px;
+            height: 20px;
+
+            &.active {
+                display: block;
+            }
+
+            .spinner {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #e5e7eb;
+                border-top-color: #8da434;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+        }
+    }
+
+    // Loading Spinner (Untuk Table & Error States)
+    .loading-spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        color: #6b7280;
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #8da434;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        p {
+            margin: 0;
+            font-size: 15px;
+            color: #6b7280;
+        }
+    }
+
+    // Error Message State
+    .error-message {
+        text-align: center;
+        padding: 40px;
+        color: #ef4444;
+
+        svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            color: #ef4444;
+        }
+
+        p {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .btn-reload {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: #fee2e2;
+            color: #b91c1c;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+
+            &:hover {
+                background: #fecaca;
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+            }
+
+            .btn-icon {
+                width: 16px;
+                height: 16px;
+                stroke-width: 2;
+            }
+        }
+    }
+
+    // Card & Table
+    .card {
+        background: white;
+        padding: 0 0 10px 0;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+
+        th {
+            background: rgba(45, 76, 82, 0.05);
+            padding: 16px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(45, 76, 82, 0.1);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(45, 76, 82, 0.1);
+            font-size: 15px;
+            font-weight: 600;
+            color: #374151;
+            overflow: hidden;
+        }
+
+        tbody tr {
+            &:hover {
+                background: rgba(45, 76, 82, 0.02);
+            }
+
+            &:last-child td {
+                border-bottom: none;
+            }
+        }
+    }
+
+    // Table Column Widths
+    .no-column {
+        width: 50px;
+    }
+
+    .action-column {
+        width: 180px;
+    }
+
+    // Badges - Role Colors Distinct
+    .badge {
+        padding: 8px 16px;
+        border-radius: 15px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        width: fit-content;
+
+        // Admin: Blue (distinct from petugas)
+        &-admin {
+            background-color: #dcfce7;
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        // Petugas: Amber/Orange (distinct from admin)
+        &-petugas {
+            background-color: #dbeafe; // Light blue
+            color: #1d4ed8; // Blue 700
+            font-weight: 600;
+        }
+
+        // Keep existing for other uses (soft delete status, etc.)
+        &-success {
+            background-color: #c6f6d5;
+            color: #2f855a;
+        }
+
+        &-danger {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+    }
+
+    // Action Buttons
+    .action-cell {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    .action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+
+        &-edit {
+            background: rgba(45, 76, 82, 0.05);
+            color: #047857;
+
+            &:hover {
+                background: #d1fae5;
+                transform: scale(1.1);
+            }
+        }
+
+        &-delete {
+            background: rgba(239, 68, 68, 0.05);
+            color: #ef4444;
+
+            &:hover {
+                background: rgba(239, 68, 68, 0.1);
+                transform: scale(1.1);
+            }
+        }
+
+        &-restore {
+            background: rgba(45, 76, 82, 0.05);
+            color: #1e40af;
+
+            &:hover {
+                background-color: #dbeafe;
+                transform: scale(1.1);
+            }
+        }
+
+        .action-icon {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+        }
+    }
+
+    // Empty State
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+
+        .empty-icon {
+            margin: 0 auto 16px;
+            color: #9ca3af;
+            width: 64px;
+            height: 64px;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #363b43;
+            margin: 0 0 8px 0;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 0;
+            line-height: 1.6;
+
+            .text-primary {
+                color: #8da434;
+                text-decoration: underline;
+                font-weight: 500;
+            }
+
+            .btn-link {
+                display: inline-block;
+                margin-top: 8px;
+                color: #8da434;
+                text-decoration: underline;
+                font-weight: 500;
+                padding: 6px 12px;
+                border-radius: 6px;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: rgba(141, 164, 52, 0.1);
+                }
+            }
+        }
+    }
+
+    // Pagination Container
+    .pagination-container {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            list-style: none;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            .page-item {
+                .page-link {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px 8px;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 6px;
+                    text-decoration: none;
+                    color: #374151;
+                    font-size: 13px;
+                    transition: all 0.2s ease;
+                    min-width: 40px;
+
+                    &:hover {
+                        background: #f9fafb;
+                        color: #8da434;
+                        border-color: #8da434;
+                    }
+                }
+
+                .pagination-icon {
+                    margin: 0 5px;
+                    width: 18px;
+                    height: 18px;
+                }
+
+                &.active .page-link {
+                    background: #8da434;
+                    color: white;
+                    border-color: #8da434;
+                    font-weight: 600;
+                }
+
+                &.disabled .page-link {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+// Button Primary (untuk konsistensi)
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+    }
+
+    .btn-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+// Link Button (untuk empty state)
+.btn-link {
+    display: inline-block;
+    color: #8da434;
+    text-decoration: underline;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+        background: rgba(141, 164, 52, 0.1);
+    }
+}
+
+// Animations
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// Table Row Animation
+.table-row {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ============= RESPONSIVE DESIGN - ALL BREAKPOINTS ============= */
+/* Breakpoints: 1440px, 1280px, 1024px, 850px, 768px, 480px, 360px, 320px */
+
+// Desktop Large (1440px)
+@media (max-width: 1440px) {
+    .users-index {
+        .page-header {
+            margin-bottom: 20px;
+
+            .page-title {
+                font-size: 23px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+        }
+
+        .search-container {
+            margin-bottom: 15px;
+
+            .search-wrapper {
+                max-width: 480px;
+            }
+
+            .search-input {
+                padding: 11px 46px 11px 46px;
+                font-size: 13px;
+            }
+        }
+
+        .data-table {
+            th {
+                padding: 14px;
+                font-size: 15px;
+            }
+            td {
+                padding: 13px 15px;
+                font-size: 14px;
+            }
+        }
+
+        .no-column {
+            width: 45px;
+        }
+
+        .action-column {
+            width: 170px;
+        }
+
+        .badge {
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+
+        .action-btn {
+            width: 30px;
+            height: 30px;
+
+            .action-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .empty-state {
+            padding: 36px 18px;
+
+            .empty-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .empty-title {
+                font-size: 17px;
+            }
+
+            .empty-text {
+                font-size: 13px;
+            }
+        }
+
+        .btn-primary {
+            padding: 11px 22px;
+            font-size: 13px;
+
+            .btn-icon {
+                width: 17px;
+                height: 17px;
+            }
+        }
+    }
+}
+
+// Desktop Medium (1280px)
+@media (max-width: 1280px) {
+    .users-index {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+        }
+
+        .data-table {
+            th {
+                font-size: 14px;
+            }
+            td {
+                font-size: 13px;
+            }
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+        }
+
+        .no-column {
+            width: 42px;
+        }
+
+        .action-column {
+            width: 160px;
+        }
+
+        .empty-state {
+            padding: 34px 16px;
+
+            .empty-icon {
+                width: 58px;
+                height: 58px;
+            }
+        }
+    }
+}
+
+// Tablet Landscape (1024px)
+@media (max-width: 1024px) {
+    .users-index {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+        }
+
+        .data-table {
+            th {
+                padding: 14px;
+                font-size: 14px;
+            }
+            td {
+                padding: 13px 15px;
+                font-size: 13px;
+            }
+        }
+
+        .no-column {
+            width: 40px;
+        }
+
+        .action-column {
+            width: 150px;
+        }
+
+        .badge {
+            padding: 8px 10px;
+            font-size: 11px;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+
+            .action-icon {
+                width: 17px;
+                height: 17px;
+            }
+        }
+
+        .empty-state {
+            padding: 32px 14px;
+
+            .empty-icon {
+                width: 54px;
+                height: 54px;
+            }
+
+            .empty-title {
+                font-size: 16px;
+            }
+
+            .empty-text {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+// Tablet Portrait (850px)
+@media (max-width: 850px) {
+    .users-index {
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .data-table {
+            th {
+                font-size: 14px;
+            }
+            td {
+                font-size: 13px;
+            }
+        }
+
+        .no-column {
+            width: 38px;
+        }
+
+        .action-column {
+            width: 140px;
+        }
+
+        .badge {
+            padding: 6px 10px;
+        }
+
+        .empty-state {
+            padding: 30px 12px;
+
+            .empty-icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            font-size: 12px;
+
+            .btn-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
+
+// Mobile Medium (480px)
+@media (max-width: 480px) {
+    .users-index {
+        .page-header {
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+        }
+
+        .search-container {
+            .search-wrapper {
+                max-width: 100%;
+            }
+
+            .search-input {
+                padding: 11px 50px 11px 50px;
+                font-size: 14px;
+            }
+        }
+
+        .loading-spinner {
+            padding: 26px 16px;
+
+            .spinner {
+                width: 28px;
+                height: 28px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+        }
+
+        .error-message {
+            padding: 26px 16px;
+
+            svg {
+                width: 36px;
+                height: 36px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-bottom: 14px;
+            }
+
+            .btn-reload {
+                padding: 8px 16px;
+                font-size: 12px;
+
+                .btn-icon {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .data-table {
+            min-width: 650px;
+
+            th {
+                padding: 13px;
+                font-size: 14px;
+            }
+            td {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+
+        .no-column {
+            width: 32px;
+        }
+
+        .action-column {
+            width: 110px;
+        }
+
+        .badge {
+            padding: 8px 10px;
+            font-size: 10px;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+
+            .action-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .empty-state {
+            padding: 24px 12px;
+
+            .empty-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            .empty-title {
+                font-size: 15px;
+            }
+
+            .empty-text {
+                font-size: 12px;
+            }
+        }
+
+        .pagination-container {
+            margin-top: 12px;
+
+            .pagination {
+                justify-content: center;
+                .page-item {
+                    .page-link {
+                        padding: 10px 10px;
+                        font-size: 13px;
+                    }
+
+                    .page-link span {
+                        display: none;
+                    }
+
+                    .pagination-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .btn-primary {
+            padding: 10px 16px;
+            font-size: 13px;
+
+            .btn-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
+
+// Mobile Small (360px)
+@media (max-width: 360px) {
+    .users-index {
+        .page-header {
+            margin-bottom: 18px;
+
+            .page-title {
+                font-size: 20px;
+            }
+
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+        }
+
+        .data-table {
+            min-width: 650px;
+
+            th {
+                padding: 13px;
+                font-size: 14px;
+            }
+            td {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+
+        .no-column {
+            width: 28px;
+        }
+
+        .action-column {
+            width: 90px;
+        }
+
+        .badge {
+            padding: 8px 10px;
+            font-size: 10px;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+
+            .action-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+
+        .empty-state {
+            padding: 20px 10px;
+
+            .empty-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .empty-title {
+                font-size: 14px;
+            }
+
+            .empty-text {
+                font-size: 11px;
+            }
+        }
+
+        .pagination-container {
+            .pagination {
+                .page-item {
+                    .page-link {
+                        padding: 8px 8px;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+}

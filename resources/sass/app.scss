@@ -1,0 +1,30 @@
+@use "sass:meta";
+
+/* // File yang HANYA berisi variabel (tidak perlu load-css) */
+@use "abstracts/variables";
+
+/* style base untuk font dan patokan awal  */
+@include meta.load-css("base/reset");
+
+/* style bagian autentikasi*/
+@include meta.load-css("auth/login.module.scss");
+@include meta.load-css("auth/forgot-password.module.scss");
+@include meta.load-css("auth/otp-code.module.scss");
+@include meta.load-css("auth/reset-password.module.scss");
+@include meta.load-css("auth/loading-connection.module.scss");
+
+/* style bagian dashbaord  */
+@include meta.load-css("layouts/dashboard.module.scss");
+@include meta.load-css("components/sidebar.module.scss");
+@include meta.load-css("components/topbar.module.scss");
+@include meta.load-css("components/loader/loader-main.module.scss");
+@include meta.load-css("components/loader-transition.module.scss");
+@include meta.load-css("components/alert-modal.module.scss");
+
+// Bagian page
+@include meta.load-css("pages/home.module.scss");
+@include meta.load-css("pages/profile/form.module.scss");
+@include meta.load-css("pages/users/index.module.scss");
+@include meta.load-css("pages/users/form.module.scss");
+@include meta.load-css("pages/anak-asuh/index.module.scss");
+@include meta.load-css("pages/anak-asuh/create.module.scss");

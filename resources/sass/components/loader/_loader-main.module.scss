@@ -1,0 +1,229 @@
+// Main Loader Component (Reusable Animation Only)
+.loader-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &__spinner {
+        position: relative;
+        width: 4em;
+        height: 4em;
+        transform: rotate(165deg);
+        
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            width: 0.8em;
+            height: 0.8em;
+            border-radius: 0.4em;
+            transform: translate(-50%, -50%);
+        }
+        
+        &::before {
+            animation: before8 2s infinite;
+        }
+        
+        &::after {
+            animation: after6 2s infinite;
+        }
+    }
+}
+
+@keyframes before8 {
+    0% {
+        width: 0.8em;
+        box-shadow: 1.6em -0.8em rgba(90, 140, 90, 0.75), -1.6em 0.8em rgba(245, 166, 35, 0.75);
+    }
+    35% {
+        width: 4em;
+        box-shadow: 0 -0.8em rgba(90, 140, 90, 0.75), 0 0.8em rgba(245, 166, 35, 0.75);
+    }
+    70% {
+        width: 0.8em;
+        box-shadow: -1.6em -0.8em rgba(90, 140, 90, 0.75), 1.6em 0.8em rgba(245, 166, 35, 0.75);
+    }
+    100% {
+        box-shadow: 1.6em -0.8em rgba(90, 140, 90, 0.75), -1.6em 0.8em rgba(245, 166, 35, 0.75);
+    }
+}
+
+@keyframes after6 {
+    0% {
+        height: 0.8em;
+        box-shadow: 0.8em 1.6em rgba(74, 124, 89, 0.75), -0.8em -1.6em rgba(253, 185, 19, 0.75);
+    }
+    35% {
+        height: 4em;
+        box-shadow: 0.8em 0 rgba(74, 124, 89, 0.75), -0.8em 0 rgba(253, 185, 19, 0.75);
+    }
+    70% {
+        height: 0.8em;
+        box-shadow: 0.8em -1.6em rgba(74, 124, 89, 0.75), -0.8em 1.6em rgba(253, 185, 19, 0.75);
+    }
+    100% {
+        box-shadow: 0.8em 1.6em rgba(74, 124, 89, 0.75), -0.8em -1.6em rgba(253, 185, 19, 0.75);
+    }
+}
+
+// Responsive Design - Tablet
+@media (max-width: 768px) {
+    .loader-main {
+        &__spinner {
+            width: 3.5em;
+            height: 3.5em;
+            
+            &::before,
+            &::after {
+                width: 0.7em;
+                height: 0.7em;
+                border-radius: 0.35em;
+            }
+        }
+    }
+    
+    @keyframes before8 {
+        0% {
+            width: 0.7em;
+            box-shadow: 1.4em -0.7em rgba(90, 140, 90, 0.75), -1.4em 0.7em rgba(245, 166, 35, 0.75);
+        }
+        35% {
+            width: 3.5em;
+            box-shadow: 0 -0.7em rgba(90, 140, 90, 0.75), 0 0.7em rgba(245, 166, 35, 0.75);
+        }
+        70% {
+            width: 0.7em;
+            box-shadow: -1.4em -0.7em rgba(90, 140, 90, 0.75), 1.4em 0.7em rgba(245, 166, 35, 0.75);
+        }
+        100% {
+            box-shadow: 1.4em -0.7em rgba(90, 140, 90, 0.75), -1.4em 0.7em rgba(245, 166, 35, 0.75);
+        }
+    }
+    
+    @keyframes after6 {
+        0% {
+            height: 0.7em;
+            box-shadow: 0.7em 1.4em rgba(74, 124, 89, 0.75), -0.7em -1.4em rgba(253, 185, 19, 0.75);
+        }
+        35% {
+            height: 3.5em;
+            box-shadow: 0.7em 0 rgba(74, 124, 89, 0.75), -0.7em 0 rgba(253, 185, 19, 0.75);
+        }
+        70% {
+            height: 0.7em;
+            box-shadow: 0.7em -1.4em rgba(74, 124, 89, 0.75), -0.7em 1.4em rgba(253, 185, 19, 0.75);
+        }
+        100% {
+            box-shadow: 0.7em 1.4em rgba(74, 124, 89, 0.75), -0.7em -1.4em rgba(253, 185, 19, 0.75);
+        }
+    }
+}
+
+// Responsive Design - Mobile
+@media (max-width: 480px) {
+    .loader-main {
+        &__spinner {
+            width: 3em;
+            height: 3em;
+            
+            &::before,
+            &::after {
+                width: 0.6em;
+                height: 0.6em;
+                border-radius: 0.3em;
+            }
+        }
+    }
+    
+    @keyframes before8 {
+        0% {
+            width: 0.6em;
+            box-shadow: 1.2em -0.6em rgba(90, 140, 90, 0.75), -1.2em 0.6em rgba(245, 166, 35, 0.75);
+        }
+        35% {
+            width: 3em;
+            box-shadow: 0 -0.6em rgba(90, 140, 90, 0.75), 0 0.6em rgba(245, 166, 35, 0.75);
+        }
+        70% {
+            width: 0.6em;
+            box-shadow: -1.2em -0.6em rgba(90, 140, 90, 0.75), 1.2em 0.6em rgba(245, 166, 35, 0.75);
+        }
+        100% {
+            box-shadow: 1.2em -0.6em rgba(90, 140, 90, 0.75), -1.2em 0.6em rgba(245, 166, 35, 0.75);
+        }
+    }
+    
+    @keyframes after6 {
+        0% {
+            height: 0.6em;
+            box-shadow: 0.6em 1.2em rgba(74, 124, 89, 0.75), -0.6em -1.2em rgba(253, 185, 19, 0.75);
+        }
+        35% {
+            height: 3em;
+            box-shadow: 0.6em 0 rgba(74, 124, 89, 0.75), -0.6em 0 rgba(253, 185, 19, 0.75);
+        }
+        70% {
+            height: 0.6em;
+            box-shadow: 0.6em -1.2em rgba(74, 124, 89, 0.75), -0.6em 1.2em rgba(253, 185, 19, 0.75);
+        }
+        100% {
+            box-shadow: 0.6em 1.2em rgba(74, 124, 89, 0.75), -0.6em -1.2em rgba(253, 185, 19, 0.75);
+        }
+    }
+}
+
+// Responsive Design - Small Mobile
+@media (max-width: 360px) {
+    .loader-main {
+        &__spinner {
+            width: 2.5em;
+            height: 2.5em;
+            
+            &::before,
+            &::after {
+                width: 0.5em;
+                height: 0.5em;
+                border-radius: 0.25em;
+            }
+        }
+    }
+    
+    @keyframes before8 {
+        0% {
+            width: 0.5em;
+            box-shadow: 1em -0.5em rgba(90, 140, 90, 0.75), -1em 0.5em rgba(245, 166, 35, 0.75);
+        }
+        35% {
+            width: 2.5em;
+            box-shadow: 0 -0.5em rgba(90, 140, 90, 0.75), 0 0.5em rgba(245, 166, 35, 0.75);
+        }
+        70% {
+            width: 0.5em;
+            box-shadow: -1em -0.5em rgba(90, 140, 90, 0.75), 1em 0.5em rgba(245, 166, 35, 0.75);
+        }
+        100% {
+            box-shadow: 1em -0.5em rgba(90, 140, 90, 0.75), -1em 0.5em rgba(245, 166, 35, 0.75);
+        }
+    }
+    
+    @keyframes after6 {
+        0% {
+            height: 0.5em;
+            box-shadow: 0.5em 1em rgba(74, 124, 89, 0.75), -0.5em -1em rgba(253, 185, 19, 0.75);
+        }
+        35% {
+            height: 2.5em;
+            box-shadow: 0.5em 0 rgba(74, 124, 89, 0.75), -0.5em 0 rgba(253, 185, 19, 0.75);
+        }
+        70% {
+            height: 0.5em;
+            box-shadow: 0.5em -1em rgba(74, 124, 89, 0.75), -0.5em 1em rgba(253, 185, 19, 0.75);
+        }
+        100% {
+            box-shadow: 0.5em 1em rgba(74, 124, 89, 0.75), -0.5em -1em rgba(253, 185, 19, 0.75);
+        }
+    }
+}
