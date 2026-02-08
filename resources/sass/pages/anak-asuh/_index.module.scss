@@ -35,8 +35,10 @@
         .page-actions {
             display: flex;
             gap: 12px;
+            flex-shrink: 0;
+            margin-top: 3px;
 
-            .btn-primary {
+            .btn-create-anak-asuh {
                 display: flex;
                 align-items: center;
                 padding: 12px 24px;
@@ -62,10 +64,64 @@
                     stroke-width: 2;
                 }
             }
+
+            // Export Button - Warna Biru Tua
+            .btn-export {
+                display: flex;
+                align-items: center;
+                padding: 12px 14px;
+                background: #1e40af;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                gap: 8px;
+
+                &:hover {
+                    background: #1d4ed8;
+                    transform: translateY(-2px);
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: white;
+                    stroke-width: 2;
+                }
+            }
+
+            // Import Button - Warna Hijau
+            .btn-import {
+                display: flex;
+                align-items: center;
+                padding: 12px 14px;
+                background: #16a34a;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                gap: 8px;
+
+                &:hover {
+                    background: #15803d;
+                    transform: translateY(-2px);
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: white;
+                    stroke-width: 2;
+                }
+            }
         }
     }
 
-    // Search Section
+    // Search Section - Dengan filter di sebelah kanan search
     .search-section {
         display: flex;
         justify-content: space-between;
@@ -83,11 +139,23 @@
             .search-input-wrapper {
                 position: relative;
                 flex: 1;
-                max-width: 300px;
+                max-width: 450px;
+
+                // Icon search di sebelah kiri
+                .search-icon-left {
+                    position: absolute;
+                    left: 16px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 18px;
+                    height: 18px;
+                    stroke: #718096;
+                    stroke-width: 2;
+                }
 
                 input {
                     width: 100%;
-                    padding: 12px 48px 12px 16px;
+                    padding: 12px 16px 12px 48px; // Padding kiri untuk icon
                     border: 2px solid #e2e8f0;
                     border-radius: 8px;
                     font-size: 14px;
@@ -101,20 +169,9 @@
                 }
             }
 
-            .search-icon {
-                position: absolute;
-                right: 16px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 18px;
-                height: 18px;
-                stroke: #718096;
-                stroke-width: 2;
-            }
-
             .search-loader {
                 position: absolute;
-                right: 48px;
+                right: 16px;
                 top: 50%;
                 transform: translateY(-50%);
                 width: 16px;
@@ -126,6 +183,10 @@
                 display: none;
             }
 
+            .btn-filter-mobile {
+                display: none;
+            }
+
             .search-loader.active {
                 display: block;
             }
@@ -134,17 +195,18 @@
                 display: flex;
                 gap: 12px;
                 flex-wrap: wrap;
+                margin-left: auto;
 
                 // Custom Dropdown Styling
                 .custom-dropdown {
                     position: relative;
-                    min-width: 140px;
+                    min-width: 160px;
 
                     .custom-dropdown-trigger {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
-                        padding: 10px 16px;
+                        padding: 10px 14px;
                         border: 2px solid #e2e8f0;
                         border-radius: 8px;
                         background: #ffffff;
@@ -168,7 +230,6 @@
                         .dropdown-icon {
                             width: 18px;
                             height: 18px;
-                            margin-left: 35px;
                             stroke: #718096;
                             stroke-width: 2;
                             transition: transform 0.2s ease;
@@ -202,6 +263,7 @@
 
                         .dropdown-item {
                             padding: 10px 16px;
+                            font-size: 14px;
                             cursor: pointer;
                             transition: background-color 0.2s ease;
 
@@ -217,70 +279,10 @@
                         }
                     }
                 }
-            }
-        }
 
-        // Export & Import Buttons
-        .import-export-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-
-            .inline-form {
-                display: inline-block;
-            }
-
-            // Export Button - Warna Biru Tua (konsisten dengan ikon download)
-            .btn-export {
-                display: flex;
-                align-items: center;
-                padding: 10px 16px;
-                background: #1e40af; // Biru tua
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-size: 14px;
-                transition: all 0.2s ease;
-                gap: 8px;
-
-                &:hover {
-                    background: #1d4ed8;
-                    transform: translateY(-1px);
-                }
-
-                .btn-icon {
-                    width: 18px;
-                    height: 18px;
-                    stroke: white;
-                    stroke-width: 2;
-                }
-            }
-
-            // Import Button - Warna Hijau (konsisten dengan ikon upload)
-            .btn-import {
-                display: flex;
-                align-items: center;
-                padding: 10px 16px;
-                background: #16a34a; // Hijau
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-size: 14px;
-                transition: all 0.2s ease;
-                gap: 8px;
-
-                &:hover {
-                    background: #15803d;
-                    transform: translateY(-1px);
-                }
-
-                .btn-icon {
-                    width: 18px;
-                    height: 18px;
-                    stroke: white;
-                    stroke-width: 2;
+                // Filter Cabang - Ukuran lebih panjang
+                .custom-dropdown--cabang {
+                    min-width: 250px;
                 }
             }
         }
@@ -342,7 +344,7 @@
             margin: 0 0 20px 0;
         }
 
-        // Empty Link Styling - Green link like the Import button
+        // Empty Link Styling
         .empty-link {
             display: inline-flex;
             align-items: center;
@@ -390,7 +392,7 @@
         }
     }
 
-    // Status Badge Styling - Konsisten dengan Users
+    // Status Badge Styling
     .status-badge {
         padding: 4px 12px;
         border-radius: 20px;
@@ -409,7 +411,7 @@
         }
     }
 
-    // Grade Badge Styling - Konsisten dengan Role Badge di Users
+    // Grade Badge Styling
     .grade-badge {
         padding: 4px 12px;
         border-radius: 20px;
@@ -451,8 +453,6 @@
 @media (max-width: 1440px) {
     .anak-asuh-page {
         .page-header {
-            margin-bottom: 20px;
-
             .page-title {
                 font-size: 23px;
             }
@@ -462,7 +462,7 @@
             }
 
             .page-actions {
-                .btn-primary {
+                .btn-create-anak-asuh {
                     padding: 11px 22px;
                     font-size: 13px;
 
@@ -471,27 +471,21 @@
                         height: 17px;
                     }
                 }
+
+                .btn-export,
+                .btn-import {
+                    padding: 8px 14px;
+                    font-size: 13px;
+                }
             }
         }
 
         .search-section {
             .search-container {
-                .search-input-wrapper {
-                    max-width: 350px;
-                }
-
                 .filter-buttons {
                     .custom-dropdown {
                         min-width: 130px;
                     }
-                }
-            }
-
-            .import-export-buttons {
-                .btn-export,
-                .btn-import {
-                    padding: 8px 14px;
-                    font-size: 13px;
                 }
             }
         }
@@ -522,30 +516,44 @@
             .page-title {
                 font-size: 22px;
             }
+
+            .page-actions {
+                .btn-create-anak-asuh {
+                    padding: 8px 18px;
+                    font-size: 12px;
+
+                    .btn-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+
+                .btn-export,
+                .btn-import {
+                    padding: 6px 12px;
+                    font-size: 12px;
+                }
+            }
         }
 
         .search-section {
             .search-container {
                 .search-input-wrapper {
-                    max-width: 320px;
+                    max-width: 350px;
                 }
 
                 .filter-buttons {
                     .custom-dropdown {
-                        min-width: 120px;
+                        min-width: 150px;
 
                         .custom-dropdown-trigger {
                             font-size: 13px;
                         }
                     }
-                }
-            }
 
-            .import-export-buttons {
-                .btn-export,
-                .btn-import {
-                    padding: 8px 12px;
-                    font-size: 12px;
+                    .custom-dropdown--cabang {
+                        min-width: 250px;
+                    }
                 }
             }
         }
@@ -583,32 +591,30 @@
 
             .page-actions {
                 gap: 10px;
+
+                .btn-create-anak-asuh,
+                .btn-export,
+                .btn-import {
+                    padding: 8px 12px;
+                    font-size: 12px;
+                }
             }
         }
 
         .search-section {
             .search-container {
-                .search-input-wrapper {
-                    max-width: 300px;
-                }
-
                 .filter-buttons {
                     .custom-dropdown {
-                        min-width: 110px;
+                        min-width: 150px;
 
                         .custom-dropdown-trigger {
-                            padding: 8px 14px;
-                            font-size: 12px;
+                            font-size: 13px;
                         }
                     }
-                }
-            }
 
-            .import-export-buttons {
-                .btn-export,
-                .btn-import {
-                    padding: 8px 12px;
-                    font-size: 12px;
+                    .custom-dropdown--cabang {
+                        min-width: 235px;
+                    }
                 }
             }
         }
@@ -639,15 +645,43 @@
 @media (max-width: 850px) {
     .anak-asuh-page {
         .page-header {
-            .page-actions {
-                .btn-primary {
-                    padding: 10px 20px;
-                    font-size: 12px;
+            margin-bottom: 25px;
 
-                    .btn-icon {
-                        width: 16px;
-                        height: 16px;
-                    }
+            .page-description {
+                margin-bottom: 10px;
+            }
+
+            .page-actions {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                gap: 8px;
+
+                .btn-create-anak-asuh {
+                    order: 1;
+                    padding: 10px;
+                    font-size: 12px;
+                    flex: 0 0 auto;
+                    min-width: 120px;
+                    justify-content: center;
+                }
+
+                .btn-import {
+                    order: 2;
+                    padding: 10px;
+                    font-size: 12px;
+                    flex: 0 0 auto;
+                    min-width: 120px;
+                    justify-content: center;
+                }
+
+                .btn-export {
+                    order: 3;
+                    padding: 10px;
+                    font-size: 12px;
+                    flex: 0 0 auto;
+                    min-width: 120px;
+                    justify-content: center;
                 }
             }
         }
@@ -661,27 +695,22 @@
                 gap: 16px;
 
                 .search-input-wrapper {
-                    max-width: 100%;
+                    max-width: 90%;
                 }
 
                 .filter-buttons {
-                    justify-content: center;
+                    justify-content: flex-start;
                     flex-wrap: wrap;
+                    margin-left: 0;
+                    margin-right: 0;
 
                     .custom-dropdown {
-                        min-width: 100px;
+                        min-width: 150px;
                     }
-                }
-            }
 
-            .import-export-buttons {
-                justify-content: center;
-                width: 100%;
-
-                .btn-export,
-                .btn-import {
-                    width: 100%;
-                    justify-content: center;
+                    .custom-dropdown--cabang {
+                        min-width: 240px;
+                    }
                 }
             }
         }
@@ -715,51 +744,96 @@
             .page-actions {
                 width: 100%;
                 justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 8px;
 
-                .btn-primary {
-                    padding: 10px 16px;
-                    font-size: 13px;
+                // Button Create - Full width di mobile
+                .btn-create-anak-asuh {
+                    order: 1;
+                    flex: 1 1 100%;
+                    max-width: 100%;
+                    padding: 12px;
+                    font-size: 14px;
+                    min-width: auto;
+                    justify-content: center;
+                }
 
-                    .btn-icon {
-                        width: 16px;
-                        height: 16px;
-                    }
+                // Import & Export - Side-by-side di bawah create
+                .btn-import {
+                    order: 2;
+                    flex: 1 1 calc(50% - 4px);
+                    max-width: calc(50% - 4px);
+                    padding: 12px;
+                    font-size: 14px;
+                    min-width: auto;
+                    justify-content: center;
+                }
+
+                .btn-export {
+                    order: 3;
+                    flex: 1 1 calc(50% - 4px);
+                    max-width: calc(50% - 4px);
+                    padding: 12px;
+                    font-size: 14px;
+                    min-width: auto;
+                    justify-content: center;
                 }
             }
         }
 
         .search-section {
             margin-bottom: 20px;
+            flex-direction: row;
+            align-items: stretch;
 
             .search-container {
+                flex-direction: row;
                 gap: 12px;
 
                 .search-input-wrapper {
+                    width: 100%;
+                    max-width: 100%;
+
                     input {
-                        padding: 10px 44px 10px 14px;
-                        font-size: 13px;
+                        width: 100%;
+                        padding: 11px 50px 11px 50px;
+                        font-size: 14px;
+                    }
+                }
+
+                .btn-filter-mobile {
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 8px;
+                    background: #f7fafc;
+                    color: #4a5568;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        background: #edf2f7;
+                        border-color: #cbd5e1;
+                    }
+
+                    &.active {
+                        background: #8da434;
+                        color: white;
+                        border-color: #7a912d;
+                    }
+
+                    .btn-icon {
+                        width: 18px;
+                        height: 18px;
+                        stroke: currentColor;
+                        stroke-width: 2;
                     }
                 }
 
                 .filter-buttons {
-                    .custom-dropdown {
-                        min-width: 90px;
-
-                        .custom-dropdown-trigger {
-                            padding: 8px 12px;
-                            font-size: 12px;
-                        }
-                    }
-                }
-            }
-
-            .import-export-buttons {
-                .btn-export,
-                .btn-import {
-                    width: 100%;
-                    padding: 10px;
-                    font-size: 14px;
-                    justify-content: center;
+                    display: none;
                 }
             }
         }
@@ -805,6 +879,16 @@
             .page-description {
                 font-size: 13px;
             }
+
+            .page-actions {
+                .btn-create-anak-asuh,
+                .btn-export,
+                .btn-import {
+                    padding: 8px;
+                    font-size: 12px;
+                    min-width: 90px;
+                }
+            }
         }
 
         .search-section {
@@ -813,28 +897,44 @@
             .search-container {
                 .search-input-wrapper {
                     input {
-                        padding: 8px 40px 8px 12px;
+                        padding: 8px 12px 8px 40px;
                         font-size: 12px;
                     }
                 }
 
-                .filter-buttons {
-                    .custom-dropdown {
-                        min-width: 80px;
+                .btn-filter-mobile {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 12px;
+                    background: #f7fafc;
+                    color: #4a5568;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: all 0.2s ease;
 
-                        .custom-dropdown-trigger {
-                            padding: 6px 10px;
-                            font-size: 11px;
-                        }
+                    &:hover {
+                        background: #edf2f7;
+                        border-color: #cbd5e1;
+                    }
+
+                    &.active {
+                        background: #8da434;
+                        color: white;
+                        border-color: #7a912d;
+                    }
+
+                    .btn-icon {
+                        width: 18px;
+                        height: 18px;
+                        stroke: currentColor;
+                        stroke-width: 2;
                     }
                 }
-            }
 
-            .import-export-buttons {
-                .btn-export,
-                .btn-import {
-                    padding: 5px 10px;
-                    font-size: 12px;
+                .filter-buttons {
+                    display: none;
                 }
             }
         }

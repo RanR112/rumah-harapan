@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/pages/users/index.js',
                 'resources/js/pages/profile/index.js',
+                'resources/js/pages/anak-asuh/index.js'
             ],
             refresh: true,
         }),

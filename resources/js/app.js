@@ -19,6 +19,7 @@ import {
     Download,
     Upload,
     Search,
+    Funnel
 } from "lucide";
 
 // Helper untuk lazy load
@@ -50,6 +51,7 @@ window.lucide.createIcons = () => {
             Download,
             Upload,
             Search,
+            Funnel,
         },
     });
 };
