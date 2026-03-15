@@ -16,8 +16,11 @@ return new class extends Migration
             $table->bigInteger('model_id');
             $table->json('old_values')->nullable();
             $table->json('new_values')->nullable();
-            $table->string('ip_address', 45)->nullable();
             $table->timestamps();
+
+            $table->index('user_id');
+            $table->index('model_type');
+            $table->index('action');
         });
     }
 

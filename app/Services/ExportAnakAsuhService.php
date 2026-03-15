@@ -4,27 +4,25 @@ namespace App\Services;
 
 use App\Models\AnakAsuh;
 use App\Models\RumahHarapan;
+use Illuminate\Support\Facades\Auth;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 /**
  * ExportAnakAsuhService handles exporting foster child data to Excel or CSV.
- * Supports filtering and multiple output formats.
  */
 class ExportAnakAsuhService
 {
-    /**
-     * Export data to a file in the specified format.
-     *
-     * @param array $filters Filtering criteria (search, status, grade, rh, trashed)
-     * @param string $format Output format: 'xlsx' or 'csv'
-     * @param string $filename Base filename without extension
-     * @return string Full path to the exported file
-     */
-    public function export(array $filters, string $format = 'xlsx', string $filename = 'anak_asuh'): string
+    protected $auditLogService;
+
+    public function __construct(AuditLogService $auditLogService)
+    {
+        $this->auditLogService = $auditLogService;
+    }
+
+    public function export(array $filters, string $format = 'xlsx', string $filename = 'Data Anak Asuh Rumah Harapan'): string
     {
         $query = AnakAsuh::with('rumahHarapan');
 
-        // Apply filters
         if (!empty($filters['search'])) {
             $query->where(function ($q) use ($filters) {
                 $q->where('nama_anak', 'like', "%{$filters['search']}%")
@@ -34,6 +32,10 @@ class ExportAnakAsuhService
 
         if (!empty($filters['status'])) {
             $query->where('status', $filters['status']);
+        }
+
+        if (isset($filters['is_active']) && $filters['is_active'] !== '') {
+            $query->where('is_active', (bool) $filters['is_active']);
         }
 
         if (!empty($filters['grade'])) {
@@ -47,40 +49,56 @@ class ExportAnakAsuhService
             }
         }
 
-        if (!empty($filters['trashed']) && $filters['trashed'] === true) {
-            $query->withTrashed();
-        }
-
         $data = $query->get()->map(function ($anak) {
             return [
-                'RH' => $anak->rumahHarapan->kode ?? '',
-                'NAMA_ANAK' => $anak->nama_anak,
-                'NIK' => $anak->nik,
-                'NO_KARTU_KELUARGA' => $anak->no_kartu_keluarga,
-                'ALAMAT_LENGKAP' => $anak->alamat_lengkap,
-                'JENIS_KEL' => $anak->jenis_kel,
-                'TEMPAT_LAHIR' => $anak->tempat_lahir,
-                'TANGGAL_LAHIR' => $anak->tanggal_lahir ? $anak->tanggal_lahir->format('Y-m-d') : '',
-                'UMUR' => $anak->umur,
-                'STATUS' => $anak->status,
-                'GRADE' => $anak->grade,
-                'PENDIDIKAN_KELAS' => $anak->pendidikan_kelas,
-                'NAMA_ORANG_TUA' => $anak->nama_orang_tua,
-                'NO_HANDPHONE' => $anak->no_handphone,
-                'TANGGAL_MASUK_RH' => $anak->tanggal_masuk_rh ? $anak->tanggal_masuk_rh->format('Y-m-d') : '',
-                'YANG_MENGASUH_SEBELUM_DIASRAMA' => $anak->yang_mengasuh_sebelum_diasrama,
-                'REKOMENDASI' => $anak->rekomendasi,
+                'RH'                             => $anak->rumahHarapan->kode ?? '',
+                'NAMA ANAK'                      => $anak->nama_anak,
+                'NIK'                            => $anak->nik,
+                'NO KARTU KELUARGA'              => $anak->no_kartu_keluarga,
+                'ALAMAT LENGKAP'                 => $anak->alamat_lengkap,
+                'JENIS KEL'                      => $anak->jenis_kel,
+                'TEMPAT LAHIR'                   => $anak->tempat_lahir,
+                'TANGGAL LAHIR'                  => $anak->tanggal_lahir
+                    ? $anak->tanggal_lahir->format('Y-m-d')
+                    : '',
+                'UMUR'                           => $anak->umur,
+                'STATUS'                         => $anak->status,
+                'STATUS KEAKTIFAN'               => $anak->is_active ? 'Aktif' : 'Tidak Aktif',
+                'GRADE'                          => $anak->grade,
+                'PENDIDIKAN KELAS'               => $anak->pendidikan_kelas,
+                'NAMA ORANG TUA'                 => $anak->nama_orang_tua,
+                'NO HANDPHONE'                   => $anak->no_handphone,
+                'TANGGAL MASUK RH'               => $anak->tanggal_masuk_rh
+                    ? $anak->tanggal_masuk_rh->format('Y-m-d')
+                    : '',
+                'YANG MENGASUH SEBELUM DIASRAMA' => $anak->yang_mengasuh_sebelum_diasrama,
+                'REKOMENDASI'                    => $anak->rekomendasi,
             ];
         });
 
-        $fullPath = storage_path("app/exports/{$filename}_" . now()->format('Ymd_His') . ".{$format}");
+        // Format nama file: "Data Anak Asuh Rumah Harapan_15-01-2025.xlsx"
+        // Tanpa waktu, tanggal format d-m-Y agar mudah dibaca
+        $fullPath = storage_path(
+            "app/exports/{$filename}_" . now()->format('d-m-Y') . ".{$format}"
+        );
 
-        // Ensure directory exists
         if (!is_dir(dirname($fullPath))) {
             mkdir(dirname($fullPath), 0755, true);
         }
 
         (new FastExcel($data))->export($fullPath);
+
+        if (Auth::check()) {
+            $this->auditLogService->logCustom(
+                'Expor Data Anak Asuh',
+                'export',
+                [
+                    'format'     => $format === 'xlsx' ? 'Excel' : 'CSV',
+                    'nama file'  => basename($fullPath),
+                    'total data' => $data->count(),
+                ]
+            );
+        }
 
         return $fullPath;
     }

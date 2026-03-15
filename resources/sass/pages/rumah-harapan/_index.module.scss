@@ -1,0 +1,1304 @@
+.rumah-harapan-index {
+    font-family: "Inter", sans-serif;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .page-header-content {
+            flex: 1;
+            min-width: 300px;
+
+            .page-title {
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--color-text-primary);
+                margin: 0 0 8px 0;
+                letter-spacing: -0.5px;
+            }
+
+            .page-description {
+                font-size: 16px;
+                color: var(--color-text-secondary);
+                margin: 0;
+                line-height: 1.6;
+                max-width: 600px;
+            }
+        }
+
+        .page-actions {
+            display: flex;
+            flex-shrink: 0;
+            margin-top: 3px;
+
+            .btn-create-rumah-harapan {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 12px 24px;
+                background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+                color: var(--color-text-inverse);
+                border: none;
+                border-radius: var(--border-radius-sm);
+                font-weight: 600;
+                text-decoration: none;
+                transition: all var(--transition-fast);
+                font-size: 14px;
+                cursor: pointer;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+                }
+
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: var(--color-text-inverse);
+                    stroke-width: 2;
+                }
+            }
+        }
+    }
+
+    .rumah-harapan-filters {
+        margin-bottom: 15px;
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            flex: 1;
+            min-width: 250px;
+            max-width: 500px;
+
+            .search-wrapper {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+
+            .search-icon {
+                position: absolute;
+                left: 16px;
+                color: var(--color-text-subtle);
+                width: 20px;
+                height: 20px;
+                pointer-events: none;
+            }
+
+            .search-input {
+                width: 100%;
+                padding: 12px 48px 12px 48px;
+                border: 2px solid var(--color-border-input);
+                border-radius: var(--border-radius-sm);
+                font-size: 14px;
+                background: var(--color-bg-input);
+                color: var(--color-text-primary);
+                transition: all var(--transition-fast);
+
+                &:focus {
+                    outline: none;
+                    background: var(--color-bg-input-focus);
+                    border-color: var(--color-brand-primary);
+                    box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                }
+
+                &::placeholder {
+                    color: var(--color-text-subtle);
+                }
+            }
+
+            .search-loader {
+                position: absolute;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: none;
+                width: 20px;
+                height: 20px;
+
+                &.active {
+                    display: block;
+                }
+
+                .spinner {
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid var(--color-border);
+                    border-top-color: var(--color-brand-primary);
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                }
+            }
+        }
+
+        .filters-wrapper-rh {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            min-width: 300px;
+            margin-left: auto;
+
+            .reset-filter-btn-rh {
+                background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+                border: none;
+                border-radius: var(--border-radius-sm);
+                padding: 5px 16px;
+                height: 37px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all var(--transition-fast);
+                color: var(--color-text-inverse);
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: capitalize;
+                letter-spacing: 0.5px;
+                flex-shrink: 0;
+                margin-top: 5px;
+                order: -1;
+
+                &:hover {
+                    transform: translateY(-1px);
+                }
+            }
+
+            .rumah-harapan-status-filter {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                min-width: 180px;
+
+                .custom-dropdown {
+                    position: relative;
+                    width: 100%;
+
+                    .dropdown-trigger {
+                        width: 100%;
+                        padding: 12px 16px;
+                        border: 2px solid var(--color-border-input);
+                        border-radius: var(--border-radius-sm);
+                        font-weight: 500;
+                        color: var(--color-text-primary);
+                        font-size: 14px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        background: var(--color-bg-input);
+                        cursor: pointer;
+                        transition: all var(--transition-fast);
+                        appearance: none;
+                        text-align: left;
+
+                        &:focus {
+                            outline: none;
+                            border-color: var(--color-brand-primary);
+                            box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                        }
+                        &:hover {
+                            border-color: var(--color-brand-primary);
+                        }
+
+                        .dropdown-value {
+                            color: var(--color-text-secondary);
+                            flex: 1;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+
+                        .dropdown-chevron {
+                            width: 18px;
+                            height: 18px;
+                            flex-shrink: 0;
+                            margin-left: 8px;
+                            transition: transform var(--transition-fast);
+                            stroke: var(--color-text-muted);
+                            stroke-width: 2;
+                        }
+
+                        &[aria-expanded="true"] .dropdown-chevron {
+                            transform: rotate(180deg);
+                        }
+                    }
+
+                    .dropdown-menu {
+                        position: absolute;
+                        top: calc(100% + 4px);
+                        left: 0;
+                        right: 0;
+                        margin-top: 4px;
+                        background: var(--color-bg-surface);
+                        border-radius: var(--border-radius-sm);
+                        box-shadow: var(--shadow-md);
+                        z-index: 1000;
+                        display: none;
+                        max-height: 200px;
+                        overflow-y: auto;
+                        border: 1px solid var(--color-border);
+                        animation: dropdownSlideDown 0.2s ease;
+
+                        &::-webkit-scrollbar {
+                            width: 6px;
+                        }
+                        &::-webkit-scrollbar-track {
+                            background: var(--color-bg-muted);
+                            border-radius: 3px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            background: var(--color-border);
+                            border-radius: 3px;
+                            &:hover {
+                                background: var(--color-text-subtle);
+                            }
+                        }
+
+                        &.show,
+                        &[style*="display: block"] {
+                            display: block;
+                        }
+
+                        .dropdown-option {
+                            padding: 12px 16px;
+                            cursor: pointer;
+                            transition: all var(--transition-fast);
+                            font-size: 14px;
+                            color: var(--color-text-secondary);
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+
+                            &:hover {
+                                background-color: var(--color-bg-muted);
+                                color: var(--color-text-primary);
+                            }
+                            &:active {
+                                background-color: var(--color-bg-surface-hover);
+                            }
+
+                            &.selected {
+                                background-color: var(--color-brand-primary);
+                                color: var(--color-text-inverse);
+                                font-weight: 600;
+                                &:hover {
+                                    background-color: var(--color-brand-primary-dark);
+                                }
+                            }
+
+                            &:not(:last-child) {
+                                border-bottom: 1px solid var(--color-border-muted);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .loading-spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        color: var(--color-text-muted);
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--color-border);
+            border-top-color: var(--color-brand-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        p {
+            margin: 0;
+            font-size: 15px;
+            color: var(--color-text-muted);
+        }
+    }
+
+    .error-message {
+        text-align: center;
+        padding: 40px;
+        color: var(--color-danger);
+
+        svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            color: var(--color-danger);
+        }
+        p {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .btn-reload {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--color-danger-bg);
+            color: var(--color-danger-dark);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+
+            &:hover {
+                background: var(--color-danger-bg-hover, #fecaca);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+            }
+
+            .btn-icon {
+                width: 16px;
+                height: 16px;
+                stroke-width: 2;
+            }
+        }
+    }
+
+    .card {
+        background: var(--color-bg-surface);
+        padding: 0 0 10px 0;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--color-border-muted);
+        overflow: hidden;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+
+        th {
+            background: var(--color-bg-muted);
+            padding: 13px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            border-bottom: 1px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 11px;
+            border-bottom: 1px solid var(--color-border-muted);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            overflow: hidden;
+        }
+
+        tbody tr {
+            &:hover {
+                background: var(--color-bg-surface-hover);
+            }
+            &:last-child td {
+                border-bottom: none;
+            }
+        }
+    }
+
+    // Kolom tetap
+    .no-column {
+        width: 50px;
+    }
+    .action-column {
+        width: 120px;
+    }
+
+    // Kolom dengan ellipsis — base style
+    .rh-kode-cell {
+        min-width: 100px;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rh-nama-cell {
+        min-width: 160px;
+        max-width: 220px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rh-status-cell {
+        min-width: 90px;
+        width: 110px;
+    }
+
+    .rh-alamat-cell {
+        // Kolom paling dinamis — dapat ruang terbanyak, ellipsis saat sempit
+        min-width: 180px;
+        max-width: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .status-badge {
+        padding: 6px 14px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        width: fit-content;
+
+        &.status-active {
+            background-color: var(--color-success-bg);
+            color: var(--color-success);
+        }
+        &.status-inactive {
+            background-color: var(--color-bg-muted);
+            color: var(--color-gray-dark);
+        }
+    }
+
+    .rumah-harapan-actions {
+        display: flex;
+        padding: 14px;
+        gap: 8px;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    .btn-rumah-harapan-edit,
+    .btn-rumah-harapan-delete,
+    .btn-rumah-harapan-show {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: var(--border-radius-sm);
+        transition: all var(--transition-fast);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        text-decoration: none;
+
+        &.btn-rumah-harapan-edit {
+            background: rgba(4, 120, 87, 0.05);
+            color: #047857;
+            &:hover {
+                background: var(--color-success-bg);
+                transform: scale(1.1);
+            }
+        }
+
+        &.btn-rumah-harapan-delete {
+            background: rgba(239, 68, 68, 0.05);
+            color: var(--color-danger);
+            &:hover {
+                background: var(--color-danger-bg);
+                transform: scale(1.1);
+            }
+        }
+
+        &.btn-rumah-harapan-show {
+            background: rgba(59, 130, 246, 0.05);
+            color: var(--color-info);
+            &:hover {
+                background: var(--color-info-bg);
+                transform: scale(1.1);
+            }
+        }
+
+        .action-icon {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+        }
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+
+        .empty-icon {
+            margin: 0 auto 16px;
+            color: var(--color-text-subtle);
+            width: 64px;
+            height: 64px;
+        }
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: 0 0 8px 0;
+        }
+        .empty-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .empty-subtext {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin: 8px 0 0 0;
+            line-height: 1.5;
+        }
+        .empty-actions {
+            margin-top: 12px;
+        }
+    }
+
+    .pagination-container {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            list-style: none;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .page-item {
+                .page-link {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px 10px;
+                    border: 1px solid var(--color-border);
+                    border-radius: var(--border-radius-sm);
+                    text-decoration: none;
+                    color: var(--color-text-primary);
+                    background: var(--color-bg-surface);
+                    font-size: 13px;
+                    transition: all var(--transition-fast);
+                    min-width: 36px;
+
+                    &:hover {
+                        background: var(--color-bg-surface-hover);
+                        color: var(--color-brand-primary);
+                        border-color: var(--color-brand-primary);
+                    }
+                }
+
+                .pagination-icon {
+                    margin: 0 5px;
+                    width: 18px;
+                    height: 18px;
+                }
+
+                &.active .page-link {
+                    background: var(--color-brand-primary);
+                    color: var(--color-text-inverse);
+                    border-color: var(--color-brand-primary);
+                    font-weight: 600;
+                }
+
+                &.disabled .page-link {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+
+                &.page-item-ellipsis {
+                    pointer-events: none;
+                    cursor: default;
+
+                    .page-link-ellipsis {
+                        padding: 8px 6px;
+                        min-width: auto;
+                        color: var(--color-text-subtle);
+                        font-weight: 500;
+                        border: none;
+                        background: transparent;
+                        cursor: default;
+
+                        &:hover {
+                            background: transparent !important;
+                            color: var(--color-text-subtle) !important;
+                            border-color: transparent !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+.empty-link {
+    display: inline-block;
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-fast);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+        background: rgba(141, 164, 52, 0.1);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes dropdownSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.table-row {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ============= RESPONSIVE DESIGN ============= */
+
+@media (max-width: 1440px) {
+    .rumah-harapan-index {
+        .page-header {
+            margin-bottom: 30px;
+            .page-header-content {
+                .page-title {
+                    font-size: 23px;
+                }
+                .page-description {
+                    font-size: 14px;
+                }
+            }
+            .page-actions .btn-create-rumah-harapan {
+                padding: 11px 22px;
+                font-size: 13px;
+                .btn-icon {
+                    width: 17px;
+                    height: 17px;
+                }
+            }
+        }
+        .rumah-harapan-filters {
+            margin-bottom: 15px;
+            .filter-row {
+                gap: 14px;
+            }
+            .search-container .search-input {
+                padding: 11px 46px;
+                font-size: 13px;
+            }
+            .rumah-harapan-status-filter {
+                min-width: 160px;
+                .custom-dropdown {
+                    .dropdown-trigger {
+                        padding: 11px 14px;
+                        font-size: 13px;
+                        .dropdown-chevron {
+                            width: 17px;
+                            height: 17px;
+                        }
+                    }
+                    .dropdown-menu .dropdown-option {
+                        padding: 11px 14px;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+        .data-table {
+            th {
+                padding: 12px;
+                font-size: 15px;
+            }
+            td {
+                padding: 11px 15px;
+                font-size: 14px;
+            }
+        }
+        .no-column {
+            width: 45px;
+        }
+        .action-column {
+            width: 110px;
+        }
+        .rh-kode-cell {
+            min-width: 90px;
+            max-width: 130px;
+        }
+        .rh-nama-cell {
+            min-width: 150px;
+            max-width: 200px;
+        }
+        .rh-status-cell {
+            min-width: 85px;
+            width: 100px;
+        }
+        .rh-alamat-cell {
+            min-width: 160px;
+            max-width: 270px;
+        }
+        .status-badge {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        .btn-rumah-harapan-edit,
+        .btn-rumah-harapan-delete,
+        .btn-rumah-harapan-show {
+            width: 30px;
+            height: 30px;
+            .action-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        .empty-state {
+            padding: 36px 18px;
+            .empty-icon {
+                width: 60px;
+                height: 60px;
+            }
+            .empty-title {
+                font-size: 17px;
+            }
+            .empty-text {
+                font-size: 13px;
+            }
+            .empty-subtext {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .rumah-harapan-index {
+        .page-header .page-header-content .page-title {
+            font-size: 22px;
+        }
+        .data-table {
+            th {
+                font-size: 14px;
+            }
+            td {
+                font-size: 13px;
+            }
+        }
+        .status-badge {
+            padding: 8px 12px;
+            font-size: 11px;
+        }
+        .no-column {
+            width: 42px;
+        }
+        .action-column {
+            width: 100px;
+        }
+        .rh-kode-cell {
+            min-width: 85px;
+            max-width: 120px;
+        }
+        .rh-nama-cell {
+            min-width: 140px;
+            max-width: 185px;
+        }
+        .rh-status-cell {
+            min-width: 80px;
+            width: 95px;
+        }
+        .rh-alamat-cell {
+            min-width: 150px;
+            max-width: 250px;
+        }
+        .empty-state {
+            padding: 34px 16px;
+            .empty-icon {
+                width: 58px;
+                height: 58px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .rumah-harapan-index {
+        .page-header {
+            margin-bottom: 27px;
+            .page-header-content {
+                .page-title {
+                    font-size: 22px;
+                }
+                .page-description {
+                    font-size: 14px;
+                }
+            }
+        }
+        .rumah-harapan-filters .rumah-harapan-status-filter {
+            min-width: 140px;
+        }
+        .data-table {
+            th {
+                padding: 12px;
+                font-size: 14px;
+            }
+            td {
+                padding: 11px 15px;
+                font-size: 13px;
+            }
+        }
+        .no-column {
+            width: 40px;
+        }
+        .action-column {
+            width: 90px;
+        }
+        .rh-kode-cell {
+            min-width: 80px;
+            max-width: 110px;
+        }
+        .rh-nama-cell {
+            min-width: 130px;
+            max-width: 170px;
+        }
+        .rh-status-cell {
+            min-width: 75px;
+            width: 90px;
+        }
+        .rh-alamat-cell {
+            min-width: 140px;
+            max-width: 220px;
+        }
+        .status-badge {
+            padding: 6px 10px;
+            font-size: 11px;
+        }
+        .btn-rumah-harapan-edit,
+        .btn-rumah-harapan-delete,
+        .btn-rumah-harapan-show {
+            width: 32px;
+            height: 32px;
+            .action-icon {
+                width: 17px;
+                height: 17px;
+            }
+        }
+        .empty-state {
+            padding: 32px 14px;
+            .empty-icon {
+                width: 54px;
+                height: 54px;
+            }
+            .empty-title {
+                font-size: 16px;
+            }
+            .empty-text {
+                font-size: 12px;
+            }
+            .empty-subtext {
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .rumah-harapan-index {
+        .page-header {
+            margin-bottom: 15px;
+            .page-actions .btn-create-rumah-harapan {
+                padding: 10px 20px;
+                font-size: 12px;
+                .btn-icon {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+        .data-table {
+            th {
+                font-size: 14px;
+            }
+            td {
+                font-size: 13px;
+            }
+        }
+        .no-column {
+            width: 38px;
+        }
+        .action-column {
+            width: 80px;
+        }
+        // Mulai perkecil — ellipsis makin aktif
+        .rh-kode-cell {
+            min-width: 70px;
+            max-width: 95px;
+        }
+        .rh-nama-cell {
+            min-width: 110px;
+            max-width: 150px;
+        }
+        .rh-status-cell {
+            min-width: 70px;
+            width: 85px;
+        }
+        .rh-alamat-cell {
+            min-width: 120px;
+            max-width: 180px;
+        }
+        .empty-state {
+            padding: 30px 12px;
+            .empty-icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .rumah-harapan-index {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+
+        .page-header {
+            flex-shrink: 0;
+            margin-bottom: 14px;
+            .page-header-content .page-description {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+            .page-actions .btn-create-rumah-harapan {
+                padding: 10px 16px;
+                font-size: 14px;
+                .btn-icon {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+
+        .rumah-harapan-filters {
+            flex-shrink: 0;
+            margin-bottom: 10px;
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+            }
+            .search-container {
+                margin-bottom: 6px;
+                .search-wrapper {
+                    max-width: 100%;
+                }
+                .search-input {
+                    padding: 11px 50px;
+                    font-size: 14px;
+                }
+            }
+            .filters-wrapper-rh {
+                justify-content: flex-start;
+                width: 70%;
+                margin-left: 0;
+                gap: 12px;
+                .reset-filter-btn-rh {
+                    order: 999;
+                    padding: 4px 12px;
+                    height: 35px;
+                    font-size: 13px;
+                }
+                .rumah-harapan-status-filter {
+                    width: 60%;
+                    .custom-dropdown .dropdown-trigger {
+                        padding: 11px 14px;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+
+        .card {
+            flex: 1;
+            min-height: 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .error-message {
+            padding: 26px 16px;
+            svg {
+                width: 36px;
+                height: 36px;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 14px;
+                margin-bottom: 14px;
+            }
+            .btn-reload {
+                padding: 8px 16px;
+                font-size: 12px;
+                .btn-icon {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .data-table {
+            min-width: 620px; // cukup untuk semua th nowrap tidak wrap
+            th {
+                padding: 11px;
+                font-size: 13px;
+            }
+            td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+        .no-column {
+            width: 32px;
+        }
+        .action-column {
+            width: 70px;
+        }
+        .rh-kode-cell {
+            min-width: 75px;
+            max-width: 95px;
+            font-size: 12px;
+        }
+        .rh-nama-cell {
+            min-width: 110px;
+            max-width: 140px;
+            font-size: 12px;
+        }
+        .rh-status-cell {
+            min-width: 65px;
+            width: 80px;
+        }
+        .rh-alamat-cell {
+            min-width: 120px;
+            max-width: 160px;
+            font-size: 12px;
+        }
+        .status-badge {
+            padding: 5px 8px;
+            font-size: 10px;
+        }
+        .btn-rumah-harapan-edit,
+        .btn-rumah-harapan-delete,
+        .btn-rumah-harapan-show {
+            width: 28px;
+            height: 28px;
+            .action-icon {
+                width: 14px;
+                height: 14px;
+            }
+        }
+        .empty-state {
+            padding: 24px 12px;
+            .empty-icon {
+                width: 44px;
+                height: 44px;
+            }
+            .empty-title {
+                font-size: 15px;
+            }
+            .empty-text,
+            .empty-subtext {
+                font-size: 12px;
+            }
+        }
+
+        .pagination-container {
+            flex-shrink: 0;
+            margin-top: 8px;
+            .pagination {
+                justify-content: center;
+                gap: 6px;
+                padding: 10px 0;
+                .page-item {
+                    .page-link {
+                        padding: 8px 10px;
+                        font-size: 13px;
+                        min-width: 32px;
+                    }
+                    .page-link span {
+                        display: none;
+                    }
+                    .pagination-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .rumah-harapan-index {
+        .page-header {
+            margin-bottom: 12px;
+            .page-header-content {
+                .page-title {
+                    font-size: 20px;
+                }
+                .page-description {
+                    font-size: 13px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+        .rumah-harapan-filters .filters-wrapper-rh {
+            .reset-filter-btn-rh {
+                margin-left: -5px;
+                padding: 5px 10px;
+                height: 32px;
+                font-size: 13px;
+            }
+            .rumah-harapan-status-filter .custom-dropdown {
+                .dropdown-trigger {
+                    padding: 10px 12px;
+                    font-size: 13px;
+                }
+                .dropdown-menu .dropdown-item {
+                    font-size: 12px;
+                }
+            }
+        }
+        .data-table {
+            min-width: 600px; // th nowrap butuh lebar minimal lebih dari 520px lama
+            th {
+                padding: 11px;
+                font-size: 12px;
+            }
+            td {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+        }
+        .no-column {
+            width: 28px;
+        }
+        .action-column {
+            width: 60px;
+        }
+        .rh-kode-cell {
+            min-width: 68px;
+            max-width: 85px;
+        }
+        .rh-nama-cell {
+            min-width: 100px;
+            max-width: 125px;
+        }
+        .rh-status-cell {
+            min-width: 58px;
+            width: 72px;
+        }
+        .rh-alamat-cell {
+            min-width: 110px;
+            max-width: 140px;
+        }
+        .status-badge {
+            padding: 5px 8px;
+            font-size: 9px;
+        }
+        .btn-rumah-harapan-edit,
+        .btn-rumah-harapan-delete,
+        .btn-rumah-harapan-show {
+            width: 26px;
+            height: 26px;
+            .action-icon {
+                width: 14px;
+                height: 14px;
+            }
+        }
+        .empty-state {
+            padding: 20px 10px;
+            .empty-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .empty-title {
+                font-size: 14px;
+            }
+            .empty-text,
+            .empty-subtext {
+                font-size: 11px;
+            }
+        }
+        .pagination-container .pagination .page-item .page-link {
+            padding: 8px 8px;
+            font-size: 12px;
+        }
+    }
+}

@@ -6,41 +6,29 @@
     'closeText' => 'Tutup',
 ])
 
-<!-- Alert Modal Overlay (Hidden by default) -->
+{{-- Alert Modal Component - Global --}}
 <div id="alertModal" class="alert-modal-overlay" style="display: none;">
-    <div class="alert-modal-container" data-alert-type="{{ $type }}">
+    <div class="alert-modal-container">
         <div class="alert-modal-content">
-            <div class="alert-icon alert-icon--{{ $type }}">
-                @if ($type == 'success')
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                @elseif($type == 'error')
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                @else
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                        </path>
-                    </svg>
-                @endif
+            {{-- Alert Icon --}}
+            <div class="alert-icon alert-icon--confirm">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                    </path>
+                </svg>
             </div>
-            <h3 class="alert-title">{{ $title }}</h3>
-            <p class="alert-message">{{ $message }}</p>
 
+            {{-- Alert Title (dengan ID!) --}}
+            <h3 class="alert-title" id="alertModalTitle">Pemberitahuan</h3>
+
+            {{-- Alert Message (dengan ID!) --}}
+            <p class="alert-message" id="alertModalMessage">Pesan akan ditampilkan di sini</p>
+
+            {{-- Alert Actions --}}
             <div class="alert-actions">
-                @if ($type == 'confirm')
-                    <button class="alert-btn alert-btn-cancel" id="alertCancelBtn">Batal</button>
-                    <button class="alert-btn alert-btn-confirm" id="alertConfirmBtn">{{ $confirmText }}</button>
-                @else
-                    <button class="alert-btn alert-btn-close" id="alertCloseBtn">
-                        {{ $closeText }}
-                    </button>
-                @endif
+                <button class="alert-btn alert-btn-cancel" id="alertCancelBtn">Batal</button>
+                <button class="alert-btn alert-btn-confirm" id="alertConfirmBtn">Konfirmasi</button>
             </div>
         </div>
     </div>

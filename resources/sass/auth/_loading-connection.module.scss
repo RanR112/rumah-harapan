@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    background: var(--color-bg-auth);
     position: relative;
     font-family: "Inter", sans-serif;
 
@@ -37,13 +37,13 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        
+
         img {
             width: 200px;
             height: auto;
             max-width: 100%;
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.12));
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-base);
 
             &:hover {
                 transform: scale(1.02);
@@ -51,12 +51,11 @@
         }
     }
 
-    // Loader styling with slower animation
+    // Loader brand animation — hardcode, warna identik brand
     .loader {
         &:before {
             animation: before8 2s infinite;
         }
-
         &:after {
             animation: after6 2s infinite;
         }
@@ -64,26 +63,26 @@
 
     &__text {
         font-size: 1.125rem;
-        color: #4a5568;
+        color: var(--color-text-secondary);
         font-weight: 500;
         letter-spacing: 0.5px;
         margin: 0;
         animation: pulse 2s ease-in-out infinite;
 
         &--error {
-            color: #dc2626;
+            color: var(--color-danger-dark);
             font-weight: 600;
             animation: none;
         }
     }
 
     &__error-icon {
-        color: #ef4444;
+        color: var(--color-danger);
         font-size: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        
+
         svg {
             width: 4rem;
             height: 4rem;
@@ -92,6 +91,7 @@
     }
 
     &__retry-btn {
+        // Brand gradient — hardcode, sama di kedua mode
         background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
         color: white;
         border: none;
@@ -101,23 +101,22 @@
         font-size: 1rem;
         cursor: pointer;
         margin-top: 1rem;
-        transition: all 0.3s ease;
+        transition: all var(--transition-base);
         box-shadow: 0 4px 12px rgba(141, 164, 52, 0.25);
 
         &:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(141, 164, 52, 0.35);
         }
-
         &:active {
             transform: translateY(0);
         }
     }
 }
 
-// Pulse animation for loading text
 @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 1;
     }
     50% {
@@ -125,32 +124,25 @@
     }
 }
 
-// Responsive Design - Tablet
 @media (max-width: 768px) {
     .loading-connection {
         padding: 1.5rem;
-        
         &__container {
             gap: 2rem;
         }
-
         &__logo img {
             width: 160px;
         }
-        
         &__text {
             font-size: 1rem;
         }
-
         &__error-icon {
             font-size: 3.5rem;
-            
             svg {
                 width: 3.5rem;
                 height: 3.5rem;
             }
         }
-
         &__retry-btn {
             padding: 12px 28px;
             font-size: 0.95rem;
@@ -158,32 +150,25 @@
     }
 }
 
-// Responsive Design - Mobile
 @media (max-width: 480px) {
     .loading-connection {
         padding: 1rem;
-        
         &__container {
             gap: 1.75rem;
         }
-
         &__logo img {
             width: 140px;
         }
-        
         &__text {
             font-size: 0.95rem;
         }
-
         &__error-icon {
             font-size: 3rem;
-            
             svg {
                 width: 3rem;
                 height: 3rem;
             }
         }
-
         &__retry-btn {
             padding: 12px 24px;
             font-size: 0.9rem;
@@ -191,30 +176,24 @@
     }
 }
 
-// Responsive Design - Small Mobile
 @media (max-width: 360px) {
     .loading-connection {
         &__container {
             gap: 1.5rem;
         }
-
         &__logo img {
             width: 120px;
         }
-        
         &__text {
             font-size: 0.875rem;
         }
-
         &__error-icon {
             font-size: 2.5rem;
-            
             svg {
                 width: 2.5rem;
                 height: 2.5rem;
             }
         }
-
         &__retry-btn {
             padding: 10px 20px;
             font-size: 0.85rem;

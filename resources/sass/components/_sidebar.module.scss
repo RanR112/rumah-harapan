@@ -1,28 +1,27 @@
 // Sidebar
 .sidebar {
     width: 250px;
-    background: #ffffff;
-    border-right: 1px solid #e2e8f0;
+    background: var(--color-bg-sidebar);
+    border-right: 1px solid var(--color-border);
     border-radius: 0 12px 12px 0;
     height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 100;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-base);
     display: flex;
     flex-direction: column;
-    
+
     // Default state untuk desktop
     @media (min-width: 1025px) {
         transform: translateX(0);
     }
-    
+
     // Hidden state untuk mobile
     @media (max-width: 1024px) {
         transform: translateX(-100%);
-        
-        // Ketika sidebar dibuka
+
         &.sidebar--open {
             transform: translateX(0);
         }
@@ -34,26 +33,26 @@
         flex-direction: column;
         align-items: center;
         gap: 12px;
-        
+
         .logo {
             display: flex;
             justify-content: center;
-            
+
             img {
                 width: 130px;
                 height: auto;
             }
         }
-        
+
         .sidebar-title {
             font-size: 15px;
             font-weight: 600;
-            color: #2d3748;
+            color: var(--color-text-secondary);
             text-align: center;
             margin: 0;
             line-height: 1.4;
         }
-        
+
         .sidebar-divider {
             width: 60px;
             height: 2px;
@@ -61,69 +60,69 @@
             border-radius: 2px;
         }
     }
-    
+
     .sidebar-nav {
         padding: 20px 0;
         flex: 1;
         overflow-y: auto;
-        
+
         .nav-list {
             list-style: none;
             margin: 0;
             padding: 0 12px;
-            
+
             .nav-item {
                 margin-bottom: 6px;
-                
+
                 &.active {
                     .nav-link {
                         background: linear-gradient(135deg, #f5a623 0%, #fdb913 100%);
-                        color: #ffffff;
+                        color: var(--color-text-inverse);
                         font-weight: 600;
                         border-radius: 10px;
                         box-shadow: 0 2px 8px rgba(245, 166, 35, 0.25);
-                        
+
                         .nav-icon {
-                            fill: #ffffff;
-                            stroke: #ffffff;
-                            color: #ffffff;
+                            fill: var(--color-text-inverse);
+                            stroke: var(--color-text-inverse);
+                            color: var(--color-text-inverse);
                         }
                     }
                 }
-                
+
                 .nav-link {
                     display: flex;
                     align-items: center;
                     padding: 12px 16px;
                     text-decoration: none;
-                    color: #4a5568;
-                    transition: all 0.3s ease;
+                    color: var(--color-text-secondary);
+                    transition: all var(--transition-base);
                     border-radius: 10px;
                     position: relative;
-                    
+
                     &:hover {
                         background: linear-gradient(135deg, #e89820 0%, #f0a810 100%);
-                        color: #ffffff;
+                        color: var(--color-text-inverse);
                         transform: translateX(2px);
                         box-shadow: 0 2px 6px rgba(232, 152, 32, 0.2);
-                        
+
                         .nav-icon {
-                            fill: #ffffff;
-                            stroke: #ffffff;
-                            color: #ffffff;
+                            fill: var(--color-text-inverse);
+                            stroke: var(--color-text-inverse);
+                            color: var(--color-text-inverse);
                         }
                     }
-                    
+
                     .nav-icon {
                         margin-right: 12px;
                         width: 20px;
                         height: 20px;
                         fill: currentColor;
                         stroke: currentColor;
-                        color: #4a5568;
-                        transition: all 0.3s ease;
+                        color: var(--color-text-secondary);
+                        transition: all var(--transition-base);
                     }
-                    
+
                     .nav-text {
                         font-size: 14px;
                         font-weight: 500;
@@ -132,446 +131,152 @@
             }
         }
     }
-    
+
     .sidebar-footer {
         padding: 20px;
-        border-top: 1px solid #e2e8f0;
+        border-top: 1px solid var(--color-border);
         display: flex;
         justify-content: center;
-        
+
         .logout-form {
             width: 100%;
             display: flex;
             justify-content: center;
-            
+
             .logout-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 gap: 8px;
-                background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
-                color: #ffffff;
+                background: linear-gradient(135deg, var(--color-danger) 0%, var(--color-danger-dark) 100%);
+                color: var(--color-text-inverse);
                 border: none;
-                border-radius: 10px;
+                border-radius: var(--border-radius-md);
                 padding: 12px 24px;
                 font-size: 14px;
                 font-weight: 600;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all var(--transition-base);
                 box-shadow: 0 2px 8px rgba(229, 62, 62, 0.25);
-                
+                min-width: 120px;
+                min-height: 40px;
+
                 &:hover {
-                    background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+                    background: linear-gradient(135deg, var(--color-danger-dark) 0%, var(--color-danger-darker) 100%);
                     transform: translateY(-2px);
                     box-shadow: 0 4px 12px rgba(229, 62, 62, 0.35);
                 }
-                
+
                 &:active {
                     transform: translateY(0);
                 }
-                
-                .nav-icon {
+
+                &:disabled {
+                    cursor: not-allowed;
+                    transform: none;
+                    opacity: 0.85;
+                }
+
+                .nav-icon-logout {
                     width: 18px;
                     height: 18px;
-                    fill: #ffffff;
-                    stroke: #ffffff;
-                    color: #ffffff;
+                    fill: var(--color-text-inverse);
+                    stroke: var(--color-text-inverse);
+                    color: var(--color-text-inverse);
                 }
-                
-                .nav-text {
+
+                .btn-text {
                     font-size: 14px;
+                }
+
+                .btn-loader {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
                 }
             }
         }
-    }
-}
-
-// Styling SVG Icons (untuk sidebar & topbar)
-.nav-icon,
-.logout-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    stroke: currentColor;
-    
-    // Default color
-    color: #4a5568;
-    
-    // Active state
-    .nav-item.active & {
-        fill: #ffffff;
-        stroke: #ffffff;
-        color: #ffffff;
-    }
-    
-    // Hover state
-    .nav-link:hover & {
-        fill: #ffffff;
-        stroke: #ffffff;
-        color: #ffffff;
     }
 }
 
 /* ============= RESPONSIVE DESIGN ============= */
 
-// Desktop Large (1440px)
 @media (max-width: 1440px) {
     .sidebar {
         width: 240px;
-        
+
         .sidebar-header {
             padding: 22px 18px;
             gap: 10px;
-            
-            .logo {
-                img {
-                    width: 130px;
-                }
+
+            .logo img {
+                width: 130px;
             }
-            
             .sidebar-title {
                 font-size: 15px;
             }
-            
         }
-        
+
         .sidebar-nav {
             padding: 18px 0;
-            
+
             .nav-list {
                 padding: 0 10px;
-                
-                .nav-item {
-                    .nav-link {
-                        padding: 11px 14px;
-                        
-                        .nav-icon {
-                            margin-right: 10px;
-                            width: 18px;
-                            height: 18px;
-                        }
-                        
-                        .nav-text {
-                            font-size: 13px;
-                        }
+
+                .nav-item .nav-link {
+                    padding: 11px 14px;
+
+                    .nav-icon {
+                        margin-right: 10px;
+                        width: 18px;
+                        height: 18px;
+                    }
+                    .nav-text {
+                        font-size: 13px;
                     }
                 }
             }
         }
-        
+
         .sidebar-footer {
             padding: 18px;
-            
-            .logout-form {
-                .logout-btn {
-                    padding: 11px 22px;
-                    font-size: 13px;
-                    
-                    .nav-icon {
-                        width: 17px;
-                        height: 17px;
-                    }
+
+            .logout-form .logout-btn {
+                padding: 11px 22px;
+                font-size: 13px;
+
+                .nav-icon {
+                    width: 17px;
+                    height: 17px;
                 }
             }
         }
     }
 }
 
-// // Desktop Medium (1280px)
 @media (max-width: 1280px) {
     .sidebar {
         width: 230px;
-        
+
         .sidebar-header {
-            
-            .logo {
-                img {
-                    width: 130px;
-                }
+            .logo img {
+                width: 130px;
             }
-            
             .sidebar-title {
                 font-size: 15px;
             }
-            
         }
-        
     }
 }
 
-// // Tablet Landscape (1024px) - MOBILE BREAKPOINT
 @media (max-width: 1024px) {
     .sidebar {
         width: 250px;
     }
 }
 
-// // Tablet Portrait (850px)
-// @media (max-width: 850px) {
-//     .sidebar {
-//         width: 250px;
-        
-//         .sidebar-header {
-//             padding: 16px 14px;
-//             gap: 8px;
-            
-//             .logo {
-//                 img {
-//                     width: 85px;
-//                 }
-//             }
-            
-//             .sidebar-title {
-//                 font-size: 11px;
-//             }
-            
-//             .sidebar-divider {
-//                 width: 40px;
-//             }
-//         }
-        
-//         .sidebar-nav {
-//             padding: 14px 0;
-            
-//             .nav-list {
-//                 padding: 0 8px;
-                
-//                 .nav-item {
-//                     margin-bottom: 4px;
-                    
-//                     .nav-link {
-//                         padding: 9px 12px;
-//                         border-radius: 8px;
-                        
-//                         .nav-icon {
-//                             width: 16px;
-//                             height: 16px;
-//                             margin-right: 8px;
-//                         }
-                        
-//                         .nav-text {
-//                             font-size: 11px;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-        
-//         .sidebar-footer {
-//             padding: 14px;
-            
-//             .logout-form {
-//                 .logout-btn {
-//                     padding: 9px 16px;
-//                     font-size: 11px;
-                    
-//                     .nav-icon {
-//                         width: 15px;
-//                         height: 15px;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// // Mobile Large (480px)
-// @media (max-width: 480px) {
-//     .sidebar {
-//         width: 250px;
-        
-//         .sidebar-header {
-//             padding: 14px 12px;
-            
-//             .logo {
-//                 img {
-//                     width: 75px;
-//                 }
-//             }
-            
-//             .sidebar-title {
-//                 font-size: 10px;
-//             }
-            
-//             .sidebar-divider {
-//                 width: 35px;
-//             }
-//         }
-        
-//         .sidebar-nav {
-//             padding: 12px 0;
-            
-//             .nav-list {
-//                 padding: 0 6px;
-                
-//                 .nav-item {
-//                     .nav-link {
-//                         padding: 8px 10px;
-                        
-//                         .nav-icon {
-//                             width: 14px;
-//                             height: 14px;
-//                             margin-right: 6px;
-//                         }
-                        
-//                         .nav-text {
-//                             font-size: 10px;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-        
-//         .sidebar-footer {
-//             padding: 12px;
-            
-//             .logout-form {
-//                 .logout-btn {
-//                     padding: 8px 14px;
-//                     font-size: 10px;
-                    
-//                     .nav-icon {
-//                         width: 13px;
-//                         height: 13px;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// // Mobile Small (360px)
-// @media (max-width: 360px) {
-//     .sidebar {
-//         width: 250px;
-        
-//         .sidebar-header {
-//             padding: 12px 10px;
-//             gap: 6px;
-            
-//             .logo {
-//                 img {
-//                     width: 65px;
-//                 }
-//             }
-            
-//             .sidebar-title {
-//                 font-size: 9px;
-//             }
-            
-//             .sidebar-divider {
-//                 width: 30px;
-//             }
-//         }
-        
-//         .sidebar-nav {
-//             padding: 10px 0;
-            
-//             .nav-list {
-//                 padding: 0 6px;
-                
-//                 .nav-item {
-//                     .nav-link {
-//                         padding: 7px 8px;
-//                         border-radius: 6px;
-                        
-//                         .nav-icon {
-//                             width: 12px;
-//                             height: 12px;
-//                             margin-right: 5px;
-//                         }
-                        
-//                         .nav-text {
-//                             font-size: 9px;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-        
-//         .sidebar-footer {
-//             padding: 10px;
-            
-//             .logout-form {
-//                 .logout-btn {
-//                     padding: 7px 12px;
-//                     font-size: 9px;
-                    
-//                     .nav-icon {
-//                         width: 11px;
-//                         height: 11px;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// // Mobile Extra Small (< 320px)
-// @media (max-width: 320px) {
-//     .sidebar {
-//         width: 250px;
-        
-//         .sidebar-header {
-//             padding: 10px 8px;
-            
-//             .logo {
-//                 img {
-//                     width: 55px;
-//                 }
-//             }
-            
-//             .sidebar-title {
-//                 font-size: 8px;
-//             }
-            
-//             .sidebar-divider {
-//                 width: 25px;
-//             }
-//         }
-        
-//         .sidebar-nav {
-//             padding: 8px 0;
-            
-//             .nav-list {
-//                 padding: 0 4px;
-                
-//                 .nav-item {
-//                     .nav-link {
-//                         padding: 6px 6px;
-                        
-//                         .nav-icon {
-//                             width: 10px;
-//                             height: 10px;
-//                             margin-right: 4px;
-//                         }
-                        
-//                         .nav-text {
-//                             font-size: 8px;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-        
-//         .sidebar-footer {
-//             padding: 8px;
-            
-//             .logout-form {
-//                 .logout-btn {
-//                     padding: 6px 10px;
-//                     font-size: 8px;
-                    
-//                     .nav-icon {
-//                         width: 10px;
-//                         height: 10px;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
+// Overlay untuk mobile
 .sidebar-overlay {
     position: fixed;
     top: 0;
@@ -582,12 +287,12 @@
     z-index: 99;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    
+    transition: all var(--transition-base);
+
     @media (min-width: 1025px) {
         display: none;
     }
-    
+
     &.sidebar-overlay--active {
         opacity: 1;
         visibility: visible;

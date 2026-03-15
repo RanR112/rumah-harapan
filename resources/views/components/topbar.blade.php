@@ -54,9 +54,13 @@
                 <button type="submit" class="profile-logout-btn" role="menuitem">
                     @include('components.icon-svg', [
                         'name' => 'right-to-bracket',
-                        'class' => 'logout-icon',
+                        'class' => 'nav-icon-logout',
                     ])
-                    Logout
+
+                    <span class="btn-text">Keluar</span>
+                    <div class="btn-loader" style="display: none;">
+                        @include('components.loader.loader-pulse')
+                    </div>
                 </button>
             </form>
         </div>

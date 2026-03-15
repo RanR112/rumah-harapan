@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone');
             $table->enum('role', ['admin', 'petugas'])->default('petugas');
+            $table->enum('theme', ['light', 'dark'])->default('light');
             $table->string('password');
             $table->rememberToken();
             $table->string('reset_otp', 6)->nullable()->index();

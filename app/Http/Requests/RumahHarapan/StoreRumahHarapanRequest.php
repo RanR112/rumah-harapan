@@ -25,7 +25,6 @@ class StoreRumahHarapanRequest extends FormRequest
             'telepon' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'koordinator' => 'nullable|string|max:255',
-            'is_active' => 'nullable|boolean',
         ];
     }
 }

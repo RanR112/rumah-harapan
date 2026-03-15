@@ -17,7 +17,7 @@ class UpdateRumahHarapanRequest extends FormRequest
 
     public function rules(): array
     {
-        $branchId = $this->route('rumah_harapan');
+        $rumahHarapanId = $this->route('id');
 
         return [
             'kode' => [
@@ -25,7 +25,7 @@ class UpdateRumahHarapanRequest extends FormRequest
                 'required',
                 'string',
                 'max:10',
-                Rule::unique('rumah_harapans')->ignore($branchId),
+                Rule::unique('rumah_harapans')->ignore($rumahHarapanId),
             ],
             'nama' => 'sometimes|required|string|max:255',
             'alamat' => 'sometimes|required|string',

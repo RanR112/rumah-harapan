@@ -1,0 +1,586 @@
+.settings-page {
+    padding: 0 0 40px;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 15px;
+
+    &__title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+        letter-spacing: -0.3px;
+    }
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    .settings-card--account {
+        grid-column: 1 / -1;
+    }
+}
+
+.settings-card {
+    background: var(--color-bg-surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border-muted);
+    overflow: hidden;
+    transition: box-shadow var(--transition-base);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 20px 24px 0;
+    }
+
+    &__header-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--border-radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        i,
+        svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.8;
+        }
+
+        &--account {
+            background: rgba(141, 164, 52, 0.12);
+            i,
+            svg {
+                color: var(--color-brand-primary);
+            }
+        }
+
+        &--appearance {
+            background: rgba(99, 102, 241, 0.1);
+            i,
+            svg {
+                color: #6366f1;
+            }
+        }
+
+        &--about {
+            background: var(--color-info-bg);
+            i,
+            svg {
+                color: var(--color-info);
+            }
+        }
+    }
+
+    &__title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+        flex: 1; // dorong btn-edit ke kanan
+    }
+
+    &__body {
+        padding: 20px 24px;
+    }
+
+    &__footer {
+        padding: 0 24px 20px;
+    }
+
+    // Footer khusus mobile — tersembunyi by default, tampil di 480px
+    &__footer--mobile {
+        display: none;
+    }
+}
+
+.account-info {
+    &__details {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__label {
+        font-size: 13px;
+        color: var(--color-text-muted);
+        font-weight: 500;
+        min-width: 90px; // lebih lebar untuk "No. Telepon"
+    }
+
+    &__value {
+        font-size: 14px;
+        color: var(--color-text-primary);
+        font-weight: 600;
+    }
+
+    &__badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 600;
+
+        &--admin {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+        }
+
+        &--petugas {
+            background: var(--color-info-bg);
+            color: var(--color-info);
+        }
+    }
+}
+
+.btn-edit-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+    color: var(--color-text-inverse);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    i,
+    svg {
+        width: 18px;
+        height: 18px;
+        stroke-width: 2;
+        stroke: var(--color-text-inverse);
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+    }
+
+    // Versi header (desktop) — margin-left otomatis dari flex: 1 di __title
+    &--header {
+        flex-shrink: 0;
+    }
+}
+
+.appearance-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    &__label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+}
+
+.theme-switch {
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: inline-block;
+
+    &__input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    // Ukuran diperkecil: 46x24px (dari 56x28px)
+    &__track {
+        display: block;
+        width: 46px;
+        height: 24px;
+        border-radius: 100px;
+        background: var(--color-bg-muted);
+        border: 2px solid var(--color-border);
+        position: relative;
+        transition:
+            background var(--transition-base),
+            border-color var(--transition-base);
+    }
+
+    // Thumb: 16px (dari 20px), left: 2px
+    &__thumb {
+        position: absolute;
+        top: 50%;
+        left: 2px;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--color-text-secondary);
+        transition:
+            transform var(--transition-base),
+            background var(--transition-base);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    // Checked: thumb geser 22px (46 - 24 = 22, dikurangi 2px padding kiri)
+    &__input:checked + &__track {
+        background: #4338ca;
+        border-color: #4338ca;
+
+        .theme-switch__thumb {
+            transform: translateY(-50%) translateX(22px);
+            background: #e0e7ff;
+        }
+    }
+
+    &__input:disabled + &__track {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
+    &:hover &__track {
+        border-color: var(--color-brand-primary);
+    }
+
+    &__input:focus-visible + &__track {
+        outline: 2px solid var(--color-brand-primary);
+        outline-offset: 2px;
+    }
+}
+
+.about-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--color-border-muted);
+
+        &:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+    }
+
+    &__label {
+        font-size: 13px;
+        color: var(--color-text-muted);
+        font-weight: 500;
+    }
+
+    &__value {
+        font-size: 13.5px;
+        color: var(--color-text-primary);
+        font-weight: 600;
+    }
+
+    &__badge {
+        display: inline-flex;
+        padding: 3px 10px;
+        background: var(--color-brand-lighter);
+        color: var(--color-brand-dark);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+}
+
+/* ============================================
+    RESPONSIVE — 1024px
+============================================ */
+@media (max-width: 1024px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+
+        .settings-card--account {
+            grid-column: 1;
+        }
+    }
+}
+
+/* ============================================
+    RESPONSIVE — 768px
+============================================ */
+@media (max-width: 850px) {
+    .settings-header {
+        margin-bottom: 20px;
+
+        &__title {
+            font-size: 20px;
+        }
+    }
+
+    .settings-grid {
+        gap: 16px;
+    }
+
+    .settings-card {
+        &__header {
+            padding: 16px 18px 0;
+        }
+        &__body {
+            padding: 16px 18px;
+        }
+        &__footer {
+            padding: 0 18px 16px;
+        }
+    }
+
+    .account-info {
+        &__label {
+            min-width: 80px;
+        }
+    }
+}
+
+/* ============================================
+    RESPONSIVE — 480px
+============================================ */
+@media (max-width: 480px) {
+    .settings-header {
+        margin-bottom: 16px;
+
+        &__title {
+            font-size: 17px;
+        }
+    }
+
+    .settings-grid {
+        gap: 14px;
+    }
+
+    .settings-card {
+        &__header {
+            padding: 14px 16px 0;
+            gap: 10px;
+        }
+
+        &__header-icon {
+            width: 34px;
+            height: 34px;
+
+            i,
+            svg {
+                width: 17px;
+                height: 17px;
+            }
+        }
+
+        &__title {
+            font-size: 14px;
+        }
+
+        &__body {
+            padding: 14px 16px;
+        }
+
+        &__footer {
+            padding: 0 16px 14px;
+        }
+
+        // Sembunyikan button di header, tampilkan footer di mobile
+        &__footer--mobile {
+            display: block;
+        }
+    }
+
+    // Sembunyikan btn-edit-profile versi header di mobile
+    .btn-edit-profile--header {
+        display: none;
+    }
+
+    .btn-edit-profile {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .account-info {
+        &__item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+
+        &__label {
+            min-width: unset;
+            font-size: 12px;
+        }
+
+        &__value {
+            font-size: 13px;
+        }
+    }
+
+    // Toggle sedikit lebih besar di mobile agar mudah ditekan — 50x26px
+    .theme-switch {
+        &__track {
+            width: 50px;
+            height: 26px;
+        }
+
+        &__thumb {
+            width: 18px;
+            height: 18px;
+            left: 2px;
+        }
+
+        &__input:checked + &__track {
+            .theme-switch__thumb {
+                transform: translateY(-50%) translateX(24px);
+            }
+        }
+    }
+
+    .appearance-row {
+        gap: 12px;
+
+        &__label {
+            font-size: 13px;
+        }
+    }
+
+    .about-list {
+        gap: 12px;
+
+        &__item {
+            padding-bottom: 12px;
+        }
+
+        &__label,
+        &__value {
+            font-size: 12.5px;
+        }
+    }
+}
+
+/* ============================================
+    RESPONSIVE — 360px
+============================================ */
+@media (max-width: 360px) {
+    .settings-header {
+        margin-bottom: 14px;
+
+        &__title {
+            font-size: 16px;
+        }
+    }
+
+    .settings-grid {
+        gap: 12px;
+    }
+
+    .settings-card {
+        &__header {
+            padding: 12px 14px 0;
+        }
+
+        &__header-icon {
+            width: 30px;
+            height: 30px;
+
+            i,
+            svg {
+                width: 15px;
+                height: 15px;
+            }
+        }
+
+        &__title {
+            font-size: 13px;
+        }
+
+        &__body {
+            padding: 12px 14px;
+        }
+
+        &__footer {
+            padding: 0 14px 12px;
+        }
+    }
+
+    .btn-edit-profile {
+        padding: 9px 14px;
+        font-size: 12px;
+
+        i,
+        svg {
+            width: 13px;
+            height: 13px;
+        }
+    }
+
+    .account-info {
+        &__details {
+            gap: 10px;
+        }
+
+        &__label {
+            font-size: 11px;
+        }
+
+        &__value {
+            font-size: 12px;
+        }
+
+        &__badge {
+            padding: 5px 12px;
+            font-size: 11px;
+        }
+    }
+
+    // Toggle di 360px — tetap 50x26px dari 480px, tidak dikecilkan lagi
+    .appearance-row {
+        &__label {
+            font-size: 12px;
+        }
+    }
+
+    .about-list {
+        gap: 10px;
+
+        &__item {
+            padding-bottom: 10px;
+        }
+
+        &__label,
+        &__value {
+            font-size: 12px;
+        }
+
+        &__badge {
+            font-size: 11px;
+            padding: 2px 8px;
+        }
+    }
+}

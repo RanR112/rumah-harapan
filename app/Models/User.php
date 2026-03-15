@@ -24,6 +24,7 @@ class User extends Authenticatable
         'phone',
         'password',
         'role',
+        'theme',
         'reset_otp',
         'reset_otp_created_at',
     ];
@@ -46,6 +47,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'reset_otp_created_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
 }

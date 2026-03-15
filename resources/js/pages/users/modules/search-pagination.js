@@ -7,7 +7,6 @@
  */
 
 import { renderTable, renderPagination, showLoading, showError } from './table-renderer.js';
-import { attachActionButtonsListeners } from '../index.js';
 
 // Fetch data dari server
 export async function fetchData(context, page = 1) {
@@ -37,7 +36,10 @@ export async function fetchData(context, page = 1) {
         // Render table dan pagination
         renderTable(context, data.data, data.first_item);
         renderPagination(context, data.current_page, data.last_page);
-        attachActionButtonsListeners();
+
+        if (context.onAfterRender) {
+            context.onAfterRender(context);
+        }
         
         // Update URL
         const newUrl = new URL(`${context.baseUrl}/users`);

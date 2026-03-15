@@ -1,0 +1,313 @@
+.session-timeout-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity var(--transition-base),
+        visibility var(--transition-base);
+
+    &--visible {
+        opacity: 1;
+        visibility: visible;
+
+        .session-timeout-modal__box {
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+    }
+
+    &__box {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        background: var(--color-bg-surface);
+        border-radius: var(--border-radius-xl);
+        box-shadow: var(--shadow-modal);
+        padding: 36px 32px 28px;
+        text-align: center;
+        transform: scale(0.95) translateY(8px);
+        transition: transform var(--transition-base);
+    }
+
+    &__icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: rgba(217, 119, 6, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+
+        i,
+        svg {
+            width: 26px;
+            height: 26px;
+            color: #d97706; // warning amber — hardcode semantic
+            stroke-width: 1.8;
+        }
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0 0 10px;
+        letter-spacing: -0.3px;
+    }
+
+    &__message {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        margin: 0 0 20px;
+    }
+
+    &__countdown {
+        margin-bottom: 20px;
+
+        span {
+            display: inline-block;
+            font-size: 32px;
+            font-weight: 800;
+            color: #d97706; // warning amber — hardcode semantic
+            letter-spacing: -1px;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+    }
+
+    // Pesan koneksi terputus
+    &__network {
+        display: none;
+        align-items: flex-start;
+        gap: 10px;
+        background: var(--color-danger-bg);
+        border: 1px solid var(--color-danger-border);
+        border-radius: var(--border-radius-md);
+        padding: 12px 14px;
+        margin-bottom: 20px;
+        text-align: left;
+
+        &--visible {
+            display: flex;
+        }
+
+        &-icon {
+            flex-shrink: 0;
+            margin-top: 1px;
+
+            i,
+            svg {
+                width: 16px;
+                height: 16px;
+                color: var(--color-danger);
+                stroke-width: 2;
+            }
+        }
+
+        &-text {
+            font-size: 13px;
+            color: var(--color-danger-text);
+            line-height: 1.5;
+            margin: 0;
+
+            strong {
+                font-weight: 700;
+                color: var(--color-danger);
+            }
+        }
+    }
+
+    // Tombol — horizontal di desktop & tablet
+    &__actions {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    &__btn {
+        flex: 1; // bagi rata lebar dalam row
+        height: 44px;
+        border-radius: var(--border-radius-md);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all var(--transition-fast);
+        letter-spacing: 0.2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        position: relative;
+
+        .btn-loader {
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        // Tetap Masuk / Coba Lagi — brand gradient
+        &--primary {
+            background: linear-gradient(135deg, #a8c550 0%, #8da434 60%, #6d8a2b 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+
+            &:hover:not(:disabled) {
+                transform: translateY(-1px);
+                box-shadow: 0 6px 16px rgba(141, 164, 52, 0.4);
+            }
+
+            &:active:not(:disabled) {
+                transform: translateY(0);
+            }
+
+            &:disabled {
+                opacity: 0.65;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        // Keluar — muted
+        &--secondary {
+            background: var(--color-bg-muted);
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+
+            &:hover:not(:disabled) {
+                background: var(--color-bg-surface-hover);
+                color: var(--color-text-primary);
+            }
+
+            &:disabled {
+                opacity: 0.65;
+                cursor: not-allowed;
+            }
+
+            .pulse-dot {
+                background-color: var(--color-text-secondary);
+            }
+        }
+    }
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 480px) {
+    .session-timeout-modal {
+        padding: 16px;
+
+        &__box {
+            max-width: 340px;
+            padding: 24px 18px 20px;
+        }
+
+        &__icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+
+            i,
+            svg {
+                width: 22px;
+                height: 22px;
+            }
+        }
+
+        &__title {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        &__message {
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        &__countdown {
+            margin-bottom: 16px;
+
+            span {
+                font-size: 28px;
+            }
+        }
+
+        &__network {
+            padding: 10px 12px;
+            margin-bottom: 16px;
+        }
+
+        &__network-text {
+            font-size: 12px;
+        }
+
+        // Vertical di mobile
+        &__actions {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        &__btn {
+            flex: unset;
+            width: 100%;
+            height: 42px;
+            font-size: 13px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .session-timeout-modal {
+        padding: 12px;
+
+        &__box {
+            max-width: 300px;
+            padding: 20px 16px 18px;
+        }
+
+        &__icon {
+            width: 42px;
+            height: 42px;
+            margin-bottom: 14px;
+
+            i,
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &__title {
+            font-size: 15px;
+        }
+
+        &__message {
+            font-size: 12px;
+        }
+
+        &__countdown span {
+            font-size: 26px;
+        }
+
+        &__btn {
+            height: 40px;
+            font-size: 13px;
+        }
+    }
+}

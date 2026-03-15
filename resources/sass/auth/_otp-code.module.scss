@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    background: var(--color-bg-auth);
     position: relative;
 
     &::before {
@@ -20,6 +20,7 @@
         pointer-events: none;
     }
 
+    // Autofill — browser limitation, hardcode
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px #f7f9fb inset !important;
         box-shadow: 0 0 0 1000px #f7f9fb inset !important;
@@ -30,7 +31,7 @@
         width: 100%;
         max-width: 450px;
         padding: 20px 30px;
-        background: #ffffff;
+        background: var(--color-bg-surface);
         border-radius: 24px;
         box-shadow:
             0 20px 60px rgba(0, 0, 0, 0.08),
@@ -53,34 +54,31 @@
     .check-email__title {
         font-size: 22px;
         font-weight: 700;
-        color: #1a202c;
+        color: var(--color-text-primary);
         margin-bottom: 5px;
         letter-spacing: -0.5px;
     }
 
     .check-email__subtitle {
         font-size: 16px;
-        color: #718096;
+        color: var(--color-text-muted);
         line-height: 1.6;
         font-weight: 400;
         margin-bottom: 24px;
     }
 
-    /* === Timer OTP === */
     .otp-timer {
         text-align: center;
         margin-bottom: 24px;
-        color: #718096;
+        color: var(--color-text-muted);
         font-size: 14px;
     }
 
-    /* === Form Styles === */
     .forgot-password__form {
         text-align: left;
 
         .form-group {
             margin-bottom: 24px;
-
             &:last-of-type {
                 margin-bottom: 0;
             }
@@ -90,12 +88,11 @@
             display: block;
             font-size: 14px;
             font-weight: 600;
-            color: #2d3748;
+            color: var(--color-text-primary);
             margin-bottom: 10px;
             letter-spacing: 0.2px;
         }
 
-        /* === OTP Input Digits === */
         .otp-inputs {
             display: flex;
             justify-content: center;
@@ -109,26 +106,27 @@
             text-align: center;
             font-size: 24px;
             font-weight: 700;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            background-color: #f7f9fb;
-            transition: all 0.3s ease;
+            border: 2px solid var(--color-border-input);
+            border-radius: var(--border-radius-sm);
+            background-color: var(--color-bg-input);
+            color: var(--color-text-primary);
+            transition: all var(--transition-base);
 
             &:focus {
                 outline: none;
-                background-color: #ffffff;
-                border-color: rgba(141, 164, 52, 0.4);
-                box-shadow: 0 0 0 3px rgba(126, 217, 87, 0.1);
+                background-color: var(--color-bg-input-focus);
+                border-color: var(--color-border-input-focus);
+                box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
             }
-            
+
             &.is-invalid {
-                border-color: #fc8181;
-                background-color: #fff5f5;
+                border-color: var(--color-danger);
+                background-color: var(--color-danger-bg);
             }
         }
 
         .form-error {
-            color: #e53e3e;
+            color: var(--color-danger);
             font-size: 13px;
             margin-top: 8px;
             display: block;
@@ -153,7 +151,7 @@
                 font-size: 15px;
                 letter-spacing: 0.5px;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all var(--transition-base);
                 box-shadow: 0 8px 20px rgba(126, 217, 87, 0.25);
                 position: relative;
                 display: flex;
@@ -172,6 +170,7 @@
                     box-shadow: 0 6px 16px rgba(141, 164, 52, 0.3);
                 }
 
+                // Timer expired — warna disabled abu-abu, hardcode
                 &.timer-expired {
                     background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
                     cursor: not-allowed;
@@ -187,31 +186,31 @@
         }
     }
 
-    /* === Back Link === */
     .forgot-password__back {
         margin-top: 20px;
         text-align: center;
         font-size: 13px;
+        color: var(--color-text-secondary);
 
         .link-back {
             font-size: 13px;
-            color: #8da434;
+            color: var(--color-brand-primary);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s ease;
+            transition: color var(--transition-fast);
 
             &:hover {
-                color: #7a9128;
+                color: var(--color-brand-dark);
                 text-decoration: underline;
             }
         }
     }
 
     /* ============================================
-       EMAIL SENT ANIMATION (Morphing Style)
+       EMAIL SENT ANIMATION — SVG colors hardcode
+       (warna animasi SVG inline, tidak bisa pakai CSS vars)
        ============================================ */
 
-    /* === Background Circle Animation === */
     .bg-circle {
         animation: bgScale 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         transform-origin: center;
@@ -228,7 +227,6 @@
         }
     }
 
-    /* === Pulse Rings Animation === */
     .pulse-ring {
         animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
         transform-origin: center;
@@ -237,7 +235,6 @@
     .pulse-ring-1 {
         animation-delay: 0s;
     }
-
     .pulse-ring-2 {
         animation-delay: 1s;
     }
@@ -259,7 +256,6 @@
         }
     }
 
-    /* === Envelope Body Animation === */
     .envelope-body {
         animation: envelopeSlideIn 0.5s ease-out 0.2s backwards;
         transform-origin: center;
@@ -276,7 +272,6 @@
         }
     }
 
-    /* === Envelope Flap Animation (Morphing Effect) === */
     .envelope-flap {
         animation:
             flapDraw 0.5s ease-out 0.4s backwards,
@@ -306,7 +301,6 @@
         }
     }
 
-    /* === Checkmark Animation === */
     .checkmark {
         animation: checkmarkAppear 0.6s ease-out 1.5s forwards;
         transform-origin: center;
@@ -383,21 +377,18 @@
             max-width: 400px;
             padding: 20px 30px;
         }
-
         .check-email__title {
             font-size: 20px;
         }
         .check-email__subtitle {
             font-size: 13px;
         }
-
         .forgot-password__form {
             .otp-digit {
                 width: 45px;
                 height: 55px;
                 font-size: 22px;
             }
-
             .btn-action .btn-primary {
                 .btn-text,
                 .btn-loader {
@@ -414,7 +405,6 @@
             max-width: 430px;
             padding: 20px 30px;
         }
-
         .forgot-password__form {
             .otp-digit {
                 width: 48px;
@@ -436,7 +426,6 @@
         .check-email__subtitle {
             font-size: 14px;
         }
-
         .forgot-password__form {
             .otp-digit {
                 width: 52px;
@@ -462,7 +451,6 @@
         .check-email__subtitle {
             font-size: 12.5px;
         }
-
         .forgot-password__form {
             .otp-digit {
                 width: 48px;
@@ -501,7 +489,6 @@
                 0 15px 40px rgba(0, 0, 0, 0.06),
                 0 8px 20px rgba(0, 0, 0, 0.03);
         }
-
         .check-email__title {
             font-size: 18px;
             margin-bottom: 5px;
@@ -509,7 +496,10 @@
         .check-email__subtitle {
             font-size: 12px;
         }
-
+        .check-email__icon svg {
+            width: 80px;
+            height: 80px;
+        }
         .forgot-password__form {
             .otp-digit {
                 width: 42px;
@@ -541,14 +531,6 @@
                 }
             }
         }
-
-        /* Responsive SVG Animation */
-        .check-email__icon {
-            svg {
-                width: 80px;
-                height: 80px;
-            }
-        }
     }
 }
 
@@ -558,7 +540,6 @@
             padding: 15px 25px;
             border-radius: 14px;
         }
-
         .check-email__title {
             font-size: 18px;
             margin-bottom: 4px;
@@ -567,7 +548,10 @@
             font-size: 11.5px;
             line-height: 1.5;
         }
-
+        .check-email__icon svg {
+            width: 70px;
+            height: 70px;
+        }
         .forgot-password__form {
             .otp-digit {
                 width: 40px;
@@ -597,14 +581,6 @@
                     font-size: 12px;
                     letter-spacing: 0.3px;
                 }
-            }
-        }
-
-        /* Responsive SVG Animation untuk layar kecil */
-        .check-email__icon {
-            svg {
-                width: 70px;
-                height: 70px;
             }
         }
     }

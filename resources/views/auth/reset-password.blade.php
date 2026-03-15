@@ -8,6 +8,14 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
+    {{-- Baca tema dari localStorage agar konsisten dengan preferensi user --}}
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     @vite(['resources/sass/app.scss'])
 </head>
 
@@ -33,14 +41,8 @@
             <div class="form-group">
                 <label for="password" class="form-label">Password Baru</label>
                 <div class="password-input-wrapper">
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        required 
-                        placeholder="Masukkan password baru"
-                        class="form-input @error('password') is-invalid @enderror"
-                    >
+                    <input type="password" id="password" name="password" required placeholder="Masukkan password baru"
+                        class="form-input @error('password') is-invalid @enderror">
                     <button type="button" class="toggle-password" data-target="password">
                         <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
@@ -60,14 +62,9 @@
             <div class="form-group">
                 <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                 <div class="password-input-wrapper">
-                    <input 
-                        type="password" 
-                        id="password_confirmation" 
-                        name="password_confirmation" 
-                        required
-                        placeholder="Masukkan ulang password baru" 
-                        class="form-input @error('password_confirmation') is-invalid @enderror"
-                    >
+                    <input type="password" id="password_confirmation" name="password_confirmation" required
+                        placeholder="Masukkan ulang password baru"
+                        class="form-input @error('password_confirmation') is-invalid @enderror">
                     <button type="button" class="toggle-password" data-target="password_confirmation">
                         <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">

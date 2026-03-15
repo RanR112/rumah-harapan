@@ -1,14 +1,15 @@
 // Dashboard Layout
 .dashboard-layout {
-    min-height: 100vh;
-    background-color: #f8fafc;
-    overflow-x: hidden;
+    height: 100vh;
+    background-color: var(--color-bg-body);
+    overflow: hidden;
 }
 
 .dashboard-container {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
 // Main Content - Adjusted for fixed sidebar
@@ -16,30 +17,35 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     margin-left: 250px;
     width: calc(100% - 250px);
-    transition: margin-left 0.3s ease, width 0.3s ease;
-    
+    transition:
+        margin-left var(--transition-base),
+        width var(--transition-base);
+
     @media (max-width: 1024px) {
         margin-left: 0;
         width: 100%;
     }
 }
 
-// Page Content
+// Page Content — satu-satunya area yang boleh scroll
 .page-content {
     flex: 1;
     padding: 28px;
     width: 100%;
-    // max-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
 
-    scrollbar-width: none; // Firefox
-    -ms-overflow-style: none; // IE and Edge
-    
-    // Wrapper untuk konten dengan max-width
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     .content-wrapper {
         max-width: 1350px;
         margin: 0 auto;
@@ -58,12 +64,12 @@
     z-index: 99;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    
+    transition: all var(--transition-base);
+
     @media (min-width: 1025px) {
         display: none;
     }
-    
+
     &.sidebar-overlay--active {
         opacity: 1;
         visibility: visible;
@@ -72,91 +78,73 @@
 
 /* ============= RESPONSIVE DESIGN ============= */
 
-// Desktop Large (1440px)
 @media (max-width: 1440px) {
     .main-content {
         margin-left: 240px;
         width: calc(100% - 240px);
     }
-    
+
     .page-content {
         padding: 28px;
-        
+
         .content-wrapper {
             max-width: 1150px;
         }
     }
 }
 
-// Desktop Medium (1280px)
 @media (max-width: 1280px) {
     .main-content {
         margin-left: 230px;
         width: calc(100% - 230px);
     }
-    
+
     .page-content {
         padding: 24px;
-        
+
         .content-wrapper {
             max-width: 1000px;
         }
     }
 }
 
-// Tablet Landscape (1024px) - Mobile breakpoint
 @media (max-width: 1024px) {
     .main-content {
         margin-left: 0;
         width: 100%;
     }
-    
+
     .page-content {
         padding: 30px;
-        
+
         .content-wrapper {
             max-width: 100%;
         }
     }
 }
 
-// Tablet Portrait (850px)
 @media (max-width: 850px) {
     .page-content {
-        
         .content-wrapper {
             max-width: 100%;
         }
     }
 }
 
-// Mobile Large (480px)
 @media (max-width: 480px) {
     .page-content {
         padding: 25px;
-        
+
         .content-wrapper {
             max-width: 100%;
         }
     }
 }
 
-// Mobile Small (360px)
 @media (max-width: 360px) {
     .page-content {
         padding: 20px;
-        
-        .content-wrapper {
-            max-width: 100%;
-        }
-    }
-}
 
-// Mobile Extra Small (< 320px)
-@media (max-width: 320px) {
-    .page-content {
-        padding: 15px;
-        
         .content-wrapper {
             max-width: 100%;
         }

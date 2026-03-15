@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ auth()->user()->theme ?? 'light' }}">
 
 <head>
     <meta charset="utf-8">
@@ -8,14 +8,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    {{-- Sync tema ke localStorage agar halaman auth bisa membaca saat logout --}}
+    <script>
+        localStorage.setItem('theme', '{{ auth()->user()->theme ?? 'light' }}');
+    </script>
+
     @vite(['resources/sass/app.scss'])
 </head>
 
 <body class="dashboard-layout">
-    <!-- Gunakan komponen loader-transition -->
     @include('components.loader-transition')
 
-    <!-- Konten dashboard tetap ada dan terlihat -->
     <div class="dashboard-container">
         @include('components.sidebar')
 
@@ -29,37 +33,13 @@
         </div>
     </div>
 
-    <!-- Overlay untuk mobile sidebar -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     @include('components.alert-modal')
+    @include('components.session-timeout-modal')
 
     @vite(['resources/js/app.js'])
     @stack('scripts')
-
-    <!-- Script untuk handle initial loading -->
-    <script>
-        // Sembunyikan loader setelah delay yang sesuai
-        function hideInitialLoader() {
-            const loader = document.getElementById('dashboardTransitionLoader');
-            if (loader) {
-                // Delay 1.5 detik sebelum sembunyikan
-                setTimeout(() => {
-                    loader.classList.remove('dashboard-transition-loader--active');
-                    setTimeout(() => {
-                        loader.remove();
-                    }, 200);
-                }, 1500);
-            }
-        }
-
-        // Jalankan secepat mungkin
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', hideInitialLoader);
-        } else {
-            hideInitialLoader();
-        }
-    </script>
 </body>
 
 </html>

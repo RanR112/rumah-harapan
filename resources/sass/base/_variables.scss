@@ -1,0 +1,184 @@
+// ============================================================
+// DESIGN TOKENS — Light & Dark Mode
+// ============================================================
+// Cara pakai: var(--nama-variabel)
+// Contoh    : color: var(--color-text-primary);
+// ============================================================
+
+:root {
+    // ----------------------------------------------------------
+    // BACKGROUND
+    // ----------------------------------------------------------
+    --color-bg-body: #f0f4f8;
+    --color-bg-surface: #ffffff;
+    --color-bg-surface-hover: #f7fafc;
+    --color-bg-muted: #f1f5f9;
+    --color-bg-input: #f7f9fb;
+    --color-bg-input-focus: #ffffff;
+    --color-bg-sidebar: #ffffff;
+    --color-bg-topbar: #ffffff;
+    --color-bg-auth: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); // background halaman auth
+
+    // ----------------------------------------------------------
+    // TEXT
+    // ----------------------------------------------------------
+    --color-text-primary: #1a202c;
+    --color-text-secondary: #4a5568;
+    --color-text-muted: #718096;
+    --color-text-subtle: #a0aec0;
+    --color-text-inverse: #ffffff;
+
+    // ----------------------------------------------------------
+    // BORDER
+    // ----------------------------------------------------------
+    --color-border: #e2e8f0;
+    --color-border-muted: #f1f5f9;
+    --color-border-input: #e2e8f0;
+    --color-border-input-focus: rgba(141, 164, 52, 0.4);
+
+    // ----------------------------------------------------------
+    // BRAND — Hijau tema Rumah Harapan
+    // ----------------------------------------------------------
+    --color-brand-primary: #8da434;
+    --color-brand-primary-dark: #7a9128;
+    --color-brand-light: #a8c550;
+    --color-brand-lighter: #f7fcfa;
+    --color-brand-gradient: linear-gradient(135deg, #a8c550 0%, #8da434 60%, #6d8a2b 100%);
+
+    // ----------------------------------------------------------
+    // BRAND — Oranye/Kuning aksen
+    // ----------------------------------------------------------
+    --color-accent-orange: #f5a623;
+    --color-accent-orange-dark: #e89820;
+    --color-accent-yellow: #fdb913;
+    --color-accent-yellow-dark: #f0a810;
+
+    // ----------------------------------------------------------
+    // SEMANTIC — Status warna
+    // ----------------------------------------------------------
+    --color-danger: #e53e3e;
+    --color-danger-dark: #c53030;
+    --color-danger-darker: #9b2c2c;
+    --color-danger-bg: #fef2f2;
+    --color-danger-bg-subtle: #fff5f5;
+    --color-danger-border: #fc8181;
+    --color-danger-text: #991b1b;
+    --color-danger-text-dark: #7f1d1d;
+
+    --color-success: #16a34a;
+    --color-success-bg: #dcfce7;
+
+    --color-info: #2563eb;
+    --color-info-dark: #1d4ed8;
+    --color-info-bg: #dbeafe;
+
+    --color-warning: #d97706;
+    --color-warning-bg: #fef3c7;
+
+    --color-purple: #7c3aed;
+    --color-purple-dark: #6d28d9;
+
+    --color-indigo: #6366f1;
+    --color-indigo-dark: #4f46e5;
+
+    --color-teal: #0d9488;
+    --color-teal-dark: #0f766e;
+
+    --color-gray: #6b7280;
+    --color-gray-dark: #4b5563;
+    --color-gray-light: #9ca3af;
+
+    // ----------------------------------------------------------
+    // SHADOW
+    // ----------------------------------------------------------
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+    // ----------------------------------------------------------
+    // MISC
+    // ----------------------------------------------------------
+    --border-radius-sm: 6px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 16px;
+    --border-radius-2xl: 24px;
+
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+}
+
+// ============================================================
+// DARK MODE OVERRIDES
+// ============================================================
+// Palette: neutral dark gray — bukan biru navy
+// Hierarki background: body(paling gelap) → surface → muted(paling terang)
+// Teks: primary terang, secondary & muted tetap terbaca jelas
+// ============================================================
+[data-theme="dark"] {
+    // ----------------------------------------------------------
+    // BACKGROUND — neutral gray, bukan biru
+    // ----------------------------------------------------------
+    --color-bg-body: #161618; // background halaman — paling gelap
+    --color-bg-surface: #222224; // card, modal, dropdown
+    --color-bg-surface-hover: #2a2a2d; // hover item
+    --color-bg-muted: #2a2a2d; // area divider, tabel zebra
+    --color-bg-input: #2a2a2d; // input field
+    --color-bg-input-focus: #313135; // input saat focus
+    --color-bg-sidebar: #1c1c1e; // sidebar sedikit lebih gelap dari surface
+    --color-bg-topbar: #1c1c1e; // topbar konsisten dengan sidebar
+    --color-bg-auth: linear-gradient(135deg, #1a1a1c 0%, #222224 100%); // background halaman auth ikut gelap
+
+    // ----------------------------------------------------------
+    // TEXT — terang dan kontras jelas
+    // ----------------------------------------------------------
+    --color-text-primary: #f5f5f5; // heading, teks utama — putih hangat
+    --color-text-secondary: #d4d4d4; // label, subheading
+    --color-text-muted: #a3a3a3; // keterangan, placeholder
+    --color-text-subtle: #737373; // teks sangat redup
+    --color-text-inverse: #161618; // teks di atas background terang
+
+    // ----------------------------------------------------------
+    // BORDER — subtle, tidak terlalu mencolok
+    // ----------------------------------------------------------
+    --color-border: #3a3a3d;
+    --color-border-muted: #2a2a2d;
+    --color-border-input: #3a3a3d;
+    --color-border-input-focus: rgba(141, 164, 52, 0.5);
+
+    // ----------------------------------------------------------
+    // BRAND
+    // ----------------------------------------------------------
+    --color-brand-lighter: rgba(141, 164, 52, 0.12);
+
+    // ----------------------------------------------------------
+    // SHADOW — lebih dalam di dark mode
+    // ----------------------------------------------------------
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.55);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+    // ----------------------------------------------------------
+    // SEMANTIC — tetap bisa dibaca di dark mode
+    // ----------------------------------------------------------
+    --color-danger: #f87171;
+    --color-danger-dark: #ef4444;
+    --color-danger-bg: rgba(248, 113, 113, 0.12);
+    --color-danger-bg-subtle: rgba(248, 113, 113, 0.08);
+    --color-danger-border: rgba(248, 113, 113, 0.3);
+    --color-danger-text: #fca5a5;
+
+    --color-success: #4ade80;
+    --color-success-bg: rgba(74, 222, 128, 0.12);
+
+    --color-info: #60a5fa;
+    --color-info-dark: #3b82f6;
+    --color-info-bg: rgba(96, 165, 250, 0.12);
+
+    --color-warning: #fbbf24;
+    --color-warning-bg: rgba(251, 191, 36, 0.12);
+}

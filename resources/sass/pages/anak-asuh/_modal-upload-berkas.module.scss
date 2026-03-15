@@ -1,0 +1,408 @@
+.modal-berkas-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-berkas-container {
+    background: var(--color-bg-surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+    font-family: "Inter", sans-serif;
+
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+        box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+        -webkit-text-fill-color: #2d3748 !important;
+    }
+}
+
+// ── Header ──────────────────────────────────────────
+.modal-berkas-header {
+    padding: 24px;
+    border-bottom: 2px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-berkas-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.modal-berkas-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+
+    &:hover {
+        background: var(--color-bg-muted);
+    }
+
+    .modal-berkas-close-icon {
+        width: 20px;
+        height: 20px;
+        stroke: var(--color-text-muted);
+    }
+}
+
+// ── Body ──────────────────────────────────────────
+.modal-berkas-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-berkas-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-berkas-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-berkas-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+
+    .modal-berkas-required {
+        color: var(--color-danger);
+    }
+}
+
+.modal-berkas-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--color-border-input);
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    color: var(--color-text-primary);
+    background: var(--color-bg-input);
+    transition: all var(--transition-fast);
+
+    &::placeholder {
+        color: var(--color-text-subtle);
+    }
+
+    &:focus {
+        outline: none;
+        background: var(--color-bg-input-focus);
+        border-color: var(--color-border-input-focus);
+        box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+    }
+
+    &.is-invalid {
+        border-color: var(--color-danger);
+        &:focus {
+            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+        }
+    }
+}
+
+// ── File Upload ──────────────────────────────────────────
+.modal-berkas-file-wrapper {
+    position: relative;
+}
+
+.modal-berkas-file-input {
+    display: none;
+}
+
+.modal-berkas-file-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 2px dashed var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background: var(--color-bg-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+        border-color: var(--color-border-input-focus);
+        background: var(--color-bg-surface-hover);
+    }
+
+    .modal-berkas-upload-icon {
+        width: 20px;
+        height: 20px;
+        stroke: var(--color-text-muted);
+        flex-shrink: 0;
+    }
+
+    #berkasFileName {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.modal-berkas-hint {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.modal-berkas-error {
+    font-size: 12px;
+    color: var(--color-danger);
+    min-height: 18px;
+    display: block;
+}
+
+// ── Footer ──────────────────────────────────────────
+.modal-berkas-footer {
+    padding: 20px 24px;
+    border-top: 2px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modal-berkas-btn {
+    padding: 10px 20px;
+    min-width: 140px;
+    min-height: 45px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid transparent;
+
+    .btn-loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.modal-berkas-btn-cancel {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border);
+
+    &:hover:not(:disabled) {
+        background: var(--color-bg-muted);
+        border-color: var(--color-text-subtle);
+    }
+}
+
+.modal-berkas-btn-upload {
+    background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+    color: var(--color-text-inverse);
+    border: none;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-berkas-backdrop {
+        padding: 12px;
+    }
+
+    .modal-berkas-container {
+        max-width: 90%;
+        border-radius: 10px;
+    }
+
+    .modal-berkas-header {
+        padding: 18px 16px;
+    }
+    .modal-berkas-title {
+        font-size: 17px;
+    }
+
+    .modal-berkas-close {
+        width: 30px;
+        height: 30px;
+        .modal-berkas-close-icon {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    .modal-berkas-body {
+        padding: 18px 16px;
+    }
+    .modal-berkas-form {
+        gap: 8px;
+    }
+    .modal-berkas-label {
+        font-size: 14px;
+    }
+    .modal-berkas-input {
+        padding: 15px 14px;
+        font-size: 14px;
+    }
+
+    .modal-berkas-file-label {
+        padding: 15px 14px;
+        .modal-berkas-upload-icon {
+            width: 18px;
+            height: 18px;
+        }
+        #berkasFileName {
+            font-size: 14px;
+        }
+    }
+
+    .modal-berkas-hint {
+        font-size: 11px;
+    }
+    .modal-berkas-error {
+        font-size: 11px;
+    }
+
+    .modal-berkas-footer {
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        .modal-berkas-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .modal-berkas-backdrop {
+        padding: 10px;
+    }
+    .modal-berkas-container {
+        border-radius: 8px;
+    }
+    .modal-berkas-header {
+        padding: 16px 14px;
+    }
+    .modal-berkas-title {
+        font-size: 16px;
+    }
+
+    .modal-berkas-close {
+        width: 28px;
+        height: 28px;
+        .modal-berkas-close-icon {
+            width: 17px;
+            height: 17px;
+        }
+    }
+
+    .modal-berkas-body {
+        padding: 16px 14px;
+    }
+    .modal-berkas-form {
+        gap: 8px;
+    }
+    .modal-berkas-label {
+        font-size: 13px;
+    }
+    .modal-berkas-input {
+        padding: 14px 13px;
+        font-size: 13px;
+    }
+
+    .modal-berkas-file-label {
+        padding: 14px 13px;
+        gap: 10px;
+        .modal-berkas-upload-icon {
+            width: 17px;
+            height: 17px;
+        }
+        #berkasFileName {
+            font-size: 13px;
+        }
+    }
+
+    .modal-berkas-hint {
+        font-size: 11px;
+    }
+    .modal-berkas-error {
+        font-size: 11px;
+    }
+
+    .modal-berkas-footer {
+        padding: 14px;
+        gap: 8px;
+        .modal-berkas-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 12px 16px;
+            font-size: 13px;
+        }
+    }
+}

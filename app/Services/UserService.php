@@ -25,6 +25,13 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
  */
 class UserService
 {
+    protected $auditLogService;
+
+    public function __construct(\App\Services\AuditLogService $auditLogService)
+    {
+        $this->auditLogService = $auditLogService;
+    }
+
     /**
      * Membuat pengguna baru di database
      * 
@@ -49,13 +56,29 @@ class UserService
      */
     public function create(array $data): User
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'] ?? null, // Phone opsional
-            'password' => Hash::make($data['password']), // Hash password
+            'phone' => $data['phone'] ?? null,
+            'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
+
+        $auditData = collect($data)->except([
+            'password',
+            'password_confirmation',
+            '_token'
+        ])->toArray();
+
+        $this->auditLogService->logCrud(
+            User::class,
+            $user->id,
+            'created',
+            [],
+            $auditData
+        );
+
+        return $user;
     }
 
     /**
@@ -76,24 +99,42 @@ class UserService
      *                    - email: string
      *                    - phone: string|null
      *                    - role: string
-     *                    - password: string|null (opsional)
      * @return User Instance User yang sudah diupdate
      * 
      * @throws \Exception Jika terjadi error saat update database
      */
     public function update(User $user, array $data): User
     {
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->phone = $data['phone'] ?? null; // Phone opsional
-        $user->role = $data['role'];
+        $oldValues = [
+            'name'  => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'role'  => $user->role,
+        ];
 
-        // Update password hanya jika ada input baru
-        if (!empty($data['password'])) {
-            $user->password = Hash::make($data['password']);
-        }
+        // Update hanya field yang boleh diubah oleh admin
+        $user->name  = $data['name'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'] ?? null;
+        $user->role  = $data['role'];
 
         $user->save();
+
+        $auditNew = [
+            'name'  => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'] ?? null,
+            'role'  => $data['role'],
+        ];
+
+        $this->auditLogService->logCrud(
+            User::class,
+            $user->id,
+            'updated',
+            $oldValues,
+            $auditNew
+        );
+
         return $user;
     }
 
@@ -165,12 +206,23 @@ class UserService
      */
     public function hardDelete(int $id): bool
     {
-        // CARI USER TANPA PENGECEKAN SOFT DELETE
-        // Bisa menghapus user aktif maupun yang di-soft delete
         $user = User::withTrashed()->where('id', $id)->first();
 
         if ($user) {
-            return $user->forceDelete(); // Hapus permanen
+            $oldValues = $user->toArray();
+
+            $result = $user->forceDelete();
+
+            // Log audit untuk delete
+            $this->auditLogService->logCrud(
+                User::class,
+                $id,
+                'deleted',
+                $oldValues,
+                []
+            );
+
+            return $result;
         }
 
         return false;
@@ -269,7 +321,7 @@ class UserService
         // return $withTrashed
         //     ? User::withTrashed()->find($id)
         //     : User::find($id);
-        
+
         // HANYA CARI USER AKTIF (tanpa soft delete)
         return User::find($id);
     }
@@ -289,28 +341,21 @@ class UserService
         return User::count();
     }
 
-    /**
-     * Menghitung total pengguna (termasuk yang di-soft delete)
-     * 
-     * Digunakan di:
-     * - Dashboard untuk menampilkan statistik lengkap
-     * - Laporan audit
-     * 
-     * @param bool $includeTrashed Jika true, hitung juga pengguna yang di-soft delete
-     *                              (TIDAK DIGUNAKAN saat ini)
-     * @return int Jumlah total pengguna
-     * 
-     * @throws \Exception Jika terjadi error saat query database
-     */
-    public function getTotalCountWithTrashed(bool $includeTrashed = false): int
-    {
-        $query = User::query();
+    // /**
+    //  * Get total count of user.
+    //  *
+    //  * @param bool $includeTrashed (BELUM DIGUNAKAN karena tidak ada soft delete)
+    //  * @return int
+    //  */
+    // public function getTotalCountWithTrashed(bool $includeTrashed = false): int
+    // {
+    //     $query = User::query();
 
-        // TIDAK DIGUNAKAN saat ini karena tidak ada soft delete
-        // if ($includeTrashed) {
-        //     $query->withTrashed();
-        // }
+    //     // TIDAK DIGUNAKAN karena tidak ada soft delete
+    //     // if ($includeTrashed) {
+    //     //     $query->withTrashed();
+    //     // }
 
-        return $query->count();
-    }
+    //     return $query->count();
+    // }
 }

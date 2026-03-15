@@ -6,6 +6,7 @@ use App\Http\Requests\RumahHarapan\StoreRumahHarapanRequest;
 use App\Http\Requests\RumahHarapan\UpdateRumahHarapanRequest;
 use App\Services\RumahHarapanService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RumahHarapanController extends Controller
 {
@@ -17,10 +18,48 @@ class RumahHarapanController extends Controller
     }
 
     /**
-     * Display a listing of branches.
+     * Display a listing of asrama with AJAX search/pagination.
      */
     public function index(Request $request)
     {
+        if ($request->ajax() || $request->wantsJson()) {
+            $filters = [
+                'search'    => $request->input('search'),
+                'is_active' => $request->has('is_active')
+                    ? $request->boolean('is_active')
+                    : null,
+            ];
+
+            $perPage = $request->input('per_page', 7);
+            $rumahHarapanList = $this->service->getPaginated($filters, $perPage, false);
+
+            $rawData = [];
+            foreach ($rumahHarapanList->items() as $rumahHarapan) {
+                $rawData[] = [
+                    'id'          => $rumahHarapan->id,
+                    'kode'        => $rumahHarapan->kode,
+                    'nama'        => $rumahHarapan->nama,
+                    'alamat'      => $rumahHarapan->alamat,
+                    'kota'        => $rumahHarapan->kota,
+                    'provinsi'    => $rumahHarapan->provinsi,
+                    'telepon'     => $rumahHarapan->telepon,
+                    'email'       => $rumahHarapan->email,
+                    'koordinator' => $rumahHarapan->koordinator,
+                    'is_active'   => $rumahHarapan->is_active,
+                    'created_by'  => $rumahHarapan->createdBy?->name ?? 'N/A',
+                ];
+            }
+
+            return response()->json([
+                'data'         => $rawData,
+                'current_page' => $rumahHarapanList->currentPage(),
+                'last_page'    => $rumahHarapanList->lastPage(),
+                'total'        => $rumahHarapanList->total(),
+                'per_page'     => $rumahHarapanList->perPage(),
+                'first_item'   => $rumahHarapanList->firstItem(),
+            ]);
+        }
+
         $filters = [
             'search'    => $request->input('search'),
             'is_active' => $request->has('is_active')
@@ -28,17 +67,17 @@ class RumahHarapanController extends Controller
                 : null,
         ];
 
-        $perPage = 15;
-        $trashed = $request->boolean('trashed', false);
+        return view('pages.rumah-harapan.index', compact('filters'));
+    }
 
-        $branches = $this->service
-            ->getPaginated($filters, $perPage, $trashed)
-            ->appends($request->query());
+    /**
+     * Show detail asrama (read-only) — accessible by admin & petugas.
+     */
+    public function show(int $id)
+    {
+        $rumahHarapan = $this->service->findById($id);
 
-        return view('rumah-harapan.index', [
-            'branches' => $branches,
-            'trashed'  => $trashed,
-        ]);
+        return view('pages.rumah-harapan.show', compact('rumahHarapan'));
     }
 
     /**
@@ -46,22 +85,27 @@ class RumahHarapanController extends Controller
      */
     public function create()
     {
-        return view('rumah-harapan.create');
+        return view('pages.rumah-harapan.create');
     }
 
     /**
-     * Store new branch.
+     * Store new asrama.
      */
     public function store(StoreRumahHarapanRequest $request)
     {
-        $this->service->create(
-            $request->validated(),
-            $request->user()
-        );
+        try {
+            $this->service->create(
+                $request->validated(),
+                $request->user()
+            );
 
-        return redirect()
-            ->route('admin.rumah-harapan.index')
-            ->with('success', 'Cabang berhasil ditambahkan.');
+            return redirect()
+                ->route('rumah-harapan.index', ['success' => 'Asrama berhasil ditambahkan.']);
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput();
+        }
     }
 
     /**
@@ -71,73 +115,61 @@ class RumahHarapanController extends Controller
     {
         $rumahHarapan = $this->service->findById($id);
 
-        return view('rumah-harapan.edit', compact('rumahHarapan'));
+        return view('pages.rumah-harapan.edit', compact('rumahHarapan'));
     }
 
     /**
-     * Update branch.
+     * Update asrama.
      */
     public function update(UpdateRumahHarapanRequest $request, int $id)
     {
-        $branch = $this->service->findById($id);
+        try {
+            $rumahHarapan = $this->service->findById($id);
 
-        $this->service->update(
-            $branch,
-            $request->validated(),
-            $request->user()
-        );
+            $this->service->update(
+                $rumahHarapan,
+                $request->validated(),
+                $request->user()
+            );
 
-        return redirect()
-            ->route('admin.rumah-harapan.index')
-            ->with('success', 'Cabang berhasil diperbarui.');
+            // Kembali ke page asal — dikirim dari hidden input di form edit
+            $currentPage = (int) $request->input('current_page', 1);
+
+            return redirect()->route('rumah-harapan.index', array_filter([
+                'page'    => $currentPage > 1 ? $currentPage : null,
+                'success' => 'Asrama berhasil diperbarui.',
+            ]));
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput();
+        }
     }
 
     /**
-     * Soft delete branch.
+     * Hard delete (permanent delete) asrama.
      */
     public function destroy(int $id)
     {
-        $branch = $this->service->findById($id);
-        $this->service->delete($branch);
+        try {
+            $currentPage = (int) request()->input('current_page', 1);
 
-        return redirect()
-            ->route('admin.rumah-harapan.index')
-            ->with('success', 'Cabang berhasil dihapus.');
-    }
+            $this->service->hardDelete($id);
 
-    /**
-     * Restore branch.
-     */
-    public function restore(int $id)
-    {
-        $branch = $this->service->restore($id);
+            // Hitung sisa data setelah delete untuk menentukan redirect page
+            $perPage       = 7;
+            $remainingData = $this->service->getPaginated([], $perPage, false);
+            $lastPage      = $remainingData->lastPage();
 
-        if (!$branch) {
-            return redirect()
-                ->route('admin.rumah-harapan.index')
-                ->with('error', 'Cabang tidak ditemukan.');
+            // Jika page saat ini melebihi last page, turun ke page sebelumnya
+            $redirectPage = min($currentPage, max(1, $lastPage));
+
+            return redirect()->route('rumah-harapan.index', array_filter([
+                'page'    => $redirectPage > 1 ? $redirectPage : null,
+                'success' => 'Data Asrama berhasil dihapus.',
+            ]));
+        } catch (\Exception $e) {
+            return redirect()->back();
         }
-
-        return redirect()
-            ->route('admin.rumah-harapan.index', ['trashed' => true])
-            ->with('success', 'Cabang berhasil dipulihkan.');
-    }
-
-    /**
-     * Hard delete branch.
-     */
-    public function hardDelete(int $id)
-    {
-        $success = $this->service->hardDelete($id);
-
-        if (!$success) {
-            return redirect()
-                ->route('admin.rumah-harapan.index', ['trashed' => true])
-                ->with('error', 'Cabang tidak ditemukan atau belum dihapus.');
-        }
-
-        return redirect()
-            ->route('admin.rumah-harapan.index', ['trashed' => true])
-            ->with('success', 'Cabang berhasil dihapus permanen.');
     }
 }

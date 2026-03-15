@@ -8,6 +8,14 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
+    {{-- Baca tema dari localStorage agar konsisten dengan preferensi user --}}
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     @vite(['resources/sass/app.scss'])
 </head>
 

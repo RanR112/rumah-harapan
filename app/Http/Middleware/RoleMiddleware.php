@@ -30,8 +30,7 @@ class RoleMiddleware
             return $next($request);
         }
 
-        // Jika tidak memiliki akses, redirect ke dashboard dengan error
-        return redirect()->route('dashboard')
-            ->with('error', 'Akses ditolak. Anda tidak memiliki izin yang cukup.');
+        // Tampilkan halaman unauthorized jika tidak punya akses
+        abort(403);
     }
 }

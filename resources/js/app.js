@@ -5,12 +5,14 @@ import {
     UserPlus,
     Building2,
     Clock,
+    UserCog,
+    LogIn,
+    LogOut,
+    KeyRound,
     Plus,
     ChevronRight,
     ChevronLeft,
     Save,
-    Eye,
-    EyeOff,
     Edit,
     Trash2,
     RotateCcw,
@@ -19,7 +21,20 @@ import {
     Download,
     Upload,
     Search,
-    Funnel
+    Funnel,
+    Camera,
+    FileText,
+    CheckCircle,
+    Calendar,
+    Eye,
+    Layers,
+    Info,
+    GitCompare,
+    CircleAlert,
+    SunMoon,
+    User,
+    ClockAlert,
+    WifiOff,
 } from "lucide";
 
 // Helper untuk lazy load
@@ -37,12 +52,14 @@ window.lucide.createIcons = () => {
             UserPlus,
             Building2,
             Clock,
+            UserCog,
+            LogIn,
+            LogOut,
+            KeyRound,
             Plus,
             ChevronRight,
             ChevronLeft,
             Save,
-            Eye,
-            EyeOff,
             Edit,
             Trash2,
             RotateCcw,
@@ -52,6 +69,19 @@ window.lucide.createIcons = () => {
             Upload,
             Search,
             Funnel,
+            Camera,
+            FileText,
+            CheckCircle,
+            Calendar,
+            Eye,
+            Layers,
+            Info,
+            GitCompare,
+            CircleAlert,
+            SunMoon,
+            User,
+            ClockAlert,
+            WifiOff,
         },
     });
 };
@@ -82,10 +112,36 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     );
 
-    // Lazy Load: Page Transition (untuk dashboard)
+    // Lazy Load: Page Transition + Initial Loader Hide (dashboard)
+    // Digabung karena keduanya bergantung pada elemen yang sama
     lazyLoad(document.getElementById("dashboardTransitionLoader"), () =>
         import("./components/page-transition.js").then((module) => {
             module.PageTransition.init();
+            hideInitialLoader();
         }),
     );
+
+    // Lazy Load: Session Timeout (hanya di halaman dashboard)
+    lazyLoad(document.getElementById("sessionTimeoutModal"), () =>
+        import("./components/session-timeout.js").then((m) =>
+            m.initSessionTimeout(),
+        ),
+    );
 });
+
+/**
+ * Sembunyikan loader awal dashboard setelah halaman siap.
+ * Dipindahkan dari inline script di dashboard.blade.php ke sini
+ * agar tidak ada inline JS di layout.
+ */
+function hideInitialLoader() {
+    const loader = document.getElementById("dashboardTransitionLoader");
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.remove("dashboard-transition-loader--active");
+            setTimeout(() => {
+                loader.remove();
+            }, 200);
+        }, 1500);
+    }
+}

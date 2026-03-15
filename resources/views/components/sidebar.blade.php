@@ -17,6 +17,27 @@
             </li>
 
             @if (Auth::check())
+                {{-- Anak Asuh — admin & petugas --}}
+                @if (in_array(Auth::user()->role, ['admin', 'petugas']))
+                    <li class="nav-item {{ request()->routeIs('anak-asuh*') ? 'active' : '' }}">
+                        <a href="{{ route('anak-asuh.index') }}" class="nav-link">
+                            @include('components.icon-svg', ['name' => 'users', 'class' => 'nav-icon'])
+                            <span class="nav-text">Data Anak Asuh</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- Asrama — admin & petugas (petugas: read-only via index) --}}
+                @if (in_array(Auth::user()->role, ['admin', 'petugas']))
+                    <li class="nav-item {{ request()->routeIs('rumah-harapan*') ? 'active' : '' }}">
+                        <a href="{{ route('rumah-harapan.index') }}" class="nav-link">
+                            @include('components.icon-svg', ['name' => 'building', 'class' => 'nav-icon'])
+                            <span class="nav-text">Asrama</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- Manajemen User — admin only --}}
                 @if (Auth::user()->role === 'admin')
                     <li class="nav-item {{ request()->routeIs('users*') ? 'active' : '' }}">
                         <a href="{{ route('users.index') }}" class="nav-link">
@@ -27,16 +48,26 @@
                             <span class="nav-text">Manajemen User</span>
                         </a>
                     </li>
-                @endif
 
-                @if (in_array(Auth::user()->role, ['admin', 'petugas']))
-                    <li class="nav-item {{ request()->routeIs('anak-asuh*') ? 'active' : '' }}">
-                        <a href="{{ route('anak-asuh.index') }}" class="nav-link">
-                            @include('components.icon-svg', ['name' => 'users', 'class' => 'nav-icon'])
-                            <span class="nav-text">Data Anak Asuh</span>
+                    {{-- Aktivitas Sistem — admin only --}}
+                    <li class="nav-item {{ request()->routeIs('audit-log*') ? 'active' : '' }}">
+                        <a href="{{ route('audit-log.index') }}" class="nav-link">
+                            @include('components.icon-svg', [
+                                'name' => 'clipboard-list',
+                                'class' => 'nav-icon',
+                            ])
+                            <span class="nav-text">Aktivitas Sistem</span>
                         </a>
                     </li>
                 @endif
+
+                {{-- Settings — admin & petugas --}}
+                <li class="nav-item {{ request()->routeIs('settings*') ? 'active' : '' }}">
+                    <a href="{{ route('settings.index') }}" class="nav-link">
+                        @include('components.icon-svg', ['name' => 'gear', 'class' => 'nav-icon'])
+                        <span class="nav-text">Pengaturan</span>
+                    </a>
+                </li>
             @endif
         </ul>
     </nav>
@@ -45,8 +76,11 @@
         <form action="{{ route('logout') }}" method="POST" class="logout-form">
             @csrf
             <button type="submit" class="logout-btn">
-                @include('components.icon-svg', ['name' => 'right-to-bracket', 'class' => 'nav-icon'])
-                <span class="nav-text">Keluar</span>
+                @include('components.icon-svg', [
+                    'name' => 'right-to-bracket',
+                    'class' => 'nav-icon-logout',
+                ])
+                <span class="btn-text">Keluar</span>
                 <div class="btn-loader" style="display: none;">
                     @include('components.loader.loader-pulse')
                 </div>

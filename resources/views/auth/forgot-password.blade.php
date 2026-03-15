@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    {{-- Baca tema dari localStorage agar konsisten dengan preferensi user --}}
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    
     @vite(['resources/sass/app.scss'])
 </head>
+
 <body class="forgot-password-page">
     <div class="forgot-password-container">
         <div class="forgot-password__logo">
             <img src="{{ asset('images/Logo.svg') }}" alt="Logo">
         </div>
-        
+
         <div class="forgot-password__header">
             <h1 class="forgot-password__title">Lupa Password</h1>
             <p class="forgot-password__subtitle">
@@ -20,21 +31,14 @@
             </p>
         </div>
 
-        <form method="POST" action="{{ route('password.email') }}" class="forgot-password__form" id="forgotPasswordForm">
+        <form method="POST" action="{{ route('password.email') }}" class="forgot-password__form"
+            id="forgotPasswordForm">
             @csrf
 
             <div class="form-group">
                 <label for="email" class="form-label">Alamat Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                    placeholder="Masukkan alamat email Anda"
-                    class="form-input @error('email') is-invalid @enderror"
-                >
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
+                    placeholder="Masukkan alamat email Anda" class="form-input @error('email') is-invalid @enderror">
                 @error('email')
                     <span class="form-error" id="emailError">{{ $message }}</span>
                 @enderror
@@ -57,4 +61,5 @@
 
     @vite(['resources/js/app.js'])
 </body>
+
 </html>

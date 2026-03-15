@@ -8,11 +8,6 @@ use Illuminate\Validation\Rules\Password;
 
 class ProfileUpdateRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
     public function rules(): array
     {
         return [
@@ -25,10 +20,15 @@ class ProfileUpdateRequest extends FormRequest
                 Rule::unique('users')->ignore($this->user()->id),
             ],
             'phone' => ['nullable', 'string', 'max:20'],
-            
-            // Password fields - conditionally required
-            'current_password' => ['nullable', 'current_password'],
+
+            // Validasi current_password hanya sebagai string nullable
+            // Validasi kecocokan password ditangani manual di controller
+            'current_password' => ['nullable', 'string'],
+
+            // sometimes: skip validasi jika field tidak ada di request sama sekali
+            // nullable: izinkan nilai kosong
             'password' => [
+                'sometimes',
                 'nullable',
                 'string',
                 Password::min(8)
@@ -41,34 +41,24 @@ class ProfileUpdateRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get custom messages for validator errors.
-     *
-     * @return array<string, string>
-     */
     public function messages(): array
     {
         return [
             'current_password.current_password' => 'Kata sandi saat ini tidak sesuai.',
-            'password.min' => 'Kata sandi minimal 8 karakter.',
+            'password.min'       => 'Kata sandi minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai.',
-            'phone.max' => 'Nomor telepon maksimal 20 karakter.',
+            'phone.max'          => 'Nomor telepon maksimal 20 karakter.',
         ];
     }
 
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
     public function attributes(): array
     {
         return [
-            'name' => 'Nama Lengkap',
-            'email' => 'Email',
-            'phone' => 'Nomor Telepon',
-            'current_password' => 'Kata Sandi Saat Ini',
-            'password' => 'Kata Sandi Baru',
+            'name'                  => 'Nama Lengkap',
+            'email'                 => 'Email',
+            'phone'                 => 'Nomor Telepon',
+            'current_password'      => 'Kata Sandi Saat Ini',
+            'password'              => 'Kata Sandi Baru',
             'password_confirmation' => 'Konfirmasi Kata Sandi',
         ];
     }

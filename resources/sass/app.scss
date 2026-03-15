@@ -1,25 +1,32 @@
 @use "sass:meta";
 
-/* // File yang HANYA berisi variabel (tidak perlu load-css) */
-@use "abstracts/variables";
+/* ============================================================
+   VARIABLES — CSS custom properties (light & dark mode)
+   Harus di-load PERTAMA sebelum semua file lain
+   ============================================================ */
+@include meta.load-css("base/variables");
 
-/* style base untuk font dan patokan awal  */
+/* style base untuk font dan patokan awal */
 @include meta.load-css("base/reset");
 
-/* style bagian autentikasi*/
+@import "flatpickr/dist/flatpickr.min.css";
+
+/* style bagian autentikasi */
 @include meta.load-css("auth/login.module.scss");
 @include meta.load-css("auth/forgot-password.module.scss");
 @include meta.load-css("auth/otp-code.module.scss");
 @include meta.load-css("auth/reset-password.module.scss");
 @include meta.load-css("auth/loading-connection.module.scss");
 
-/* style bagian dashbaord  */
+/* style bagian dashboard */
 @include meta.load-css("layouts/dashboard.module.scss");
 @include meta.load-css("components/sidebar.module.scss");
 @include meta.load-css("components/topbar.module.scss");
 @include meta.load-css("components/loader/loader-main.module.scss");
 @include meta.load-css("components/loader-transition.module.scss");
 @include meta.load-css("components/alert-modal.module.scss");
+@include meta.load-css("components/errors.module.scss");
+@include meta.load-css("components/session-timeout-modal.module.scss");
 
 // Bagian page
 @include meta.load-css("pages/home.module.scss");
@@ -28,4 +35,11 @@
 @include meta.load-css("pages/users/form.module.scss");
 @include meta.load-css("pages/anak-asuh/index.module.scss");
 @include meta.load-css("pages/anak-asuh/modal-filter.module.scss");
-@include meta.load-css("pages/anak-asuh/create.module.scss");
+@include meta.load-css("pages/anak-asuh/form.module.scss");
+@include meta.load-css("pages/anak-asuh/modal-upload-berkas.module.scss");
+@include meta.load-css("pages/anak-asuh/modal-import.module.scss");
+@include meta.load-css("pages/rumah-harapan/index.module.scss");
+@include meta.load-css("pages/rumah-harapan/form.module.scss");
+@include meta.load-css("pages/audit-log/index.module.scss");
+@include meta.load-css("pages/audit-log/show.module.scss");
+@include meta.load-css("pages/settings/index.module.scss");

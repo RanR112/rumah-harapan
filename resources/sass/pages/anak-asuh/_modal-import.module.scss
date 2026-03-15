@@ -1,0 +1,583 @@
+.import-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+
+    &.show {
+        display: flex;
+    }
+}
+
+.import-modal-container {
+    background: var(--color-bg-surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 500px;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+    font-family: "Inter", sans-serif;
+
+    // Autofill tidak bisa baca CSS var — hardcode dengan warna paling netral
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+        box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+        -webkit-text-fill-color: #2d3748 !important;
+    }
+}
+
+// ── Header ──────────────────────────────────────────
+.import-modal-header {
+    padding: 24px;
+    border-bottom: 2px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.import-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.import-modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+
+    &:hover {
+        background: var(--color-bg-muted);
+    }
+
+    .import-modal-close-icon {
+        width: 20px;
+        height: 20px;
+        stroke: var(--color-text-muted);
+    }
+}
+
+// ── Body ──────────────────────────────────────────
+.import-modal-body {
+    padding: 15px 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+}
+
+.import-modal-description {
+    font-size: 15px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+.import-format-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--color-info);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--transition-fast);
+
+    &:hover {
+        color: var(--color-info-dark, #1d4ed8);
+    }
+}
+
+.import-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.import-modal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.import-modal-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+
+    .import-modal-required {
+        color: var(--color-danger);
+    }
+}
+
+// ── File Upload ──────────────────────────────────────────
+.import-modal-file-wrapper {
+    position: relative;
+}
+
+.import-modal-file-input {
+    display: none;
+}
+
+.import-modal-file-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 2px dashed var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background: var(--color-bg-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+        border-color: var(--color-border-input-focus);
+        background: var(--color-bg-surface-hover);
+    }
+
+    .import-modal-upload-icon {
+        width: 20px;
+        height: 20px;
+        stroke: var(--color-text-muted);
+        flex-shrink: 0;
+    }
+
+    .import-modal-file-name {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.import-modal-hint {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.import-modal-error {
+    font-size: 12px;
+    color: var(--color-danger);
+    min-height: 18px;
+    display: block;
+}
+
+// ── Note Section ──────────────────────────────────────────
+// Warna note (kuning/amber) sengaja hardcode —
+// warna semantik warning konsisten di light & dark
+.import-note {
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: var(--border-radius-sm);
+    padding: 14px;
+}
+
+.import-note-text {
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.5;
+    margin: 0;
+
+    strong {
+        font-weight: 600;
+    }
+}
+
+// ── Footer ──────────────────────────────────────────
+.import-modal-footer {
+    padding: 10px 20px;
+    border-top: 2px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.import-modal-btn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    min-width: 140px;
+    min-height: 45px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid transparent;
+
+    .btn-loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.import-modal-btn-cancel {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border);
+
+    &:hover:not(:disabled) {
+        background: var(--color-bg-muted);
+        border-color: var(--color-text-subtle);
+    }
+}
+
+.import-modal-btn-upload {
+    background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+    color: var(--color-text-inverse);
+    border: none;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+}
+
+// ── Modal Format Kolom ──────────────────────────────────────────
+.format-kolom-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.format-kolom-container {
+    background: var(--color-bg-surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+    font-family: "Inter", sans-serif;
+}
+
+.format-kolom-header {
+    padding: 20px 24px;
+    border-bottom: 2px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.format-kolom-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+// Body format kolom: warna biru info sengaja hardcode —
+// konsisten sebagai info/documentation block di light & dark
+.format-kolom-body {
+    padding: 20px 24px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+    background: #dbeafe;
+    border-left: 1px solid #93c5fd;
+    border-right: 1px solid #93c5fd;
+}
+
+.import-format-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e40af;
+    margin: 0 0 10px 0;
+}
+
+.import-format-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 13px;
+    color: #1e3a8a;
+    line-height: 1.8;
+}
+
+span.import-format-note {
+    font-size: 12px;
+    color: #3b82f6;
+    font-weight: 400;
+}
+
+p.import-format-note {
+    font-size: 12px;
+    color: #3b82f6;
+    font-weight: 400;
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.format-kolom-footer {
+    padding: 16px 24px;
+    border-top: 2px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+
+    .import-modal-btn {
+        margin-top: 0;
+        min-width: 100px;
+    }
+}
+
+// ── Keyframes ──────────────────────────────────────────
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── Responsive ──────────────────────────────────────────
+@media (max-width: 480px) {
+    .import-modal-backdrop {
+        padding: 12px;
+    }
+
+    .import-modal-container {
+        max-width: 90%;
+        max-height: 78vh;
+        border-radius: 10px;
+    }
+
+    .import-modal-header {
+        padding: 18px 16px;
+    }
+    .import-modal-title {
+        font-size: 17px;
+    }
+
+    .import-modal-close {
+        width: 30px;
+        height: 30px;
+        .import-modal-close-icon {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    .import-modal-body {
+        padding: 17px 20px;
+    }
+    .import-modal-form {
+        gap: 10px;
+    }
+    .import-modal-description {
+        font-size: 14px;
+    }
+    .import-modal-form-group {
+        margin-top: 10px;
+    }
+    .import-modal-label {
+        font-size: 14px;
+    }
+
+    .import-modal-file-label {
+        padding: 15px 14px;
+        .import-modal-upload-icon {
+            width: 18px;
+            height: 18px;
+        }
+        .import-modal-file-name {
+            font-size: 14px;
+        }
+    }
+
+    .import-modal-hint {
+        font-size: 11px;
+    }
+    .import-modal-error {
+        font-size: 11px;
+    }
+
+    .import-modal-footer {
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 8px;
+        .import-modal-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+    }
+
+    .format-kolom-backdrop {
+        padding: 12px;
+    }
+    .format-kolom-container {
+        max-width: 95%;
+        max-height: 85vh;
+        border-radius: 10px;
+    }
+    .format-kolom-header {
+        padding: 16px;
+    }
+    .format-kolom-title {
+        font-size: 16px;
+    }
+    .format-kolom-body {
+        padding: 16px;
+    }
+    .format-kolom-footer {
+        padding: 12px 16px;
+        .import-modal-btn {
+            min-width: unset;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .import-modal-backdrop {
+        padding: 10px;
+    }
+    .import-modal-container {
+        border-radius: 8px;
+    }
+    .import-modal-header {
+        padding: 16px 14px;
+    }
+    .import-modal-title {
+        font-size: 16px;
+    }
+
+    .import-modal-close {
+        width: 28px;
+        height: 28px;
+        .import-modal-close-icon {
+            width: 17px;
+            height: 17px;
+        }
+    }
+
+    .import-modal-body {
+        padding: 16px 18px;
+    }
+    .import-modal-form {
+        gap: 8px;
+    }
+    .import-modal-form-group {
+        margin-top: 10px;
+    }
+    .import-modal-description {
+        font-size: 13px;
+    }
+    .import-modal-label {
+        font-size: 14px;
+    }
+
+    .import-modal-file-label {
+        padding: 14px 13px;
+        gap: 10px;
+        .import-modal-upload-icon {
+            width: 17px;
+            height: 17px;
+        }
+        .import-modal-file-name {
+            font-size: 13px;
+        }
+    }
+
+    .import-modal-hint {
+        font-size: 10px;
+    }
+    .import-modal-error {
+        font-size: 11px;
+    }
+
+    .import-modal-footer {
+        padding: 10px 18px;
+        gap: 5px;
+        .import-modal-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+    }
+
+    .format-kolom-backdrop {
+        padding: 12px;
+    }
+    .format-kolom-container {
+        border-radius: 8px;
+    }
+    .format-kolom-header {
+        padding: 14px;
+    }
+    .format-kolom-title {
+        font-size: 14px;
+    }
+    .format-kolom-body {
+        padding: 14px;
+    }
+}

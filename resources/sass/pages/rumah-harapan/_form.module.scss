@@ -1,0 +1,670 @@
+.rumah-harapan-form-page {
+    font-family: "Inter", sans-serif;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .page-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .btn-header-back {
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-sm);
+            background: var(--color-bg-surface);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+
+            &:hover {
+                border-color: var(--color-text-subtle);
+                background: var(--color-bg-muted);
+                color: var(--color-text-primary);
+                text-decoration: none;
+            }
+
+            &:active {
+                transform: translateY(1px);
+            }
+
+            .btn-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    .card {
+        background: var(--color-bg-surface);
+        border-radius: var(--border-radius-xl, 16px);
+        box-shadow: var(--shadow-card);
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+
+        .card-body {
+            padding: 40px;
+        }
+    }
+
+    .rumah-harapan-form {
+        .form-container {
+            width: 100%;
+            max-width: 1000px;
+
+            .form-columns {
+                display: flex;
+                flex-direction: column;
+                gap: 35px;
+
+                @media (min-width: 481px) {
+                    flex-direction: row;
+                    gap: 32px;
+                }
+            }
+
+            .form-left,
+            .form-right {
+                flex: 1;
+                min-width: 0;
+                @media (max-width: 480px) {
+                    width: 100%;
+                }
+            }
+
+            .form-group {
+                margin-bottom: 24px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .form-label {
+                    display: block;
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: var(--color-text-primary);
+                    margin-bottom: 7px;
+
+                    .required {
+                        color: var(--color-danger);
+                    }
+                }
+
+                .form-input,
+                .form-select {
+                    width: 100%;
+                    padding: 14px 18px;
+                    border: 2px solid var(--color-border-input);
+                    border-radius: var(--border-radius-sm);
+                    font-weight: 500;
+                    color: var(--color-text-primary);
+                    font-size: 15px;
+                    transition: all var(--transition-fast);
+                    background-color: var(--color-bg-input);
+
+                    &::placeholder {
+                        color: var(--color-text-subtle);
+                        font-weight: 400;
+                    }
+
+                    &:focus {
+                        outline: none;
+                        background-color: var(--color-bg-input-focus);
+                        border-color: var(--color-border-input-focus);
+                        box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                    }
+
+                    &.is-invalid {
+                        border-color: var(--color-danger);
+                    }
+
+                    &:-webkit-autofill {
+                        -webkit-box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+                        box-shadow: 0 0 0 1000px #f7f9fb inset !important;
+                        -webkit-text-fill-color: #2d3748 !important;
+                    }
+                }
+
+                textarea.form-input {
+                    resize: none;
+                    min-height: 90px;
+                    line-height: 1.5;
+                    font-family: "Inter", sans-serif;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: var(--color-text-primary);
+                }
+
+                .custom-dropdown {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 7px;
+
+                    .dropdown-trigger {
+                        width: 100%;
+                        padding: 14px 18px;
+                        border: 2px solid var(--color-border-input);
+                        border-radius: var(--border-radius-sm);
+                        font-weight: 500;
+                        color: var(--color-text-primary);
+                        font-size: 15px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        background: var(--color-bg-input);
+                        cursor: pointer;
+                        transition: all var(--transition-fast);
+                        appearance: none;
+                        text-align: left;
+
+                        &:focus {
+                            outline: none;
+                            background-color: var(--color-bg-input-focus);
+                            border-color: var(--color-border-input-focus);
+                            box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                        }
+
+                        &:hover {
+                            border-color: var(--color-border-input-focus);
+                        }
+
+                        .dropdown-value {
+                            color: var(--color-text-secondary);
+                            flex: 1;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+
+                        .dropdown-chevron {
+                            width: 18px;
+                            height: 18px;
+                            flex-shrink: 0;
+                            margin-left: 8px;
+                            transition: transform var(--transition-fast);
+                            stroke: var(--color-text-muted);
+                            stroke-width: 2;
+                        }
+
+                        &[aria-expanded="true"] .dropdown-chevron {
+                            transform: rotate(180deg);
+                        }
+                    }
+
+                    .dropdown-menu {
+                        position: absolute;
+                        top: calc(100% + 4px);
+                        left: 0;
+                        right: 0;
+                        margin-top: 4px;
+                        background: var(--color-bg-surface);
+                        border-radius: var(--border-radius-sm);
+                        box-shadow: var(--shadow-md);
+                        z-index: 1000;
+                        display: none;
+                        max-height: 240px;
+                        overflow-y: auto;
+                        border: 1px solid var(--color-border);
+                        animation: dropdownSlideDown 0.2s ease;
+
+                        &::-webkit-scrollbar {
+                            width: 6px;
+                        }
+                        &::-webkit-scrollbar-track {
+                            background: var(--color-bg-muted);
+                            border-radius: 3px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            background: var(--color-border);
+                            border-radius: 3px;
+                            &:hover {
+                                background: var(--color-text-subtle);
+                            }
+                        }
+
+                        &.show {
+                            display: block;
+                        }
+
+                        .dropdown-option {
+                            padding: 14px 18px;
+                            cursor: pointer;
+                            transition: all var(--transition-fast);
+                            font-size: 15px;
+                            color: var(--color-text-secondary);
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+
+                            &:hover {
+                                background-color: var(--color-bg-muted);
+                                color: var(--color-text-primary);
+                            }
+                            &:active {
+                                background-color: var(--color-bg-surface-hover);
+                            }
+
+                            &.selected {
+                                background-color: var(--color-brand-primary);
+                                color: var(--color-text-inverse);
+                                font-weight: 600;
+                                &:hover {
+                                    background-color: var(--color-brand-primary-dark);
+                                }
+                            }
+
+                            &:not(:last-child) {
+                                border-bottom: 1px solid var(--color-border-muted);
+                            }
+                        }
+                    }
+                }
+
+                .form-error {
+                    display: block;
+                    color: var(--color-danger);
+                    font-size: 13px;
+                    font-weight: 500;
+                    margin-top: 6px;
+                    padding-left: 4px;
+                    min-height: 18px;
+                }
+
+                // Input read-only saat mode show
+                .form-input--readonly {
+                    background: var(--color-bg-muted);
+                    border-color: var(--color-border-muted);
+                    color: var(--color-text-secondary);
+                    cursor: default;
+
+                    &:focus {
+                        border-color: var(--color-border-muted);
+                        box-shadow: none;
+                        background: var(--color-bg-muted);
+                    }
+                }
+
+                // Badge status saat mode show (read-only, bukan dropdown)
+                .form-status-display {
+                    margin-top: 4px;
+
+                    .status-badge {
+                        display: inline-flex;
+                        align-items: center;
+                        padding: 6px 16px;
+                        border-radius: 15px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+
+                        &.status-active {
+                            background-color: var(--color-success-bg);
+                            color: var(--color-success);
+                        }
+
+                        &.status-inactive {
+                            background-color: var(--color-bg-muted);
+                            color: var(--color-gray-dark);
+                        }
+                    }
+                }
+            }
+        }
+
+        .form-actions {
+            margin-top: 40px !important;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end !important;
+
+            .btn-primary-form-rh {
+                padding: 12px 28px;
+                min-width: 180px;
+                min-height: 45px;
+                font-size: 15px;
+                font-weight: 600;
+                border: none;
+                border-radius: var(--border-radius-sm);
+                background: linear-gradient(135deg, #8da434 0%, #a8c550 100%);
+                color: var(--color-text-inverse);
+                cursor: pointer;
+                transition: all var(--transition-fast);
+
+                .btn-loader {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                &:hover:not(:disabled) {
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+                }
+                &:disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dropdownSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1440px) {
+    .rumah-harapan-form-page {
+        .page-header {
+            margin-bottom: 20px;
+            .page-title {
+                font-size: 23px;
+            }
+            .page-description {
+                font-size: 14px;
+            }
+        }
+        .card .card-body {
+            padding: 36px;
+        }
+        .rumah-harapan-form {
+            .form-container {
+                .form-columns {
+                    gap: 28px;
+                }
+                .form-group {
+                    .form-label {
+                        font-size: 14px;
+                    }
+                    .form-input,
+                    .form-select {
+                        padding: 13px 17px;
+                        font-size: 14px;
+                    }
+                    .custom-dropdown {
+                        .dropdown-trigger {
+                            padding: 13px 17px;
+                            font-size: 14px;
+                            .dropdown-chevron {
+                                width: 17px;
+                                height: 17px;
+                            }
+                        }
+                        .dropdown-menu .dropdown-option {
+                            padding: 13px 17px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+            .form-actions .btn-primary-form-rh {
+                padding: 11px 26px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .rumah-harapan-form-page {
+        .page-header .page-title {
+            font-size: 22px;
+        }
+        .card .card-body {
+            padding: 32px;
+        }
+        .rumah-harapan-form .form-container {
+            .form-columns {
+                gap: 26px;
+            }
+            .form-group {
+                margin-bottom: 22px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .rumah-harapan-form-page {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+            .page-description {
+                font-size: 14px;
+            }
+        }
+        .card .card-body {
+            padding: 30px;
+        }
+        .rumah-harapan-form {
+            .form-container {
+                .form-columns {
+                    gap: 24px;
+                }
+                .form-group {
+                    margin-bottom: 20px;
+                    .form-label {
+                        font-size: 14px;
+                    }
+                    .form-input,
+                    .form-select {
+                        padding: 12px 16px;
+                        font-size: 14px;
+                    }
+                    .custom-dropdown {
+                        .dropdown-trigger {
+                            padding: 12px 16px;
+                            font-size: 14px;
+                            .dropdown-chevron {
+                                width: 16px;
+                                height: 16px;
+                            }
+                        }
+                        .dropdown-menu .dropdown-option {
+                            padding: 12px 16px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+            .form-actions {
+                padding-top: 28px;
+                .btn-primary-form-rh {
+                    padding: 11px 24px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .rumah-harapan-form-page {
+        .page-header {
+            margin-bottom: 20px;
+        }
+        .card .card-body {
+            padding: 28px;
+        }
+        .rumah-harapan-form .form-container {
+            .form-columns {
+                gap: 22px;
+            }
+            .form-group {
+                margin-bottom: 18px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .rumah-harapan-form-page {
+        .page-header {
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+            .btn-header-back {
+                padding: 10px 18px;
+                width: 40%;
+                justify-content: center;
+                .btn-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke-width: 2;
+                }
+            }
+        }
+
+        .card {
+            border-radius: 14px;
+            .card-body {
+                padding: 24px;
+            }
+        }
+
+        .rumah-harapan-form {
+            .form-container {
+                .form-columns {
+                    flex-direction: column;
+                    gap: 18px;
+                }
+                .form-group {
+                    margin-bottom: 14px;
+                    .form-label {
+                        font-size: 14px;
+                        margin-bottom: 7px;
+                    }
+                    .form-input,
+                    .form-select {
+                        padding: 12px 14px;
+                        font-size: 14px;
+                    }
+                    textarea.form-input {
+                        min-height: 110px;
+                    }
+                    .custom-dropdown {
+                        margin-top: 7px;
+                        .dropdown-trigger {
+                            padding: 12px 14px;
+                            font-size: 14px;
+                            .dropdown-chevron {
+                                width: 17px;
+                                height: 17px;
+                            }
+                        }
+                        .dropdown-menu .dropdown-option {
+                            padding: 10px 14px;
+                            font-size: 13px;
+                        }
+                    }
+                    .form-error {
+                        font-size: 12px;
+                    }
+                }
+            }
+            .form-actions {
+                margin-top: 24px;
+                padding-top: 25px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                .btn-primary-form-rh {
+                    width: 100%;
+                    padding: 12px 15px;
+                    font-size: 15px;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .rumah-harapan-form-page {
+        .page-header {
+            margin-bottom: 15px;
+            .page-title {
+                font-size: 20px;
+            }
+            .page-description {
+                font-size: 13px;
+                margin-bottom: 3px;
+            }
+        }
+        .card .card-body {
+            padding: 20px;
+        }
+        .rumah-harapan-form {
+            .form-container .form-group {
+                .form-input,
+                .form-select {
+                    padding: 12px 13px;
+                    font-size: 14px;
+                }
+                .custom-dropdown .dropdown-trigger {
+                    padding: 12px 13px;
+                    font-size: 14px;
+                    .dropdown-chevron {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            .form-actions .btn-primary-form-rh {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+        }
+    }
+}

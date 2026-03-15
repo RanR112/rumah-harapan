@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class RumahHarapan extends Model
 {
-    use SoftDeletes;
 
     protected $fillable = [
         'kode',
@@ -25,6 +24,10 @@ class RumahHarapan extends Model
         'is_active',
         'created_by',
         'updated_by',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
     /**

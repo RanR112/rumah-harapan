@@ -8,25 +8,28 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
+    {{-- Baca tema dari localStorage agar konsisten dengan preferensi user --}}
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     @vite(['resources/sass/app.scss'])
 </head>
 
 <body class="login-page">
     {{-- Alert Error (Slide-in dari atas) --}}
     @if ($errors->any())
-        <div class="alert-container" id="alertContainer">
-            <div class="alert alert-error">
-                <div class="alert-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
+        <div class="login-alert-container" id="alertContainer">
+            <div class="login-alert login-alert-error">
+                <div class="login-alert-icon">
+                    <i data-lucide="circle-alert" class="login-alert-icon-lucide"></i>
                 </div>
-                <div class="alert-content">
-                    <h4 class="alert-title">Login Gagal</h4>
-                    <p class="alert-message">
+                <div class="login-alert-content">
+                    <h3 class="login-alert-title">Login Gagal</h3>
+                    <p class="login-alert-message">
                         @if ($errors->has('email'))
                             {{ $errors->first('email') }}
                         @elseif ($errors->has('username'))
@@ -38,12 +41,8 @@
                         @endif
                     </p>
                 </div>
-                <button type="button" class="alert-close" onclick="closeAlert()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
+                <button type="button" class="login-alert-close" onclick="closeAlert()">
+                    <i data-lucide="x" class="login-alert-close-lucide"></i>
                 </button>
             </div>
         </div>
@@ -131,7 +130,7 @@
         function closeAlert() {
             const alertContainer = document.getElementById('alertContainer');
             if (alertContainer) {
-                alertContainer.classList.add('alert-slide-out');
+                alertContainer.classList.add('login-alert-slide-out');
                 setTimeout(() => {
                     alertContainer.remove();
                 }, 300);

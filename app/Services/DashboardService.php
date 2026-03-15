@@ -33,7 +33,7 @@ class DashboardService
         return [
             'totalUsers' => $this->userService->getTotalCount(),
             'totalAnakAsuh' => $this->anakAsuhService->getTotalCount(),
-            'totalCabang' => $this->rumahHarapanService->getTotalCount(),
+            'totalAsrama' => $this->rumahHarapanService->getTotalCount(),
             'totalActivity' => $this->getRecentActivityCount(),
         ];
     }

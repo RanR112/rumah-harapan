@@ -12,12 +12,15 @@
                     Halaman kelola data user sistem untuk mendukung kelancaran operasional.
                 </p>
             </div>
-            @if (Auth::user()->role === 'admin')
-                <a href="{{ route('users.create') }}" class="btn-primary">
-                    <i data-lucide="plus" class="btn-icon"></i>
-                    Tambah User
-                </a>
-            @endif
+
+            <div class="page-actions">
+                @if (Auth::user()->role === 'admin')
+                    <button type="button" class="btn-create-user" onclick="window.location.href='{{ route('users.create') }}'">
+                        <i data-lucide="plus" class="btn-icon"></i>
+                        <span> Tambah User </span>
+                    </button>
+                @endif
+            </div>
         </div>
 
         <!-- Search Input (Tanpa Button Submit) -->

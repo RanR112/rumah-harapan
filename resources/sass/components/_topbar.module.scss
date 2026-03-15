@@ -1,6 +1,6 @@
 // Topbar
 .topbar {
-    background: #ffffff;
+    background: var(--color-bg-topbar);
     padding: 0 24px;
     height: 55px;
     display: flex;
@@ -8,24 +8,23 @@
     position: sticky;
     top: 0;
     z-index: 99;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--color-border);
 
-    // Hamburger menu - hanya untuk mobile
     .hamburger-menu {
         display: none;
         align-items: center;
         justify-content: center;
         width: 40px;
         height: 40px;
-        background: #8da434;
+        background: var(--color-brand-primary);
         border: none;
-        border-radius: 10px;
+        border-radius: var(--border-radius-md);
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all var(--transition-base);
         box-shadow: 0 2px 6px rgba(141, 164, 52, 0.2);
 
         &:hover {
-            background: #7a912f;
+            background: var(--color-brand-primary-dark);
             box-shadow: 0 4px 10px rgba(141, 164, 52, 0.3);
             transform: translateY(-1px);
         }
@@ -37,13 +36,12 @@
         .hamburger-icon {
             width: 25px;
             height: 25px;
-            fill: #ffffff;
-            stroke: #ffffff;
+            fill: var(--color-text-inverse);
+            stroke: var(--color-text-inverse);
             stroke-width: 2;
         }
     }
 
-    // Profile dropdown - selalu di kanan
     .profile-dropdown {
         margin-left: auto;
     }
@@ -55,7 +53,7 @@
     display: inline-block;
 }
 
-// Profile Trigger (avatar di luar dropdown)
+// Profile Trigger
 .profile-trigger {
     display: flex;
     align-items: center;
@@ -64,14 +62,13 @@
     border: none;
     cursor: pointer;
     padding: 8px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+    border-radius: var(--border-radius-sm);
+    transition: background-color var(--transition-fast);
 
     &:hover {
-        background-color: #f7fcfa;
+        background-color: var(--color-brand-lighter);
     }
 
-    // Avatar icon di luar dropdown
     .profile-avatar-icon {
         width: 35px;
         height: 35px;
@@ -83,18 +80,17 @@
         .user-icon {
             max-width: 35px;
             max-height: 35px;
-            fill: #8da434;
-            stroke: #8da434;
+            fill: var(--color-brand-primary);
+            stroke: var(--color-brand-primary);
         }
     }
 
-    // Chevron icon
     .profile-chevron {
         width: 16px;
         height: 16px;
-        fill: #718096;
-        stroke: #718096;
-        transition: all 0.2s ease;
+        fill: var(--color-text-muted);
+        stroke: var(--color-text-muted);
+        transition: all var(--transition-fast);
     }
 }
 
@@ -104,16 +100,16 @@
     top: 70%;
     right: 5px;
     margin-top: 8px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
     min-width: 200px;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 
     &.show {
         opacity: 1;
@@ -126,9 +122,8 @@
         align-items: center;
         gap: 12px;
         padding: 16px;
-        border-bottom: 1px solid #f1f5f9;
+        border-bottom: 1px solid var(--color-border-muted);
 
-        // Avatar icon di dalam dropdown
         .profile-avatar-icon-large {
             width: 40px;
             height: 40px;
@@ -142,8 +137,8 @@
                 max-height: 40px;
                 width: 100%;
                 height: 100%;
-                fill: #8da434;
-                stroke: #8da434;
+                fill: var(--color-brand-primary);
+                stroke: var(--color-brand-primary);
             }
         }
 
@@ -157,7 +152,7 @@
         .profile-name {
             font-size: 14px;
             font-weight: 600;
-            color: #1a202c;
+            color: var(--color-text-primary);
             margin-bottom: 5px;
             white-space: nowrap;
             overflow: hidden;
@@ -165,7 +160,6 @@
             max-width: 180px;
         }
 
-        // Role Badge Styles
         .role-badge {
             font-size: 11px;
             font-weight: 600;
@@ -178,28 +172,28 @@
         }
 
         .role-badge--admin {
-            background-color: #dcfce7; // Light green
-            color: #16a34a; // Green 600
+            background-color: var(--color-success-bg);
+            color: var(--color-success);
         }
 
         .role-badge--petugas {
-            background-color: #dbeafe; // Light blue
-            color: #1d4ed8; // Blue 700
+            background-color: var(--color-info-bg);
+            color: var(--color-info-dark);
         }
 
         .role-badge--default {
-            background-color: #f3f4f6; // Light gray
-            color: #6b7280; // Gray 500
+            background-color: var(--color-bg-muted);
+            color: var(--color-gray);
         }
 
         .role-badge--guest {
-            background-color: #fef3c7; // Light yellow
-            color: #d97706; // Amber 600
+            background-color: var(--color-warning-bg);
+            color: var(--color-warning);
         }
 
         .profile-email {
             font-size: 12px;
-            color: #718096;
+            color: var(--color-text-muted);
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
@@ -213,17 +207,17 @@
         align-items: center;
         gap: 12px;
         padding: 12px 16px;
-        color: #4a5568;
+        color: var(--color-text-secondary);
         text-decoration: none;
-        transition: all 0.2s ease;
-        border-radius: 6px;
+        transition: all var(--transition-fast);
+        border-radius: var(--border-radius-sm);
         margin: 4px 8px;
         font-size: 14px;
         font-weight: 500;
 
         &:hover {
-            background-color: #f7fafc;
-            color: #2d3748;
+            background-color: var(--color-bg-surface-hover);
+            color: var(--color-text-primary);
             transform: translateX(2px);
         }
 
@@ -234,8 +228,8 @@
         .profile-menu-icon {
             width: 18px;
             height: 18px;
-            fill: #718096;
-            stroke: #718096;
+            fill: var(--color-text-muted);
+            stroke: var(--color-text-muted);
             stroke-width: 2;
         }
     }
@@ -244,23 +238,26 @@
         .profile-logout-btn {
             display: flex;
             align-items: center;
+            justify-content: flex-start;
             gap: 12px;
             padding: 12px 16px;
             width: 94%;
+            min-width: 130px;
+            min-height: 44px;
             margin: 4px 8px;
             background: none;
             border: none;
-            color: #e53e3e;
+            color: var(--color-danger);
             cursor: pointer;
             text-align: left;
             font-size: 14px;
             font-weight: 500;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
 
             &:hover {
-                background-color: #fef2f2;
-                color: #c53030;
+                background-color: var(--color-danger-bg);
+                color: var(--color-danger-dark);
                 transform: translateX(2px);
             }
 
@@ -268,12 +265,35 @@
                 transform: translateX(0);
             }
 
-            .logout-icon {
+            &:disabled {
+                cursor: not-allowed;
+                transform: none;
+                opacity: 0.75;
+                justify-content: center;
+            }
+
+            .nav-icon-logout {
                 width: 18px;
                 height: 18px;
-                fill: #e53e3e;
-                stroke: #e53e3e;
+                fill: var(--color-danger);
+                stroke: var(--color-danger);
                 stroke-width: 2;
+                flex-shrink: 0;
+            }
+
+            .btn-text {
+                font-size: 14px;
+            }
+
+            .btn-loader {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+
+                .pulse-dot {
+                    background-color: var(--color-danger);
+                }
             }
         }
     }
@@ -281,7 +301,6 @@
 
 /* ============= RESPONSIVE DESIGN ============= */
 
-// Tablet Landscape (1024px) - MOBILE BREAKPOINT
 @media (max-width: 1024px) {
     .topbar {
         height: 65px;
@@ -298,7 +317,6 @@
         .profile-avatar-icon {
             width: 40px;
             height: 40px;
-
             .user-icon {
                 max-width: 40px;
                 max-height: 40px;
@@ -316,38 +334,33 @@
 
         .profile-header {
             gap: 10px;
-
-            .profile-info {
-                min-width: 0;
-            }
-
             .profile-name {
                 font-size: 14px;
             }
-
             .role-badge {
                 font-size: 11px;
             }
-
             .profile-email {
                 font-size: 12px;
                 max-width: 150px;
             }
         }
+
+        .profile-logout-form .profile-logout-btn {
+            min-width: 120px;
+            min-height: 42px;
+            font-size: 13px;
+        }
     }
 }
 
-// Tablet Portrait (850px)
 @media (max-width: 850px) {
-    .topbar {
-        .hamburger-menu {
-            width: 40px;
-            height: 40px;
-
-            .hamburger-icon {
-                width: 25px;
-                height: 25px;
-            }
+    .topbar .hamburger-menu {
+        width: 40px;
+        height: 40px;
+        .hamburger-icon {
+            width: 25px;
+            height: 25px;
         }
     }
 
@@ -358,7 +371,6 @@
         .profile-avatar-icon {
             width: 40px;
             height: 40px;
-
             .user-icon {
                 max-width: 40px;
                 max-height: 40px;
@@ -370,9 +382,13 @@
             height: 15px;
         }
     }
+
+    .profile-menu .profile-logout-form .profile-logout-btn {
+        min-width: 115px;
+        min-height: 40px;
+    }
 }
 
-// Mobile Large (480px)
 @media (max-width: 480px) {
     .topbar {
         padding: 0 20px;
@@ -380,7 +396,6 @@
         .hamburger-menu {
             width: 38px;
             height: 38px;
-
             .hamburger-icon {
                 width: 25px;
                 height: 25px;
@@ -395,7 +410,6 @@
         .profile-avatar-icon {
             width: 35px;
             height: 35px;
-
             .user-icon {
                 max-width: 35px;
                 max-height: 35px;
@@ -414,22 +428,15 @@
         .profile-header {
             padding: 10px;
             gap: 10px;
-
-            .profile-info {
-                min-width: 0;
-            }
-
             .profile-name {
                 font-size: 12px;
                 max-width: 160px;
             }
-
             .role-badge {
                 font-size: 10px;
                 padding: 4px 8px;
                 max-width: 55px;
             }
-
             .profile-email {
                 font-size: 11px;
                 max-width: 130px;
@@ -440,15 +447,15 @@
             font-size: 12px;
         }
 
-        .profile-logout-form {
-            .profile-logout-btn {
-                font-size: 12px;
-            }
+        .profile-logout-form .profile-logout-btn {
+            font-size: 12px;
+            min-width: 110px;
+            min-height: 38px;
+            padding: 10px 14px;
         }
     }
 }
 
-// Mobile Small (360px)
 @media (max-width: 360px) {
     .topbar {
         padding: 0 18px;
@@ -456,7 +463,6 @@
         .hamburger-menu {
             width: 36px;
             height: 36px;
-
             .hamburger-icon {
                 width: 23px;
                 height: 23px;
@@ -471,7 +477,6 @@
         .profile-avatar-icon {
             width: 33px;
             height: 33px;
-
             .user-icon {
                 max-width: 33px;
                 max-height: 33px;
@@ -482,5 +487,12 @@
             width: 13px;
             height: 13px;
         }
+    }
+
+    .profile-menu .profile-logout-form .profile-logout-btn {
+        font-size: 12px;
+        min-width: 105px;
+        min-height: 36px;
+        padding: 8px 12px;
     }
 }

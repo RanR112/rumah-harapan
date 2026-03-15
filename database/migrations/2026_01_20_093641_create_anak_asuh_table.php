@@ -15,12 +15,13 @@ return new class extends Migration
                 ->onDelete('restrict');
             $table->string('nama_anak', 255);
             $table->string('nik', 16)->unique();
-            $table->string('no_kartu_keluarga', 16); // tidak unique!
+            $table->string('no_kartu_keluarga', 16);
             $table->text('alamat_lengkap');
             $table->enum('jenis_kel', ['L', 'P']);
             $table->string('tempat_lahir', 100);
             $table->date('tanggal_lahir');
-            $table->enum('status', ['aktif', 'tidak aktif']);
+            $table->enum('status', ['yatim', 'piatu', 'yatim_piatu', 'dhuafa']);
+            $table->boolean('is_active')->default(true);
             $table->enum('grade', ['A', 'B', 'C', 'D', 'E']);
             $table->string('pendidikan_kelas', 50)->nullable();
             $table->string('nama_orang_tua', 255);
@@ -29,6 +30,8 @@ return new class extends Migration
             $table->string('yang_mengasuh_sebelum_diasrama', 255)->nullable();
             $table->text('rekomendasi')->nullable();
 
+            $table->string('foto_path')->nullable();
+
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
 
@@ -36,6 +39,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['status', 'grade']);
+            $table->index('is_active');
             $table->index('tanggal_masuk_rh');
         });
     }

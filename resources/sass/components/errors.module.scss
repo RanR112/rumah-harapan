@@ -1,0 +1,116 @@
+.error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #f0f4f8;
+}
+
+.error-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.error-logo {
+    margin-bottom: 32px;
+
+    img {
+        width: 120px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.error-code {
+    font-size: 80px;
+    font-weight: 800;
+    color: var(--color-brand-primary);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -4px;
+
+    &--danger {
+        color: var(--color-danger);
+    }
+}
+
+.error-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 12px;
+    letter-spacing: -0.3px;
+}
+
+.error-message {
+    font-size: 14px;
+    color: #718096;
+    line-height: 1.7;
+    margin: 0 0 32px;
+    max-width: 320px;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-error-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 28px;
+    background: linear-gradient(135deg, #a8c550 0%, #8da434 60%, #6d8a2b 100%);
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(141, 164, 52, 0.3);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(141, 164, 52, 0.4);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 10px rgba(141, 164, 52, 0.25);
+    }
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 64px;
+        letter-spacing: -2px;
+    }
+    .error-title {
+        font-size: 18px;
+    }
+    .error-message {
+        font-size: 13px;
+    }
+    .error-logo img {
+        width: 100px;
+    }
+}
+
+@media (max-width: 380px) {
+    .error-code {
+        font-size: 56px;
+    }
+    .error-title {
+        font-size: 16px;
+    }
+}

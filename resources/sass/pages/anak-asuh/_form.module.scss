@@ -1,0 +1,1003 @@
+.anak-asuh-form-page {
+    font-family: "Inter", sans-serif;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .page-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .btn-header-back {
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-sm);
+            background: var(--color-bg-surface);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+
+            &:hover {
+                border-color: var(--color-text-subtle);
+                background: var(--color-bg-muted);
+                color: var(--color-text-primary);
+            }
+            &:active {
+                transform: translateY(1px);
+            }
+
+            .btn-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    .card {
+        background: var(--color-bg-surface);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-card);
+        overflow: visible;
+
+        .card-body {
+            padding: 32px;
+
+            .anak-asuh-form {
+                .form-actions {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 32px;
+
+                    .btn-primary-form-anak-asuh {
+                        padding: 12px 24px;
+                        background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
+                        color: var(--color-text-inverse);
+                        border: none;
+                        border-radius: var(--border-radius-sm);
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: 600;
+                        transition: all var(--transition-fast);
+                        min-width: 180px;
+                        min-height: 45px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .btn-loader {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 4px 12px rgba(141, 164, 52, 0.3);
+                        }
+                        &:disabled {
+                            opacity: 0.8;
+                            cursor: not-allowed;
+                            transform: none;
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+
+            .anak-asuh-form-show {
+                .action-button-show {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 32px;
+                    gap: 15px;
+                }
+
+                .btn-edit-show {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 14px;
+                    background: #047857;
+                    color: var(--color-text-inverse);
+                    border: none;
+                    border-radius: var(--border-radius-sm);
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 600;
+                    transition: all var(--transition-fast);
+                    gap: 8px;
+
+                    &:hover {
+                        background: #059669;
+                        transform: translateY(-2px);
+                    }
+                    .btn-icon {
+                        width: 18px;
+                        height: 18px;
+                        stroke: var(--color-text-inverse);
+                        stroke-width: 2;
+                    }
+                }
+
+                .btn-delete-show {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 14px;
+                    background: #c53030;
+                    color: var(--color-text-inverse);
+                    border: none;
+                    border-radius: var(--border-radius-sm);
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 600;
+                    transition: all var(--transition-fast);
+                    gap: 8px;
+
+                    &:hover {
+                        background: #9b2c2c;
+                        transform: translateY(-2px);
+                    }
+                    .btn-icon {
+                        width: 18px;
+                        height: 18px;
+                        stroke: var(--color-text-inverse);
+                        stroke-width: 2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ========================================================================
+// FORM CONTAINER — tidak berubah dari versi sebelumnya
+// ========================================================================
+.anak-asuh-form-container {
+    .anak-asuh-foto-preview-group {
+        margin-bottom: 32px;
+
+        .anak-asuh-foto-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .anak-asuh-foto-preview-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 2px dashed var(--color-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+
+            &:hover {
+                border-color: var(--color-border-input-focus);
+            }
+
+            .anak-asuh-foto-preview {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .anak-asuh-foto-overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity var(--transition-fast);
+
+                .anak-asuh-foto-icon {
+                    width: 24px;
+                    height: 24px;
+                    stroke: var(--color-text-inverse);
+                    stroke-width: 2;
+                }
+            }
+
+            &:hover .anak-asuh-foto-overlay {
+                opacity: 1;
+            }
+        }
+
+        .anak-asuh-foto-delete-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: #dc2626;
+            border: 2px solid #dc2626;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            padding: 0;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+
+            &:hover {
+                background: #b91c1c;
+                border-color: #b91c1c;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.5);
+            }
+            &:active {
+                transform: translateY(0);
+            }
+
+            .anak-asuh-foto-delete-icon {
+                width: 18px;
+                height: 18px;
+                stroke: var(--color-text-inverse);
+                stroke-width: 2.5;
+            }
+        }
+
+        .anak-asuh-foto-upload {
+            display: none;
+        }
+    }
+
+    .anak-asuh-form-columns {
+        display: flex;
+        gap: 32px;
+        margin-bottom: 24px;
+
+        .anak-asuh-form-left,
+        .anak-asuh-form-right {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
+    .anak-asuh-form-group {
+        margin-bottom: 24px;
+
+        .anak-asuh-form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+
+            .anak-asuh-required {
+                color: var(--color-danger);
+            }
+        }
+
+        .anak-asuh-form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--color-border-input);
+            font-weight: 500;
+            color: var(--color-text-primary);
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            background: var(--color-bg-input);
+            transition: all var(--transition-fast);
+            box-sizing: border-box;
+
+            &::placeholder {
+                color: var(--color-text-subtle);
+                font-weight: 400;
+            }
+
+            &:focus {
+                outline: none;
+                background: var(--color-bg-input-focus);
+                border-color: var(--color-border-input-focus);
+                box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+            }
+
+            &.anak-asuh-is-invalid {
+                border-color: var(--color-danger);
+                &:focus {
+                    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+                }
+            }
+
+            &:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+                -webkit-text-fill-color: #2d3748 !important;
+            }
+
+            &:disabled,
+            &[readonly] {
+                background: var(--color-bg-input) !important;
+                color: var(--color-text-primary) !important;
+                opacity: 1 !important;
+                cursor: default;
+                border-color: var(--color-border-input);
+            }
+        }
+
+        textarea.anak-asuh-form-input {
+            resize: none;
+            min-height: 90px;
+            line-height: 1.5;
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+
+            &:disabled,
+            &[readonly] {
+                background: var(--color-bg-input) !important;
+                color: var(--color-text-primary) !important;
+                opacity: 1 !important;
+                cursor: default;
+                resize: none;
+            }
+        }
+
+        .anak-asuh-form-error {
+            color: var(--color-danger);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .anak-asuh-form-hint {
+            color: var(--color-text-muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .anak-asuh-datepicker-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            input,
+            .anak-asuh-flatpickr-input {
+                padding-right: 42px !important;
+                cursor: pointer;
+            }
+
+            .anak-asuh-datepicker-icon {
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                pointer-events: none;
+                display: flex;
+                align-items: center;
+
+                .anak-asuh-datepicker-lucide-icon {
+                    width: 18px;
+                    height: 18px;
+                    stroke: var(--color-text-muted);
+                    stroke-width: 2;
+                    display: block;
+                }
+            }
+
+            &.disabled {
+                pointer-events: none;
+                input,
+                .anak-asuh-flatpickr-input {
+                    background: var(--color-bg-input) !important;
+                    color: var(--color-text-primary) !important;
+                    opacity: 1 !important;
+                    cursor: default;
+                    border-color: var(--color-border-input) !important;
+                    &:focus {
+                        border-color: var(--color-border-input) !important;
+                        box-shadow: none !important;
+                    }
+                }
+                .anak-asuh-datepicker-icon {
+                    display: none;
+                }
+            }
+        }
+
+        .anak-asuh-custom-dropdown {
+            position: relative;
+
+            .anak-asuh-dropdown-trigger {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 18px;
+                border: 2px solid var(--color-border-input);
+                border-radius: var(--border-radius-sm);
+                background: var(--color-bg-input);
+                font-size: 14px;
+                color: var(--color-text-primary);
+                cursor: pointer;
+                transition: all var(--transition-fast);
+                width: 100%;
+
+                &:hover,
+                &[aria-expanded="true"] {
+                    border-color: var(--color-border-input-focus);
+                    box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+                }
+
+                .anak-asuh-dropdown-value {
+                    flex: 1;
+                    text-align: left;
+                    color: var(--color-text-secondary);
+                }
+                .anak-asuh-dropdown-chevron {
+                    width: 18px;
+                    height: 18px;
+                    stroke: var(--color-text-muted);
+                    stroke-width: 2;
+                    transition: transform var(--transition-fast);
+                    flex-shrink: 0;
+                }
+                &[aria-expanded="true"] .anak-asuh-dropdown-chevron {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .anak-asuh-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg-surface);
+                border: 2px solid var(--color-border);
+                border-radius: var(--border-radius-sm);
+                margin-top: 4px;
+                z-index: 1001;
+                display: none;
+                max-height: 200px;
+                overflow-y: auto;
+                box-shadow: var(--shadow-md);
+
+                &[data-show="true"] {
+                    display: block;
+                }
+
+                .anak-asuh-dropdown-option {
+                    padding: 14px 18px;
+                    font-size: 14px;
+                    color: var(--color-text-primary);
+                    cursor: pointer;
+                    transition: background-color var(--transition-fast);
+
+                    &:hover {
+                        background-color: var(--color-bg-muted);
+                    }
+                    &.selected {
+                        font-weight: 600;
+                        color: var(--color-text-secondary);
+                    }
+                }
+            }
+
+            &.disabled {
+                pointer-events: none;
+                .anak-asuh-dropdown-trigger {
+                    background: var(--color-bg-input) !important;
+                    cursor: default;
+                    border-color: var(--color-border-input) !important;
+                    box-shadow: none !important;
+                    .anak-asuh-dropdown-chevron {
+                        display: none;
+                    }
+                    &:hover,
+                    &[aria-expanded="true"] {
+                        border-color: var(--color-border-input) !important;
+                        box-shadow: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .anak-asuh-form-divider {
+        height: 1px;
+        background: var(--color-border);
+        margin: 40px 0;
+    }
+
+    .anak-asuh-berkas-group {
+        .anak-asuh-berkas-container {
+            .anak-asuh-berkas-upload-area {
+                margin-bottom: 24px;
+
+                .anak-asuh-btn-berkas-add {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                    background: var(--color-bg-muted);
+                    color: var(--color-text-secondary);
+                    border: 2px dashed var(--color-border);
+                    border-radius: var(--border-radius-sm);
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: all var(--transition-fast);
+                    gap: 8px;
+
+                    &:hover {
+                        background: var(--color-bg-surface-hover);
+                        border-color: var(--color-text-subtle);
+                    }
+                    .anak-asuh-btn-icon {
+                        width: 18px;
+                        height: 18px;
+                        stroke: currentColor;
+                        stroke-width: 2;
+                    }
+                }
+            }
+
+            .anak-asuh-berkas-list {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+
+                .anak-asuh-berkas-empty {
+                    text-align: center;
+                    color: var(--color-text-subtle);
+                    font-size: 14px;
+                    font-weight: 400;
+                    padding: 24px 0;
+                    margin: 0;
+                }
+
+                .anak-asuh-berkas-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 12px 16px;
+                    border: 2px solid var(--color-border);
+                    border-radius: var(--border-radius-sm);
+                    background: var(--color-bg-surface);
+                    transition: all var(--transition-fast);
+
+                    &:hover {
+                        border-color: var(--color-text-subtle);
+                        box-shadow: var(--shadow-card);
+                    }
+
+                    .anak-asuh-berkas-info {
+                        flex: 1;
+                        margin-right: 16px;
+                        min-width: 0;
+                        .anak-asuh-berkas-name {
+                            display: block;
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: var(--color-text-primary);
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    .anak-asuh-berkas-actions {
+                        display: flex;
+                        gap: 8px;
+                        flex-shrink: 0;
+
+                        .anak-asuh-btn-berkas-view,
+                        .anak-asuh-btn-berkas-delete,
+                        .anak-asuh-btn-berkas-download {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 35px;
+                            height: 35px;
+                            padding: 0;
+                            border: none;
+                            border-radius: var(--border-radius-sm);
+                            cursor: pointer;
+                            transition: all var(--transition-fast);
+                            text-decoration: none;
+
+                            i,
+                            svg {
+                                width: 18px;
+                                height: 18px;
+                                stroke: currentColor;
+                                stroke-width: 2;
+                            }
+                            &:hover {
+                                transform: scale(1.1);
+                            }
+                        }
+
+                        .anak-asuh-btn-berkas-view {
+                            background: rgba(37, 99, 235, 0.05);
+                            color: var(--color-info);
+                            &:hover {
+                                background: var(--color-info);
+                                color: var(--color-text-inverse);
+                            }
+                        }
+                        .anak-asuh-btn-berkas-delete {
+                            background: rgba(239, 68, 68, 0.05);
+                            color: var(--color-danger);
+                            &:hover {
+                                background: var(--color-danger);
+                                color: var(--color-text-inverse);
+                            }
+                        }
+                        .anak-asuh-btn-berkas-download {
+                            background: rgba(14, 165, 164, 0.05);
+                            color: #0ea5a4;
+                            &:hover {
+                                background: #0ea5a4;
+                                color: var(--color-text-inverse);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ========================================================================
+// FLATPICKR — hardcode, konsisten di light & dark mode
+// ========================================================================
+.flatpickr-calendar {
+    font-family: inherit;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+    overflow: hidden;
+    // Fixed width agar ukuran calendar konsisten antar bulan & tahun
+    width: 308px !important;
+
+    .flatpickr-months {
+        background: #dbeafe;
+        padding: 6px 0;
+        border-bottom: 2px solid #93c5fd;
+
+        .flatpickr-month {
+            color: #1e40af;
+            height: 44px;
+        }
+
+        .flatpickr-prev-month,
+        .flatpickr-next-month {
+            padding: 10px 12px;
+            fill: #3b82f6;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+
+            &:hover svg {
+                fill: #2563eb;
+            }
+            &.flatpickr-disabled {
+                opacity: 0.3;
+                cursor: not-allowed !important;
+                pointer-events: none;
+            }
+        }
+
+        .flatpickr-current-month {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e40af;
+            padding-top: 10px;
+
+            .flatpickr-monthDropdown-months {
+                color: #1e40af;
+                font-weight: 600;
+                border-radius: 6px;
+                padding: 6px 2px;
+                appearance: none;
+                min-width: 100px;
+            }
+            input.cur-year {
+                color: #1e40af;
+                font-weight: 700;
+                background: #ffffff;
+                border: 1px solid #cbd5e1;
+                border-radius: 6px;
+                padding: 4px 8px;
+            }
+        }
+    }
+
+    .flatpickr-weekdays {
+        background: #f1f5f9;
+        border-bottom: 2px solid #e2e8f0;
+        .flatpickr-weekday {
+            color: #475569;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+    }
+
+    .flatpickr-days {
+        border: none;
+        background: #ffffff;
+        // Fixed width mengikuti calendar width
+        width: 308px !important;
+
+        .dayContainer {
+            padding: 10px;
+            // Fixed width agar sel hari tidak bergeser antar bulan
+            width: 288px !important;
+            min-width: 288px !important;
+            max-width: 288px !important;
+
+            .flatpickr-day {
+                border-radius: 8px;
+                font-size: 14px;
+                color: #1e293b;
+                font-weight: 500;
+                height: 36px;
+                line-height: 36px;
+                // Fixed width & max-width per sel
+                width: 36px !important;
+                max-width: 36px !important;
+                border: none;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: #dbeafe;
+                    color: #1e40af;
+                    border: none;
+                    transform: scale(1.05);
+                }
+                &.today {
+                    background: #93c5fd;
+                    color: #1e3a8a;
+                    font-weight: 700;
+                    border: 2px solid #60a5fa;
+                    &:hover {
+                        background: #60a5fa;
+                        color: #ffffff;
+                    }
+                }
+                &.selected,
+                &.selected:hover {
+                    background: #3b82f6 !important;
+                    color: #ffffff !important;
+                    border: 2px solid #2563eb !important;
+                    font-weight: 700;
+                    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+                }
+                &.disabled,
+                &.prevMonthDay,
+                &.nextMonthDay {
+                    color: #cbd5e1;
+                    font-weight: 400;
+                }
+                &.disabled:hover {
+                    background: transparent;
+                    cursor: not-allowed;
+                    transform: none;
+                }
+            }
+        }
+    }
+
+    &.arrowTop::before,
+    &.arrowTop::after {
+        border-bottom-color: #dbeafe !important;
+    }
+}
+
+input.anak-asuh-flatpickr-input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--color-border-input);
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        background: var(--color-bg-input-focus);
+        border-color: var(--color-border-input-focus);
+        box-shadow: 0 0 0 3px rgba(141, 164, 52, 0.1);
+    }
+    &.anak-asuh-is-invalid {
+        border-color: var(--color-danger);
+    }
+}
+
+// ========================================================================
+// RESPONSIVE — max-height dihapus di semua breakpoint
+// ========================================================================
+
+@media (max-width: 1440px) {
+    .anak-asuh-form-page {
+        .page-header {
+            margin-bottom: 20px;
+            .page-title {
+                font-size: 23px;
+            }
+            .page-description {
+                font-size: 14px;
+            }
+        }
+        .card .card-body {
+            padding: 28px;
+        }
+    }
+    .anak-asuh-form-container .anak-asuh-form-columns {
+        gap: 28px;
+        .anak-asuh-form-group {
+            margin-bottom: 20px;
+            .anak-asuh-form-input,
+            .anak-asuh-custom-dropdown .anak-asuh-dropdown-trigger,
+            .anak-asuh-datepicker-wrapper input,
+            input.anak-asuh-flatpickr-input {
+                padding: 13px 17px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .anak-asuh-form-page {
+        .page-header .page-title {
+            font-size: 22px;
+        }
+        .card .card-body {
+            padding: 24px;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .anak-asuh-form-page {
+        .page-header {
+            .page-title {
+                font-size: 22px;
+            }
+            .page-description {
+                font-size: 14px;
+            }
+        }
+        .card .card-body {
+            padding: 20px;
+        }
+    }
+    .anak-asuh-form-container .anak-asuh-form-columns .anak-asuh-form-group {
+        margin-bottom: 20px;
+        .anak-asuh-form-input,
+        .anak-asuh-custom-dropdown .anak-asuh-dropdown-trigger,
+        .anak-asuh-datepicker-wrapper input,
+        input.anak-asuh-flatpickr-input {
+            padding: 12px 16px;
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .anak-asuh-form-page {
+        .card .card-body {
+            padding: 16px;
+        }
+    }
+    .anak-asuh-form-container .anak-asuh-foto-preview-group .anak-asuh-foto-preview-container {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+    .anak-asuh-form-page {
+        .page-header {
+            margin-bottom: 16px;
+            .page-description {
+                font-size: 13px;
+            }
+            .btn-header-back {
+                padding: 10px 18px;
+                width: 40%;
+                justify-content: center;
+            }
+        }
+        .card .card-body {
+            padding: 12px;
+            .anak-asuh-form .form-actions {
+                margin-top: 24px;
+                flex-direction: column;
+                align-items: stretch;
+                .btn-primary-form-anak-asuh {
+                    width: 100%;
+                    min-width: unset;
+                }
+            }
+        }
+    }
+    .anak-asuh-form-container {
+        .anak-asuh-foto-preview-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .anak-asuh-foto-wrapper {
+                position: relative;
+                justify-content: center;
+            }
+            .anak-asuh-foto-preview-container {
+                width: 120px;
+                height: 120px;
+            }
+            .anak-asuh-foto-delete-btn {
+                position: absolute;
+                right: -40px;
+                top: 0;
+            }
+        }
+        .anak-asuh-form-columns {
+            flex-direction: column;
+            gap: 0;
+            .anak-asuh-form-group {
+                margin-bottom: 14px;
+                .anak-asuh-form-input,
+                .anak-asuh-custom-dropdown .anak-asuh-dropdown-trigger,
+                .anak-asuh-datepicker-wrapper input,
+                input.anak-asuh-flatpickr-input {
+                    padding: 12px 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .anak-asuh-form-page {
+        .page-header {
+            margin-bottom: 12px;
+            .page-title {
+                font-size: 20px;
+            }
+        }
+        .card .card-body {
+            padding: 10px;
+        }
+    }
+    .anak-asuh-form-container .anak-asuh-form-columns .anak-asuh-form-group {
+        margin-bottom: 10px;
+        .anak-asuh-form-input,
+        .anak-asuh-custom-dropdown .anak-asuh-dropdown-trigger,
+        .anak-asuh-datepicker-wrapper input,
+        input.anak-asuh-flatpickr-input {
+            padding: 12px 13px;
+        }
+    }
+}

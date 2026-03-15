@@ -1,18 +1,19 @@
 // Dashboard Home Page
 .dashboard-home {
+    font-family: "Inter", sans-serif;
+
     .welcome-section {
         margin-bottom: 32px;
 
         .welcome-title {
             font-size: 24px;
             font-weight: 400;
-            color: #1a202c;
+            color: var(--color-text-primary);
             margin: 0 0 8px 0;
 
             .welcome-greeting {
                 font-weight: 600;
             }
-
             .welcome-name {
                 font-weight: 700;
             }
@@ -20,7 +21,7 @@
 
         .welcome-subtitle {
             font-size: 16px;
-            color: #718096;
+            color: var(--color-text-muted);
             margin: 0;
         }
     }
@@ -33,25 +34,25 @@
         margin-bottom: 32px;
 
         .card {
-            background: #ffffff;
-            border-radius: 12px;
+            background: var(--color-bg-surface);
+            border-radius: var(--border-radius-lg);
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-card);
             transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
+                transform var(--transition-fast),
+                box-shadow var(--transition-fast);
             display: flex;
             flex-direction: column;
 
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+                box-shadow: var(--shadow-md);
             }
 
             .card-title {
                 font-size: 15px;
                 font-weight: 600;
-                color: #4a5568;
+                color: var(--color-text-secondary);
                 margin: 0 0 25px 0;
                 text-align: left;
             }
@@ -65,7 +66,7 @@
                 .card-icon {
                     width: 52px;
                     height: 52px;
-                    border-radius: 12px;
+                    border-radius: var(--border-radius-lg);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -75,14 +76,14 @@
                         width: 28px;
                         height: 28px;
                         stroke-width: 2;
-                        color: white;
+                        color: var(--color-text-inverse);
                     }
                 }
 
                 .card-value {
                     font-size: 35px;
                     font-weight: 700;
-                    color: #1a202c;
+                    color: var(--color-text-primary);
                     margin: 0;
                     line-height: 1;
                 }
@@ -90,10 +91,112 @@
 
             .card-description {
                 font-size: 14px;
-                color: #718096;
+                color: var(--color-text-muted);
                 margin: 0;
                 text-align: left;
             }
+        }
+    }
+
+    // Quick Access Section — petugas only
+    .quick-access-section {
+        margin-bottom: 32px;
+
+        .section-header {
+            margin-bottom: 16px;
+
+            .section-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--color-text-primary);
+                margin: 0;
+            }
+        }
+
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+    }
+
+    .quick-access-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 20px;
+        background: var(--color-bg-surface);
+        border-radius: var(--border-radius-lg);
+        border: 1px solid var(--color-border-muted);
+        box-shadow: var(--shadow-card);
+        text-decoration: none;
+        transition:
+            transform var(--transition-fast),
+            box-shadow var(--transition-fast),
+            border-color var(--transition-fast);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-brand-primary);
+            text-decoration: none;
+
+            .quick-access-card__chevron {
+                transform: translateX(3px);
+                color: var(--color-brand-primary);
+            }
+        }
+
+        &__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        &__icon-lucide {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+            color: var(--color-text-inverse);
+        }
+
+        &__content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 0;
+        }
+
+        &__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &__subtitle {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &__chevron {
+            width: 20px;
+            height: 20px;
+            color: var(--color-text-subtle);
+            flex-shrink: 0;
+            transition:
+                transform var(--transition-fast),
+                color var(--transition-fast);
         }
     }
 
@@ -108,35 +211,35 @@
             .section-title {
                 font-size: 18px;
                 font-weight: 600;
-                color: #1a202c;
+                color: var(--color-text-primary);
                 margin: 0;
             }
 
             .view-all-link {
-                color: #5a8c5a;
+                color: var(--color-brand-primary);
                 text-decoration: none;
                 font-size: 14px;
                 font-weight: 500;
-                transition: color 0.2s ease;
+                transition: color var(--transition-fast);
 
                 &:hover {
-                    color: #4a7c59;
+                    color: var(--color-brand-primary-dark);
                     text-decoration: underline;
                 }
             }
         }
 
         .activity-list {
-            background: #ffffff;
-            border-radius: 12px;
+            background: var(--color-bg-surface);
+            border-radius: var(--border-radius-lg);
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-card);
 
             .activity-item {
                 display: flex;
                 gap: 16px;
                 padding: 16px 0;
-                border-bottom: 1px solid #f1f5f9;
+                border-bottom: 1px solid var(--color-border-muted);
 
                 &:first-child {
                     padding-top: 0;
@@ -155,7 +258,7 @@
 
                     .activity-empty-text {
                         font-size: 14px;
-                        color: #cbd5e0;
+                        color: var(--color-text-subtle);
                         margin: 0;
                         font-weight: 500;
                     }
@@ -164,7 +267,7 @@
                 .activity-icon {
                     width: 40px;
                     height: 40px;
-                    border-radius: 10px;
+                    border-radius: var(--border-radius-md);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -174,7 +277,7 @@
                         width: 20px;
                         height: 20px;
                         stroke-width: 2;
-                        color: white;
+                        color: var(--color-text-inverse);
                     }
                 }
 
@@ -183,7 +286,7 @@
 
                     .activity-text {
                         font-size: 14px;
-                        color: #1a202c;
+                        color: var(--color-text-primary);
                         margin: 0 0 4px 0;
 
                         strong {
@@ -193,7 +296,7 @@
 
                     .activity-time {
                         font-size: 12px;
-                        color: #718096;
+                        color: var(--color-text-muted);
                     }
                 }
             }
@@ -201,52 +304,58 @@
     }
 }
 
-// Card Icon Colors - Disesuaikan dengan tema logo (Hijau & Oranye)
+// ============================================================
+// Card Icon Colors — hardcode gradient brand
+// ============================================================
 .card-icon--users {
     background: linear-gradient(135deg, #5a8c5a 0%, #4a7c59 100%);
 }
-
 .card-icon--children {
     background: linear-gradient(135deg, #8da434 0%, #7a9128 100%);
 }
-
-.card-icon--cabang {
+.card-icon--asrama {
     background: linear-gradient(135deg, #f5a623 0%, #e89820 100%);
 }
-
 .card-icon--activity {
     background: linear-gradient(135deg, #fdb913 0%, #f0a810 100%);
 }
 
-// Activity Icon Colors - Disesuaikan dengan tema logo
-.activity-icon--anak_asuh,
-.activity-icon--children {
+// ============================================================
+// Activity Icon Colors — per kategori aktivitas
+// ============================================================
+.activity-icon--anak_asuh {
     background: linear-gradient(135deg, #8da434 0%, #7a9128 100%);
 }
-
-.activity-icon--user,
-.activity-icon--users {
-    background: linear-gradient(135deg, #5a8c5a 0%, #4a7c59 100%);
-}
-
-.activity-icon--cabang,
-.activity-icon--house {
+.activity-icon--asrama {
     background: linear-gradient(135deg, #f5a623 0%, #e89820 100%);
 }
-
-.activity-icon--document,
-.activity-icon--file {
-    background: linear-gradient(135deg, #fdb913 0%, #f0a810 100%);
+.activity-icon--user {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
 }
-
-.activity-icon--default,
-.activity-icon--clock {
+.activity-icon--profil {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+.activity-icon--import {
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+}
+.activity-icon--export {
+    background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
+}
+.activity-icon--login {
+    background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+}
+.activity-icon--logout {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+.activity-icon--reset_password {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+}
+.activity-icon--default {
     background: linear-gradient(135deg, #a8c550 0%, #8da434 100%);
 }
 
 /* ============= RESPONSIVE DESIGN ============= */
 
-// Desktop Large (1440px)
 @media (max-width: 1440px) {
     .dashboard-home {
         .dashboard-cards {
@@ -255,62 +364,50 @@
 
             .card {
                 padding: 20px;
-
                 .card-title {
                     font-size: 15px;
                     margin-bottom: 25px;
                 }
-
                 .card-main {
                     gap: 150px;
                     margin-bottom: 18px;
-
                     .card-icon {
                         width: 50px;
                         height: 50px;
-
                         .card-icon-lucide {
                             width: 26px;
                             height: 26px;
                         }
                     }
-
                     .card-value {
                         font-size: 35px;
                     }
                 }
-
                 .card-description {
                     font-size: 13px;
                 }
             }
         }
 
-        .recent-activity-section {
-            .activity-list {
-                padding: 18px;
-
-                .activity-item {
-                    gap: 14px;
-                    padding: 14px 0;
-
-                    .activity-icon {
-                        width: 38px;
-                        height: 38px;
-
-                        .activity-icon-lucide {
-                            width: 19px;
-                            height: 19px;
-                        }
+        .recent-activity-section .activity-list {
+            padding: 18px;
+            .activity-item {
+                gap: 14px;
+                padding: 14px 0;
+                .activity-icon {
+                    width: 38px;
+                    height: 38px;
+                    .activity-icon-lucide {
+                        width: 19px;
+                        height: 19px;
                     }
-
-                    .activity-content {
-                        .activity-text {
-                            font-size: 13px;
-                        }
-                        .activity-time {
-                            font-size: 11px;
-                        }
+                }
+                .activity-content {
+                    .activity-text {
+                        font-size: 13px;
+                    }
+                    .activity-time {
+                        font-size: 11px;
                     }
                 }
             }
@@ -318,7 +415,6 @@
     }
 }
 
-// Desktop Medium (1280px)
 @media (max-width: 1280px) {
     .dashboard-home {
         .dashboard-cards {
@@ -327,46 +423,37 @@
 
             .card {
                 padding: 18px;
-
                 .card-title {
                     font-size: 14px;
                     margin-bottom: 25px;
                 }
-
                 .card-main {
                     gap: 130px;
                     margin-bottom: 18px;
-
                     .card-icon {
                         width: 48px;
                         height: 48px;
-
                         .card-icon-lucide {
                             width: 24px;
                             height: 24px;
                         }
                     }
-
                     .card-value {
                         font-size: 30px;
                     }
                 }
-
                 .card-description {
                     font-size: 12px;
                 }
             }
         }
 
-        .recent-activity-section {
-            .activity-list {
-                padding: 16px;
-            }
+        .recent-activity-section .activity-list {
+            padding: 16px;
         }
     }
 }
 
-// Tablet Landscape (1024px)
 @media (max-width: 1024px) {
     .dashboard-home {
         .welcome-section {
@@ -384,31 +471,25 @@
 
             .card {
                 padding: 20px;
-
                 .card-title {
                     font-size: 15px;
                     margin-bottom: 25px;
                 }
-
                 .card-main {
                     gap: 250px;
                     margin-bottom: 20px;
-
                     .card-icon {
                         width: 48px;
                         height: 48px;
-
                         .card-icon-lucide {
                             width: 24px;
                             height: 24px;
                         }
                     }
-
                     .card-value {
                         font-size: 40px;
                     }
                 }
-
                 .card-description {
                     font-size: 14px;
                 }
@@ -424,24 +505,19 @@
                     font-size: 13px;
                 }
             }
-
             .activity-list {
                 padding: 16px;
-
                 .activity-item {
                     gap: 14px;
                     padding: 14px 0;
-
                     .activity-icon {
                         width: 36px;
                         height: 36px;
-
                         .activity-icon-lucide {
                             width: 18px;
                             height: 18px;
                         }
                     }
-
                     .activity-content {
                         .activity-text {
                             font-size: 13px;
@@ -456,80 +532,117 @@
     }
 }
 
-// Tablet Portrait (850px)
 @media (max-width: 850px) {
     .dashboard-home {
+        .quick-access-section .quick-access-grid {
+            gap: 12px;
+        }
+
+        .quick-access-card {
+            padding: 14px 16px;
+            gap: 12px;
+            &__icon {
+                width: 42px;
+                height: 42px;
+            }
+            &__icon-lucide {
+                width: 20px;
+                height: 20px;
+            }
+            &__title {
+                font-size: 14px;
+            }
+            &__subtitle {
+                font-size: 12px;
+            }
+        }
+
         .dashboard-cards {
             grid-template-columns: repeat(2, 1fr);
             gap: 14px;
 
             .card {
                 padding: 18px;
-
                 .card-title {
                     font-size: 15px;
                     margin-bottom: 25px;
                 }
-
                 .card-main {
                     gap: 230px;
                     margin-bottom: 20px;
-
                     .card-icon {
                         width: 44px;
                         height: 44px;
-
                         .card-icon-lucide {
                             width: 22px;
                             height: 22px;
                         }
                     }
-
                     .card-value {
                         font-size: 35px;
                     }
                 }
-
                 .card-description {
                     font-size: 13px;
                 }
             }
         }
 
-        .recent-activity-section {
-            .activity-list {
-                padding: 14px;
-            }
+        .recent-activity-section .activity-list {
+            padding: 14px;
         }
     }
 }
 
-// Mobile Large (480px)
 @media (max-width: 480px) {
     .dashboard-home {
-        max-height: 85vh;
-        overflow-y: auto;
-        scrollbar-width: none; // Firefox
-        -ms-overflow-style: none; // IE and Edge
-
         .welcome-section {
             .welcome-title {
                 font-size: 20px;
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
-
-                .welcome-greeting {
-                    font-weight: 600;
-                }
-
-                .welcome-name {
-                    font-weight: 700;
-                }
             }
             .welcome-subtitle {
                 font-size: 14px;
                 line-height: 1.6;
+            }
+        }
+
+        .quick-access-section {
+            margin-bottom: 24px;
+            .section-header {
+                margin-bottom: 12px;
+                .section-title {
+                    font-size: 16px;
+                }
+            }
+            .quick-access-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        .quick-access-card {
+            padding: 14px 16px;
+            gap: 12px;
+            &__icon {
+                width: 40px;
+                height: 40px;
+            }
+            &__icon-lucide {
+                width: 20px;
+                height: 20px;
+            }
+            &__title {
+                font-size: 14px;
+            }
+            &__subtitle {
+                font-size: 12px;
+            }
+            &__chevron {
+                width: 16px;
+                height: 16px;
             }
         }
 
@@ -539,31 +652,25 @@
 
             .card {
                 padding: 18px;
-
                 .card-title {
                     font-size: 15px;
                     margin-bottom: 20px;
                 }
-
                 .card-main {
                     gap: 230px;
                     margin-bottom: 18px;
-
                     .card-icon {
                         width: 52px;
                         height: 52px;
-
                         .card-icon-lucide {
                             width: 26px;
                             height: 26px;
                         }
                     }
-
                     .card-value {
                         font-size: 35px;
                     }
                 }
-
                 .card-description {
                     font-size: 13px;
                 }
@@ -573,29 +680,23 @@
         .recent-activity-section {
             .section-header {
                 gap: 12px;
-
                 .section-title {
                     font-size: 16px;
                 }
             }
-
             .activity-list {
                 padding: 16px;
-
                 .activity-item {
                     gap: 12px;
                     padding: 12px 0;
-
                     .activity-icon {
                         width: 36px;
                         height: 36px;
-
                         .activity-icon-lucide {
                             width: 18px;
                             height: 18px;
                         }
                     }
-
                     .activity-content {
                         .activity-text {
                             font-size: 13px;
@@ -610,60 +711,72 @@
     }
 }
 
-// Mobile Small (360px)
 @media (max-width: 360px) {
     .dashboard-home {
-        .welcome-section {
-            .welcome-title {
-                font-size: 18px;
-            }
+        .welcome-section .welcome-title {
+            font-size: 18px;
         }
-        .dashboard-cards {
-            .card {
-                padding: 18px;
 
-                .card-title {
-                    font-size: 15px;
-                }
-
-                .card-main {
-                    gap: 200px;
-
-                    .card-icon {
-                        width: 48px;
-                        height: 48px;
-
-                        .card-icon-lucide {
-                            width: 24px;
-                            height: 24px;
-                        }
-                    }
-
-                    .card-value {
-                        font-size: 30px;
-                    }
-                }
-
-                .card-description {
-                    font-size: 13px;
-                }
+        .quick-access-section {
+            margin-bottom: 20px;
+            .quick-access-grid {
+                gap: 10px;
             }
         }
 
-        .recent-activity-section {
-            .activity-list {
-                padding: 14px;
+        .quick-access-card {
+            padding: 12px 14px;
+            gap: 10px;
+            &__icon {
+                width: 36px;
+                height: 36px;
+            }
+            &__icon-lucide {
+                width: 18px;
+                height: 18px;
+            }
+            &__title {
+                font-size: 13px;
+            }
+            &__subtitle {
+                font-size: 11px;
+            }
+        }
 
-                .activity-item {
-                    padding: 10px 0;
+        .dashboard-cards .card {
+            padding: 18px;
+            .card-title {
+                font-size: 15px;
+            }
+            .card-main {
+                gap: 200px;
+                .card-icon {
+                    width: 48px;
+                    height: 48px;
+                    .card-icon-lucide {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+                .card-value {
+                    font-size: 30px;
+                }
+            }
+            .card-description {
+                font-size: 13px;
+            }
+        }
 
-                    .activity-content {
-                        .activity-text {
-                            font-size: 12px;
-                        }
-                        .activity-time {
-                            font-size: 10px;
-                        }
+        .recent-activity-section .activity-list {
+            padding: 14px;
+            .activity-item {
+                padding: 10px 0;
+                .activity-content {
+                    .activity-text {
+                        font-size: 12px;
+                    }
+                    .activity-time {
+                        font-size: 10px;
                     }
                 }
             }
@@ -671,48 +784,37 @@
     }
 }
 
-// Mobile Extra Small (< 320px)
 @media (max-width: 320px) {
     .dashboard-home {
-        .welcome-section {
-            .welcome-title {
-                font-size: 16px;
-            }
+        .welcome-section .welcome-title {
+            font-size: 16px;
         }
-        .dashboard-cards {
-            .card {
-                padding: 16px;
 
-                .card-title {
-                    font-size: 14px;
-                }
-
-                .card-main {
-                    .card-icon {
-                        width: 44px;
-                        height: 44px;
-
-                        .card-icon-lucide {
-                            width: 22px;
-                            height: 22px;
-                        }
-                    }
-
-                    .card-value {
-                        font-size: 30px;
+        .dashboard-cards .card {
+            padding: 16px;
+            .card-title {
+                font-size: 14px;
+            }
+            .card-main {
+                .card-icon {
+                    width: 44px;
+                    height: 44px;
+                    .card-icon-lucide {
+                        width: 22px;
+                        height: 22px;
                     }
                 }
-
-                .card-description {
-                    font-size: 13px;
+                .card-value {
+                    font-size: 30px;
                 }
+            }
+            .card-description {
+                font-size: 13px;
             }
         }
 
-        .recent-activity-section {
-            .activity-list {
-                padding: 12px;
-            }
+        .recent-activity-section .activity-list {
+            padding: 12px;
         }
     }
 }
